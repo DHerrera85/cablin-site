@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cablín</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER (logo centrado, sin íconos) -->
+  <header class="main-header">
+    <img src="img/logos/cablin-logo.png" alt="Cablin Logo" class="cablin-logo">
+  </header>
+
+  <!-- BANNER SUPERIOR -->
+  <div class="banner-top">
+    <p>🎨 ¡Explorá nuestros bumpers clásicos de Cablín! | 🎬 NUEVOS VIDEOS TODAS LAS SEMANAS | 🧩 Recordá la magia de los 90</p>
+  </div>
+
+  <!-- BUMPERS CAROUSEL -->
+  <section class="carousel">
+    <button class="carousel-btn left" onclick="prevSlide()">←</button>
+    <div class="carousel-track">
+      <img src="img/bumper1.png" alt="Bumper 1">
+      <img src="img/bumper2.png" alt="Bumper 2">
+      <img src="img/bumper3.png" alt="Bumper 3">
+    </div>
+    <button class="carousel-btn right" onclick="nextSlide()">→</button>
+  </section>
+
+  <!-- CATEGORÍAS -->
+  <section class="categories">
+    <div class="category-card">
+      <h2>Videos</h2>
+      <p>¡Mirá nuestros clips y canciones!</p>
+    </div>
+    <div class="category-card">
+      <h2>Juegos</h2>
+      <p>Próximamente juegos interactivos.</p>
+    </div>
+    <div class="category-card">
+      <h2>Programación</h2>
+      <p>Explorá la grilla original de Cablín.</p>
+    </div>
+  </section>
+
+  <!-- DESTACADOS -->
+  <section class="featured">
+    <h2 class="featured-title">🎉 Destacados de la semana</h2>
+    <div class="featured-grid">
+      <div class="featured-item">🎬 Bumper musical</div>
+      <div class="featured-item">🎬 Ident canal 1995</div>
+      <div class="featured-item">🎬 Especial vacaciones</div>
+    </div>
+  </section>
+
+  <!-- SELECTOR DE PERSONAJES -->
+  <section class="character-selector">
+    <!-- LADO IZQUIERDO -->
+    <div class="character-side">
+      <div class="character-card">
+        <img id="char-left" src="img/verticals/ultraforce-transparent-350x500.png" alt="Personaje Izquierda">
+      </div>
+      <div class="series-name" id="series-left">Ultraforce</div>
+    </div>
+
+    <!-- CENTRO -->
+    <div class="character-center">
+      <h2>Selecciona tu personaje</h2>
+
+      <!-- Toggle de lado -->
+      <div class="side-toggle" aria-label="Elegir lado para mostrar">
+        <button class="side-btn" data-side="left" type="button">◀ Izquierda</button>
+        <span class="side-status">Enviando a: <strong>Derecha</strong> ▶</span>
+        <button class="side-btn active" data-side="right" type="button">Derecha ▶</button>
+      </div>
+
+      <!-- Miniaturas en GRID 4×N -->
+      <div class="character-options" id="thumbGrid">
+        <!-- Fila 1 -->
+        <img src="img/round/saint-seiya-150x150.png" data-full="img/verticals/saint-seiya-transparent-350x500.png" data-name="Caballeros del Zodíaco" alt="Caballeros del Zodíaco" onclick="selectCharacter(this)">
+        <img src="img/round/sailor-moon-150x150.png" data-full="img/verticals/sailor-moon-transparent-350x500.png" data-name="Sailor Moon" alt="Sailor Moon" onclick="selectCharacter(this)">
+        <img src="img/round/virtua-fighter-150x150.png" data-full="img/verticals/virtua-fighter-transparent-350x500.png" data-name="Virtua Fighter" alt="Virtua Fighter" onclick="selectCharacter(this)">
+        <img src="img/round/heathcliff-150x150.png" data-full="img/verticals/heatcliff-transparent-350x500.png" data-name="Heathcliff" alt="Heathcliff" onclick="selectCharacter(this)">
+        <!-- Fila 2 -->
+        <img src="img/round/action-man-150x150.png" data-full="img/verticals/action-man-transparent-350x500.png" data-name="Action Man" alt="Action Man" onclick="selectCharacter(this)">
+        <img src="img/round/phantom-2040-150x150.png" data-full="img/verticals/phantom-2040-transparent-350x500.png" data-name="Phantom 2040" alt="Phantom 2040" onclick="selectCharacter(this)">
+        <img src="img/round/ultraforce-150x150.png" data-full="img/verticals/ultraforce-transparent-350x500.png" data-name="Ultraforce" alt="Ultraforce" onclick="selectCharacter(this)">
+        <img src="img/round/highlander-150x150.png" data-full="img/verticals/highlander-transparent-350x500.png" data-name="Highlander" alt="Highlander" onclick="selectCharacter(this)">
+        <!-- Fila 3 -->
+        <img src="img/round/robocop-150x150.png" data-full="img/verticals/robocop-transparent-350x500.png" data-name="Robocop" alt="Robocop" onclick="selectCharacter(this)">
+        <img src="img/round/robin-hood-150x150.png" data-full="img/verticals/robin-hood-transparent-350x500.png" data-name="Robin Hood" alt="Robin Hood" onclick="selectCharacter(this)">
+        <img src="img/round/gatchaman-150x150.png" data-full="img/verticals/gatchaman-transparent-350x500.png" data-name="Gatchaman" alt="Gatchaman" onclick="selectCharacter(this)">
+        <img src="img/round/count-duckula-150x150.png" data-full="img/verticals/count-duckula-transparent-350x500.png" data-name="Count Duckula" alt="Count Duckula" onclick="selectCharacter(this)">
+        <!-- Fila 4 -->
+        <img src="img/round/sonic-150x150.png" data-full="img/verticals/sonic-transparent-350x500.png" data-name="Sonic" alt="Sonic" onclick="selectCharacter(this)">
+        <img src="img/round/super-mario-bros-150x150.png" data-full="img/verticals/super-mario-bros-transparent-350x500.png" data-name="Super Mario Bros" alt="Super Mario Bros" onclick="selectCharacter(this)">
+        <img src="img/round/garfield-and-friends-150x150.png" data-full="img/verticals/garfield-and-friends-transparent-350x500.png" data-name="Garfield and Friends" alt="Garfield and Friends" onclick="selectCharacter(this)">
+        <img src="img/round/dennis-the-menace-150x150.png" data-full="img/verticals/dennis-the-menace-transparent-350x500.png" data-name="Dennis the Menace" alt="Dennis the Menace" onclick="selectCharacter(this)">
+        <!-- Fila 5 -->
+        <img src="img/round/jem-holograms-150x150.png" data-full="img/verticals/jem-and-the-holograms-transparent-350x500.png" data-name="Jem and the Holograms" alt="Jem and the Holograms" onclick="selectCharacter(this)">
+        <img src="img/round/little-mermaid-150x150.png" data-full="img/verticals/little-mermaid-transparent-350x500.png" data-name="Little Mermaid" alt="Little Mermaid" onclick="selectCharacter(this)">
+        <img src="img/round/little-women-150x150.png" data-full="img/verticals/little-women-transparent-350x500.png" data-name="Little Women" alt="Little Women" onclick="selectCharacter(this)">
+        <img src="img/round/wheres-wally-150x150.png" data-full="img/verticals/wheres-wally-transparent-350x500.png" data-name="Where's Wally?" alt="Where's Wally?" onclick="selectCharacter(this)">
+      </div>
+    </div>
+
+    <!-- LADO DERECHO -->
+    <div class="character-side">
+      <div class="character-card">
+        <img id="char-right" src="img/verticals/action-man-transparent-350x500.png" alt="Personaje Derecha">
+      </div>
+      <div class="series-name" id="series-right">Action Man</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>💻 Proyecto homenaje a Cablín - Desarrollado por Dherrera85</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,120 @@
+/* ------------------ GLOBAL LAYOUT ------------------ */
+:root{
+  --char-vert-width: 380px;     /* desktop por defecto */
+}
+body{
+  margin:0;
+  font-family:'Fredoka',sans-serif;
+  background:#fffaf2;
+  color:#333;
+}
+
+/* ------------------ HEADER (centrado) ------------------ */
+.main-header{
+  background:#ffcc00;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cablin-logo{ height:96px; }
+
+/* ------------------ BANNER SUPERIOR ------------------ */
+.banner-top{
+  background:#ff3399; color:#fff; font-weight:bold; padding:10px 0;
+  overflow:hidden; position:relative;
+}
+.banner-top p{
+  white-space:nowrap; animation:scroll-banner 15s linear infinite;
+  font-size:16px; padding-left:100%;
+}
+@keyframes scroll-banner{ from{transform:translateX(0)} to{transform:translateX(-100%)} }
+
+/* ------------------ CAROUSEL ------------------ */
+.carousel{
+  display:flex; align-items:center; justify-content:center;
+  background:#e6e6fa; padding:20px 0; position:relative;
+}
+.carousel-track{ display:flex; overflow:hidden; width:80%; scroll-behavior:smooth; }
+.carousel-track img{ width:300px; height:auto; margin:0 10px; border-radius:10px; box-shadow:2px 2px 8px rgba(0,0,0,.3); }
+.carousel-btn{
+  background:#ff3399; border:none; color:#fff; font-size:24px; padding:10px 15px; cursor:pointer;
+  border-radius:50%; position:absolute; top:50%; transform:translateY(-50%);
+}
+.carousel-btn.left{ left:10px } .carousel-btn.right{ right:10px }
+
+/* ------------------ CATEGORÍAS ------------------ */
+.categories{ display:flex; justify-content:center; flex-wrap:wrap; padding:30px 10px; background:#ffe3f3; }
+.category-card{
+  background:#fff; border:3px solid #ff3399; border-radius:15px; width:250px; margin:10px; padding:20px; text-align:center;
+  box-shadow:2px 2px 5px rgba(0,0,0,.1);
+}
+
+/* ------------------ DESTACADOS ------------------ */
+.featured{ background:#d6e3ff; padding:30px 20px; background-image:url('https://www.transparenttextures.com/patterns/geometry.png'); background-repeat:repeat; background-size:contain; }
+.featured-title{ text-align:center; color:#663399; font-size:24px; margin-bottom:20px; }
+.featured-grid{ display:flex; justify-content:center; flex-wrap:wrap; gap:20px; }
+.featured-item{ background:#fff; border:2px dashed #663399; border-radius:10px; padding:15px 25px; width:200px; text-align:center; position:relative; }
+
+/* ------------------ SELECTOR DE PERSONAJES ------------------ */
+.character-selector{
+  display:grid; grid-template-columns: 1fr auto 1fr; gap:24px;
+  align-items:start; justify-content:center; background:#ffe3f3; padding:40px 16px;
+}
+
+/* tarjetas verticales con ancho sincronizado */
+.character-card{
+  width: var(--char-vert-width);
+  background:#ffe9f5; border-radius:20px; padding:12px; box-shadow:0 6px 18px rgba(0,0,0,.12); display:inline-block;
+}
+.character-side img{ display:block; width:100%; height:auto; border-radius:12px; }
+.series-name{ margin-top:10px; text-align:center; color:#663399; font-weight:600; font-size:18px; }
+
+/* Centro */
+.character-center{ text-align:center; max-width:820px; }
+.character-center h2{ color:#ff3399; margin-bottom:14px; }
+
+/* Toggle */
+.side-toggle{ display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:16px; font-size:14px; }
+.side-btn{ border:2px solid #ff3399; background:#fff; color:#ff3399; border-radius:999px; padding:8px 14px; cursor:pointer; font-weight:700; }
+.side-btn.active{ background:#ff3399; color:#fff; }
+.side-status{ color:#663399; font-weight:600; }
+
+/* Miniaturas GRID 4×N (desktop y móvil) */
+.character-options{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(70px, 1fr));
+  gap:16px;
+  justify-items:center;
+}
+.character-options img{
+  width: 96px; height: 96px;        /* desktop */
+  border-radius:14px; object-fit:cover; cursor:pointer;
+  border:3px solid transparent;
+  /* sin efecto hover: sólo clic */
+  transition: box-shadow .15s ease, transform .15s ease, border-color .15s ease;
+}
+
+/* Borde activo SOLO en clic */
+.character-options img.thumb-active{
+  border-color:#FFD700;                 /* dorado */
+  box-shadow: 0 0 0 3px rgba(255,215,0,.35) inset, 0 0 12px rgba(255,215,0,.45);
+  transform: scale(1.03);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1200px){ :root{ --char-vert-width: 340px; } }
+@media (max-width: 992px){  :root{ --char-vert-width: 320px; } }
+@media (max-width: 768px){
+  :root{ --char-vert-width: 300px; }
+  .character-selector{ grid-template-columns: 1fr; }
+  .character-side{ justify-self:center; }
+  .series-name{ font-size:16px; }
+
+  /* Miniaturas más chicas y con espacio para 4 por fila */
+  .character-options{ gap:12px; }
+  .character-options img{
+    width: 76px; height: 76px;      /* móvil */
+    border-radius:12px;
+  }
+}
