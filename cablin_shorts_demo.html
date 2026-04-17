@@ -390,6 +390,160 @@
       transition:opacity .15s ease;
     }
     .canal-transition.flash{opacity:.12}
+
+    /* ── Sistema XP / Niveles ─────────────────────────── */
+
+    /* Chip de XP en el topbar */
+    .xp-chip{
+      display:flex;align-items:center;gap:5px;
+      padding:5px 10px;border-radius:999px;
+      border:1px solid rgba(255,213,74,.30);
+      background:rgba(255,213,74,.10);
+      backdrop-filter:blur(8px);
+      cursor:pointer;
+      transition:background .2s;
+    }
+    .xp-chip:active{transform:scale(.97)}
+    .xp-chip-icon{
+      width:20px;height:20px;border-radius:8px;
+      background:linear-gradient(135deg,var(--yellow),var(--pink));
+      display:grid;place-items:center;flex-shrink:0;overflow:hidden;
+    }
+    .xp-chip-icon img{width:100%;height:100%;object-fit:contain}
+    .xp-chip-pts{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:900;font-size:11px;
+      color:var(--yellow);
+      white-space:nowrap;
+    }
+
+    /* Sheet de nivel (mismo base que .sheet) */
+    #sheetXP{
+      bottom:0;
+      padding:18px 16px calc(18px + var(--safe-bot));
+      background:rgba(10,6,28,.96);
+      backdrop-filter:blur(16px);
+      border-top:1px solid rgba(255,213,74,.20);
+      border-radius:24px 24px 0 0;
+      box-shadow:0 -30px 70px rgba(0,0,0,.65);
+      max-width:680px;margin:0 auto;
+    }
+
+    /* Cabecera del sheet */
+    .xp-titulo{font-weight:900;font-size:18px;line-height:1.1;margin:0}
+    .xp-nivel-badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:5px 12px;border-radius:999px;
+      background:linear-gradient(135deg,rgba(255,213,74,.22),rgba(255,74,163,.18));
+      border:1px solid rgba(255,213,74,.30);
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:900;font-size:12px;letter-spacing:.4px;text-transform:uppercase;
+      color:var(--yellow);
+    }
+
+    /* Barra de progreso estilo Mostaza */
+    .xp-track-wrap{
+      position:relative;
+      margin:20px 0 10px;
+      padding:0 10px;
+    }
+    .xp-labels{
+      display:flex;justify-content:space-between;
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:900;font-size:10px;letter-spacing:.4px;text-transform:uppercase;
+      color:var(--muted2);
+      margin-bottom:6px;
+    }
+    .xp-labels span.active-nivel{color:var(--yellow)}
+    .xp-track{
+      height:8px;border-radius:999px;
+      background:rgba(255,255,255,.10);
+      position:relative;overflow:visible;
+    }
+    .xp-track-fill{
+      height:100%;border-radius:999px;
+      background:linear-gradient(90deg,var(--violet),var(--pink),var(--yellow));
+      transition:width .6s cubic-bezier(.34,1.56,.64,1);
+      position:relative;
+    }
+    /* Logo Cablin deslizándose sobre la barra */
+    .xp-mascot{
+      position:absolute;
+      top:50%;right:-14px;
+      transform:translateY(-50%);
+      width:28px;height:28px;border-radius:10px;
+      background:linear-gradient(135deg,var(--yellow),var(--pink));
+      border:2px solid rgba(255,255,255,.30);
+      box-shadow:0 4px 14px rgba(255,74,163,.45),0 0 0 4px rgba(255,213,74,.12);
+      display:grid;place-items:center;overflow:hidden;
+      transition:right .6s cubic-bezier(.34,1.56,.64,1);
+    }
+    .xp-mascot img{width:100%;height:100%;object-fit:contain}
+    /* Hitos (checkpoints) */
+    .xp-milestones{
+      display:flex;justify-content:space-between;
+      margin-top:12px;gap:6px;
+    }
+    .xp-milestone{
+      flex:1;border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      padding:10px 8px;
+      display:flex;flex-direction:column;align-items:center;gap:4px;
+      position:relative;
+    }
+    .xp-milestone.desbloqueado{
+      border-color:rgba(255,213,74,.30);
+      background:rgba(255,213,74,.08);
+    }
+    .xp-milestone-icon{font-size:20px;line-height:1}
+    .xp-milestone-label{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:900;font-size:9px;letter-spacing:.4px;text-transform:uppercase;
+      color:var(--muted2);text-align:center;
+    }
+    .xp-milestone.desbloqueado .xp-milestone-label{color:var(--yellow)}
+    .xp-milestone-pts{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:900;font-size:10px;color:var(--muted2);
+    }
+    .xp-milestone.desbloqueado .xp-milestone-pts{color:var(--white)}
+    /* check sobre el milestone desbloqueado */
+    .xp-milestone.desbloqueado::after{
+      content:"✓";
+      position:absolute;top:-7px;right:-5px;
+      width:16px;height:16px;border-radius:50%;
+      background:var(--yellow);color:#220a2c;
+      font-size:9px;font-weight:900;
+      display:grid;place-items:center;
+    }
+
+    /* Acciones de XP */
+    .xp-acciones{
+      margin-top:16px;
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .xp-accion-row{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:10px 12px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.04);
+    }
+    .xp-accion-info{display:flex;align-items:center;gap:8px}
+    .xp-accion-ico{font-size:18px;line-height:1}
+    .xp-accion-txt{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:800;font-size:12px;color:var(--muted);
+    }
+    .xp-accion-pts{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:900;font-size:12px;
+      color:var(--yellow);
+      background:rgba(255,213,74,.12);
+      border:1px solid rgba(255,213,74,.20);
+      padding:3px 8px;border-radius:999px;
+      white-space:nowrap;
+    }
   </style>
 </head>
 
@@ -419,6 +573,13 @@
             <circle cx="11" cy="11" r="8"></circle>
             <path d="m21 21-4.35-4.35"></path>
           </svg>
+        </button>
+        <!-- Chip XP -->
+        <button class="xp-chip" id="btnXP" title="Mi nivel" aria-label="Ver mi nivel">
+          <div class="xp-chip-icon">
+            <img src="img/logos/cablin-logo.png" alt="Cablin XP">
+          </div>
+          <span class="xp-chip-pts" id="xpChipPts">0 pts</span>
         </button>
       </div>
     </div>
@@ -960,6 +1121,78 @@
       </p>
     </section>
 
+    <!-- Sheet de Nivel XP -->
+    <section class="sheet" id="sheetXP" aria-label="Mi nivel en Cablin">
+      <div class="sheethead">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <p class="xp-titulo">Tu nivel en Cablin</p>
+          <span class="xp-nivel-badge" id="xpNivelBadge">⭐ ESPECTADOR</span>
+        </div>
+        <button class="close" id="closeXP" aria-label="Cerrar">✕</button>
+      </div>
+
+      <!-- Barra de progreso estilo Mostaza -->
+      <div class="xp-track-wrap">
+        <div class="xp-labels">
+          <span id="xpLabelA">Espectador</span>
+          <span id="xpLabelB">Fan</span>
+          <span id="xpLabelC">Cablinero</span>
+        </div>
+        <div class="xp-track">
+          <div class="xp-track-fill" id="xpTrackFill" style="width:0%">
+            <!-- Logo Cablin deslizándose -->
+            <div class="xp-mascot" id="xpMascot">
+              <img src="img/logos/cablin-logo.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hitos desbloqueables -->
+      <div class="xp-milestones">
+        <div class="xp-milestone" id="xpM1">
+          <span class="xp-milestone-icon">📺</span>
+          <span class="xp-milestone-label">Espectador</span>
+          <span class="xp-milestone-pts">0 pts</span>
+        </div>
+        <div class="xp-milestone" id="xpM2">
+          <span class="xp-milestone-icon">🎭</span>
+          <span class="xp-milestone-label">Fan</span>
+          <span class="xp-milestone-pts">50 pts</span>
+        </div>
+        <div class="xp-milestone" id="xpM3">
+          <span class="xp-milestone-icon">🏆</span>
+          <span class="xp-milestone-label">Cablinero</span>
+          <span class="xp-milestone-pts">150 pts</span>
+        </div>
+        <div class="xp-milestone" id="xpM4">
+          <span class="xp-milestone-icon">📼</span>
+          <span class="xp-milestone-label">Leyenda</span>
+          <span class="xp-milestone-pts">300 pts</span>
+        </div>
+      </div>
+
+      <!-- Cómo ganar XP -->
+      <div class="xp-acciones">
+        <div class="xp-accion-row">
+          <div class="xp-accion-info"><span class="xp-accion-ico">❤️</span><span class="xp-accion-txt">Dar like a un clip</span></div>
+          <span class="xp-accion-pts">+10 pts</span>
+        </div>
+        <div class="xp-accion-row">
+          <div class="xp-accion-info"><span class="xp-accion-ico">📺</span><span class="xp-accion-txt">Ver un clip completo</span></div>
+          <span class="xp-accion-pts">+5 pts</span>
+        </div>
+        <div class="xp-accion-row">
+          <div class="xp-accion-info"><span class="xp-accion-ico">↗️</span><span class="xp-accion-txt">Compartir un clip</span></div>
+          <span class="xp-accion-pts">+20 pts</span>
+        </div>
+        <div class="xp-accion-row">
+          <div class="xp-accion-info"><span class="xp-accion-ico">📡</span><span class="xp-accion-txt">Ver todos los bloques</span></div>
+          <span class="xp-accion-pts">+30 pts</span>
+        </div>
+      </div>
+    </section>
+
     <div class="toast" id="toast" aria-live="polite"><span></span></div>
   </div>
 
@@ -1040,11 +1273,13 @@
         if(action === 'like'){
           const countEl = clip.querySelector('[data-count="like"]');
           if(countEl) countEl.textContent = bumpCount(countEl.textContent);
+          const yaLiked = btn.classList.contains('liked');
           btn.classList.toggle('liked');
-          toast('❤️ ' + who);
+          if(!yaLiked) sumarXP(10, '❤️ like');
+          else toast('❤️ ' + who);
           btn.animate([{transform:'scale(1)'},{transform:'scale(1.18)'},{transform:'scale(1)'}], {duration:220});
         }else if(action === 'comment') toast('💬 Comentarios (demo)');
-        else if(action === 'share') toast('↗️ Compartir (demo)');
+        else if(action === 'share'){ sumarXP(20, '↗️ compartido'); }
         else if(action === 'vote') toast('🗳️ Votá: ¿te reíste? (demo)');
         else if(action === 'profile') toast('👤 Perfil del personaje (demo)');
         else toast('⋯ Más opciones (demo)');
@@ -1106,6 +1341,109 @@
         }
       }
     });
+    // ── SISTEMA XP / NIVELES ──────────────────────────
+    const XP_KEY = 'cablin_xp';
+    const XP_VISTO_KEY = 'cablin_vistos';
+
+    const niveles = [
+      { nombre: 'Espectador', min: 0,   emoji: '📺', id: 'xpM1', labelId: 'xpLabelA' },
+      { nombre: 'Fan',        min: 50,  emoji: '🎭', id: 'xpM2', labelId: 'xpLabelB' },
+      { nombre: 'Cablinero',  min: 150, emoji: '🏆', id: 'xpM3', labelId: 'xpLabelC' },
+      { nombre: 'Leyenda',    min: 300, emoji: '📼', id: 'xpM4', labelId: null       }
+    ];
+
+    function getXP(){ return parseInt(localStorage.getItem(XP_KEY) || '0', 10); }
+    function setXP(v){ localStorage.setItem(XP_KEY, Math.max(0, Math.floor(v))); }
+    function getVistos(){ return JSON.parse(localStorage.getItem(XP_VISTO_KEY) || '[]'); }
+    function addVisto(id){
+      const v = getVistos();
+      if(!v.includes(id)){ v.push(id); localStorage.setItem(XP_VISTO_KEY, JSON.stringify(v)); }
+      return !getVistos().includes(id); // true = era nuevo
+    }
+
+    function nivelActual(xp){
+      let nivel = niveles[0];
+      for(const n of niveles){ if(xp >= n.min) nivel = n; }
+      return nivel;
+    }
+
+    function pctEnNivel(xp){
+      const idx = niveles.findIndex(n => n === nivelActual(xp));
+      const actual = niveles[idx];
+      const siguiente = niveles[idx + 1];
+      if(!siguiente) return 100;
+      const rango = siguiente.min - actual.min;
+      const avance = xp - actual.min;
+      return Math.min(100, Math.round((avance / rango) * 100));
+    }
+
+    function sumarXP(pts, motivo){
+      const xpPrev = getXP();
+      const nivelPrev = nivelActual(xpPrev).nombre;
+      setXP(xpPrev + pts);
+      const xpNew = getXP();
+      const nivelNew = nivelActual(xpNew).nombre;
+      actualizarXPUI();
+      toast(`+${pts} pts ${motivo}`);
+      // Subida de nivel
+      if(nivelNew !== nivelPrev){
+        setTimeout(() => toast(`🎉 ¡Subiste de nivel! Ahora sos ${nivelNew}`), 800);
+      }
+    }
+
+    function actualizarXPUI(){
+      const xp = getXP();
+      const nivel = nivelActual(xp);
+      const pct = pctEnNivel(xp);
+
+      // Chip del topbar
+      document.getElementById('xpChipPts').textContent = xp + ' pts';
+
+      // Badge del sheet
+      document.getElementById('xpNivelBadge').textContent = nivel.emoji + ' ' + nivel.nombre.toUpperCase();
+
+      // Barra de progreso + mascot
+      const fill = document.getElementById('xpTrackFill');
+      const fillPct = Math.max(2, pct); // mínimo 2% para que se vea el logo
+      fill.style.width = fillPct + '%';
+
+      // Labels activos
+      niveles.forEach(n => {
+        if(n.labelId){
+          const el = document.getElementById(n.labelId);
+          if(el) el.classList.toggle('active-nivel', n === nivel);
+        }
+        const m = document.getElementById(n.id);
+        if(m) m.classList.toggle('desbloqueado', xp >= n.min);
+      });
+    }
+
+    // Sheet XP
+    const sheetXP = document.getElementById('sheetXP');
+    function openXP(){ sheetXP.classList.add('open'); }
+    function closeXP(){ sheetXP.classList.remove('open'); }
+    document.getElementById('btnXP').addEventListener('click', openXP);
+    document.getElementById('closeXP').addEventListener('click', closeXP);
+
+    // XP por ver clips (IntersectionObserver — sin tocar el scroll existente)
+    const clipObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting && entry.intersectionRatio > 0.7){
+          const id = entry.target.dataset.id;
+          const vistos = getVistos();
+          if(id && !vistos.includes(id)){
+            addVisto(id);
+            sumarXP(5, '📺 clip visto');
+          }
+        }
+      });
+    }, { threshold: 0.7 });
+    document.querySelectorAll('.clip[data-id]').forEach(c => clipObserver.observe(c));
+
+    // Inicializar UI al cargar
+    actualizarXPUI();
+    // ── FIN SISTEMA XP ────────────────────────────────
+
     // ── MODO CANAL PROGRAMADO ─────────────────────────────
     const canales = {
       anime: {
