@@ -22,7 +22,7 @@
       --muted2:rgba(255,255,255,.55);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bot: env(safe-area-inset-bottom, 0px);
-      --topbar-h: 56px;
+      --topbar-h: 50px;
       --strip-h: 0px;
     }
 
@@ -44,7 +44,7 @@
 
     .topbar{
       position:fixed;top:0;left:0;right:0;z-index:50;
-      padding:calc(6px + var(--safe-top)) 12px 6px;
+      padding:calc(4px + var(--safe-top)) 10px 4px;
       display:flex;align-items:center;justify-content:space-between;gap:8px;
       pointer-events:none;
       background:rgba(8,4,20,.80);
@@ -53,21 +53,18 @@
     }
     .topbar>*{pointer-events:auto}
 
-    .brand{display:flex;align-items:center;gap:8px;min-width:0}
+    .brand{display:flex;align-items:center;gap:0;min-width:0}
     .logo{
-      width:34px;height:34px;border-radius:12px;
+      width:32px;height:32px;border-radius:11px;
       background:
         radial-gradient(16px 16px at 30% 30%, rgba(255,255,255,.25), transparent 60%),
         linear-gradient(135deg, var(--yellow), var(--pink));
       box-shadow:0 10px 25px rgba(255,74,163,.22);
       display:grid;place-items:center;font-weight:900;color:#220a2c;letter-spacing:.5px;
     }
-    .brandtext{display:flex;flex-direction:column;min-width:0;line-height:1.05}
-    .brandtext .t1{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
     .top-actions{display:flex;align-items:center;gap:8px}
     .iconbtn{
-      width:36px;height:36px;border-radius:14px;
+      width:34px;height:34px;border-radius:13px;
       border:1px solid rgba(255,255,255,.14);
       background:rgba(0,0,0,.18);
       backdrop-filter:blur(10px);
@@ -313,7 +310,7 @@
     /* Chip de XP en el topbar */
     .xp-chip{
       display:flex;align-items:center;gap:5px;
-      padding:4px 8px;border-radius:999px;
+      padding:3px 7px;border-radius:999px;
       border:1px solid rgba(255,213,74,.30);
       background:rgba(255,213,74,.10);
       backdrop-filter:blur(8px);
@@ -322,7 +319,7 @@
     }
     .xp-chip:active{transform:scale(.97)}
     .xp-chip-icon{
-      width:18px;height:18px;border-radius:7px;
+      width:16px;height:16px;border-radius:6px;
       background:linear-gradient(135deg,var(--yellow),var(--pink));
       display:grid;place-items:center;flex-shrink:0;overflow:hidden;
     }
@@ -470,9 +467,6 @@
       <div class="brand">
         <div class="logo" title="Cablin">
           <img src="img/logos/cablin-logo.png" alt="Cablin" style="width:100%;height:100%;object-fit:contain;">
-        </div>
-        <div class="brandtext">
-          <div class="t1">Cablin</div>
         </div>
       </div>
       <div class="top-actions">
