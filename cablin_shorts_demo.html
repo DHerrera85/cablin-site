@@ -170,9 +170,9 @@
     .meta{
       position:absolute;left:14px;right:86px;
       bottom:calc(20px + var(--safe-bot));
-      z-index:20;display:flex;flex-direction:column;gap:10px;
+      z-index:20;display:flex;flex-direction:column;gap:6px;
     }
-    .who{display:flex;align-items:center;gap:10px;min-width:0}
+    .who{display:flex;align-items:center;gap:0;min-width:0}
     .avatar{
       width:44px;height:44px;border-radius:18px;
       background:linear-gradient(135deg, var(--yellow), var(--pink));
@@ -180,6 +180,7 @@
       box-shadow:0 14px 28px rgba(0,0,0,.35);
       display:grid;place-items:center;color:#240a2f;font-weight:1000;letter-spacing:.3px;
       overflow:hidden;
+      display:none;
     }
     .avatar img{width:100%;height:100%;object-fit:cover}
     .handle{min-width:0;display:flex;flex-direction:column;gap:2px}
@@ -201,13 +202,11 @@
       backdrop-filter:blur(6px);
       padding:12px;
       box-shadow:0 10px 24px rgba(0,0,0,.24);
+      display:none;
     }
     .caption .title{font-weight:1000;font-size:14px;line-height:1.2}
     .tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted);font-weight:900}
     .tag{padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06)}
-    .tags .tag:nth-child(n+3){display:none}
-    .actbtn[data-action="share"] + .count,
-    .actbtn[data-action="more"] + .count{display:none}
 
     .bottomnav{
       position:fixed;left:0;right:0;bottom:0;z-index:60;
@@ -1140,8 +1139,8 @@
 
     document.getElementById('hint').addEventListener('click', ()=>toast('⌨️ Navegación: ↑/↓ cambiar videos | L dar like | P personajes'));
 
-    // Limpieza visual: quitamos la acción "Más" del rail derecho en todos los clips.
-    document.querySelectorAll('.actbtn[data-action="more"]').forEach(btn => {
+    // Limpieza visual: dejamos solo Corazón y Mensajes en el rail derecho.
+    document.querySelectorAll('.actbtn:not([data-action="like"]):not([data-action="comment"])').forEach(btn => {
       const item = btn.closest('.act');
       if(item) item.remove();
     });
