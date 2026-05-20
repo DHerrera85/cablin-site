@@ -22,6 +22,8 @@
       --muted2:rgba(255,255,255,.55);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bot: env(safe-area-inset-bottom, 0px);
+      --topbar-h: 62px;
+      --strip-h: 34px;
       /* Canal programado */
       --canal-accent: #ff4aa3;
       --canal-bg: rgba(255,74,163,.18);
@@ -48,6 +50,9 @@
       padding:calc(10px + var(--safe-top)) 14px 10px;
       display:flex;align-items:center;justify-content:space-between;gap:10px;
       pointer-events:none;
+      background:rgba(8,4,20,.80);
+      backdrop-filter:blur(16px) saturate(1.4);
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
     .topbar>*{pointer-events:auto}
 
@@ -90,13 +95,15 @@
       scroll-snap-stop:always;
       scroll-behavior:smooth;
       scrollbar-width:none;
+      padding-top:calc(var(--topbar-h) + var(--strip-h) + var(--safe-top));
+      scroll-padding-top:calc(var(--topbar-h) + var(--strip-h) + var(--safe-top));
       padding-bottom:calc(76px + var(--safe-bot));
     }
     .feed::-webkit-scrollbar{display:none}
 
     .clip{
       position:relative;
-      height:100svh;
+      height:calc(100svh - var(--topbar-h) - var(--strip-h) - var(--safe-top) - 76px - var(--safe-bot));
       width:100%;
       scroll-snap-align:start;
       overflow:hidden;
@@ -330,11 +337,13 @@
     /* ── Canal Programado ─────────────────────────────── */
     .canal-strip{
       position:fixed;
-      top:calc(62px + var(--safe-top));
+      top:calc(var(--topbar-h) + var(--safe-top));
       left:0;right:0;z-index:48;
       display:flex;align-items:center;gap:10px;
       padding:5px 14px 6px;
-      background:linear-gradient(180deg, rgba(0,0,0,.55) 0%, transparent 100%);
+      background:rgba(8,4,20,.88);
+      backdrop-filter:blur(12px) saturate(1.3);
+      border-bottom:1px solid rgba(255,255,255,.07);
       pointer-events:none;
       max-width:520px;margin:0 auto;
     }
