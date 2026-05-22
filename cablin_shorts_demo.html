@@ -685,7 +685,7 @@
 
       <section class="clip" data-theme="retro" data-id="c3" data-canal="anime">
         <div class="video series-stage" id="sailorMoonStage" aria-label="Serie Sailor Moon">
-          <video class="series-video" id="sailorMoonVideo" playsinline muted preload="metadata"></video>
+          <video class="series-video" id="sailorMoonVideo" preload="metadata"></video>
           <div class="series-ui">
             <div class="series-chip" id="sailorMoonMeta"><strong>Sailor Moon</strong> • Opening</div>
             <div class="series-nav">
@@ -1202,6 +1202,11 @@
         const filter = card.dataset.filter;
         toast('Filtro: ' + card.querySelector('.ptxt').textContent);
         closeSheet();
+        if(filter === 'sailor-moon'){
+          feed.scrollTo({top: sailorMoonClip.offsetTop, behavior:'smooth'});
+          renderSailorMoonClip(0, true);
+          return;
+        }
         scrollToClipByFilter(filter);
       });
     });
@@ -1222,9 +1227,9 @@
 
     // Serie piloto Sailor Moon: navegación horizontal dentro del mismo personaje.
     const sailorMoonClips = [
-      'Videos/sailor_moon_01.mp4',
       'Videos/sailor_moon_02.mp4',
-      'Videos/sailor_moon_03.mp4'
+      'Videos/sailor_moon_03.mp4',
+      'Videos/sailor_moon_01.mp4'
     ];
     const sailorMoonStage = document.getElementById('sailorMoonStage');
     const sailorMoonVideo = document.getElementById('sailorMoonVideo');
@@ -1241,6 +1246,8 @@
     function renderSailorMoonClip(index, autoplay = true){
       sailorMoonIndex = (index + sailorMoonClips.length) % sailorMoonClips.length;
       sailorMoonVideo.src = sailorMoonClips[sailorMoonIndex];
+      sailorMoonVideo.muted = false;
+      sailorMoonVideo.volume = 1;
       sailorMoonVideo.load();
       sailorMoonCounter.textContent = `${sailorMoonIndex + 1}/${sailorMoonClips.length}`;
       sailorMoonMeta.innerHTML = `<strong>Sailor Moon</strong> • Opening ${sailorMoonIndex + 1}`;
