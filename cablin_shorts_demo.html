@@ -577,7 +577,25 @@
 
     <main class="feed" id="feed" aria-label="Feed de shorts">
       <section class="clip" data-theme="cablin" data-id="c1" data-canal="anime">
-        <div class="video" role="img" aria-label="Clip demo 1"></div>
+        <div class="video series-stage" id="caballerosStage" aria-label="Serie Caballeros del Zodiaco">
+          <video class="series-video" id="caballerosVideo" preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="caballerosMeta"><strong>Caballeros</strong> • Opening</div>
+            <div class="series-nav">
+              <button class="series-btn" id="caballerosPrev" aria-label="Clip anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="series-counter" id="caballerosCounter">1/2</div>
+              <button class="series-btn" id="caballerosNext" aria-label="Clip siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
         <div class="crt"></div><div class="noise"></div>
 
         <div class="actions">
@@ -1294,6 +1312,11 @@
         const filter = card.dataset.filter;
         toast('Filtro: ' + card.querySelector('.ptxt').textContent);
         closeSheet();
+        if(filter === 'saint-seiya'){
+          feed.scrollTo({top: caballerosClip.offsetTop, behavior:'smooth'});
+          renderCaballerosClip(0, true);
+          return;
+        }
         if(filter === 'jem'){
           feed.scrollTo({top: jemClip.offsetTop, behavior:'smooth'});
           renderJemClip(true);
@@ -1326,6 +1349,97 @@
       const item = btn.closest('.act');
       if(item) item.remove();
     });
+
+    // Serie piloto Caballeros del Zodiaco: navegación horizontal (2 clips).
+    const caballerosClips = [
+      'Videos/caballeros_zodiaco_01.mp4',
+      'Videos/caballeros_zodiaco_02.mp4'
+    ];
+    const caballerosStage = document.getElementById('caballerosStage');
+    const caballerosVideo = document.getElementById('caballerosVideo');
+    const caballerosCounter = document.getElementById('caballerosCounter');
+    const caballerosMeta = document.getElementById('caballerosMeta');
+    const caballerosPrevBtn = document.getElementById('caballerosPrev');
+    const caballerosNextBtn = document.getElementById('caballerosNext');
+    const caballerosAudioCta = document.createElement('button');
+    caballerosAudioCta.type = 'button';
+    caballerosAudioCta.className = 'series-audio-cta';
+    caballerosAudioCta.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg><span>Activar audio</span>';
+    caballerosStage.appendChild(caballerosAudioCta);
+    const caballerosClip = document.querySelector('.clip[data-id="c1"]');
+    let caballerosIndex = 0;
+    let caballerosSwipeStartX = 0;
+    let caballerosSwipeStartY = 0;
+    let caballerosSwipeActive = false;
+    let caballerosAudioArmed = false;
+
+    function renderCaballerosClip(index, autoplay = true){
+      caballerosIndex = (index + caballerosClips.length) % caballerosClips.length;
+      caballerosVideo.src = caballerosClips[caballerosIndex];
+      caballerosVideo.volume = 1;
+      caballerosVideo.load();
+      caballerosCounter.textContent = `${caballerosIndex + 1}/${caballerosClips.length}`;
+      caballerosMeta.innerHTML = `<strong>Caballeros</strong> • Opening ${caballerosIndex + 1}`;
+      if(autoplay){
+        caballerosVideo.play().then(()=>{
+          caballerosAudioCta.classList.remove('show');
+        }).catch(()=>{
+          caballerosAudioCta.classList.add('show');
+        });
+      }
+    }
+
+    function moveCaballeros(delta){
+      renderCaballerosClip(caballerosIndex + delta, true);
+    }
+
+    function playCaballerosWithAudio(){
+      caballerosAudioArmed = true;
+      caballerosVideo.muted = false;
+      caballerosVideo.volume = 1;
+      caballerosVideo.play().then(()=>{
+        caballerosAudioCta.classList.remove('show');
+      }).catch(()=>{
+        caballerosAudioCta.classList.add('show');
+      });
+    }
+
+    caballerosPrevBtn.addEventListener('click', ()=>moveCaballeros(-1));
+    caballerosNextBtn.addEventListener('click', ()=>moveCaballeros(1));
+    caballerosAudioCta.addEventListener('click', playCaballerosWithAudio);
+    caballerosVideo.addEventListener('ended', ()=>moveCaballeros(1));
+
+    caballerosStage.addEventListener('pointerdown', (e)=>{
+      caballerosSwipeActive = true;
+      caballerosSwipeStartX = e.clientX;
+      caballerosSwipeStartY = e.clientY;
+    });
+    caballerosStage.addEventListener('pointerup', (e)=>{
+      if(!caballerosSwipeActive) return;
+      caballerosSwipeActive = false;
+      const dx = e.clientX - caballerosSwipeStartX;
+      const dy = e.clientY - caballerosSwipeStartY;
+      if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
+        if(dx < 0) moveCaballeros(1);
+        else moveCaballeros(-1);
+      }
+    });
+    caballerosStage.addEventListener('pointercancel', ()=>{ caballerosSwipeActive = false; });
+
+    const caballerosObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.target !== caballerosClip) return;
+        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
+          if(caballerosAudioArmed) playCaballerosWithAudio();
+          else renderCaballerosClip(caballerosIndex, true);
+        }else{
+          caballerosVideo.pause();
+        }
+      });
+    }, { threshold: 0.6 });
+    caballerosObserver.observe(caballerosClip);
+
+    renderCaballerosClip(0, false);
 
     // Serie piloto Sonic: navegación horizontal dentro del mismo personaje.
     const sonicClips = [
