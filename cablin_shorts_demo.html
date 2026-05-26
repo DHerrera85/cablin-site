@@ -1055,6 +1055,12 @@
           </div>
           <div class="ptxt">Sailor Moon</div>
         </button>
+        <button class="pcard" data-filter="jem" role="listitem" aria-label="Filtrar Jem and the Holograms">
+          <div class="pimg">
+            <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
+          </div>
+          <div class="ptxt">Jem</div>
+        </button>
         <button class="pcard" data-filter="action-man" role="listitem" aria-label="Filtrar Action Man">
           <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(255,74,163,.55), transparent 60%),
@@ -1232,7 +1238,10 @@
         const who = clip.querySelector('.handle .name');
         return who && who.textContent.toLowerCase().includes(filter.toLowerCase());
       });
-      if(!target) return;
+      if(!target){
+        toast('Aun no hay clips cargados para este personaje');
+        return;
+      }
       feed.scrollTo({top: target.offsetTop, behavior:'smooth'});
     }
 
