@@ -642,7 +642,25 @@
       </section>
 
       <section class="clip" data-theme="comic" data-id="c2" data-canal="accion">
-        <div class="video" role="img" aria-label="Clip demo 2"></div>
+        <div class="video series-stage" id="sonicStage" aria-label="Serie Sonic">
+          <video class="series-video" id="sonicVideo" preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="sonicMeta"><strong>Sonic</strong> • Opening</div>
+            <div class="series-nav">
+              <button class="series-btn" id="sonicPrev" aria-label="Clip anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="series-counter" id="sonicCounter">1/2</div>
+              <button class="series-btn" id="sonicNext" aria-label="Clip siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
         <div class="crt"></div><div class="noise"></div>
 
         <div class="actions">
@@ -1223,6 +1241,11 @@
         const filter = card.dataset.filter;
         toast('Filtro: ' + card.querySelector('.ptxt').textContent);
         closeSheet();
+        if(filter === 'sonic'){
+          feed.scrollTo({top: sonicClip.offsetTop, behavior:'smooth'});
+          renderSonicClip(0, true);
+          return;
+        }
         if(filter === 'sailor-moon'){
           feed.scrollTo({top: sailorMoonClip.offsetTop, behavior:'smooth'});
           renderSailorMoonClip(0, true);
@@ -1245,6 +1268,97 @@
       const item = btn.closest('.act');
       if(item) item.remove();
     });
+
+    // Serie piloto Sonic: navegación horizontal dentro del mismo personaje.
+    const sonicClips = [
+      'Videos/sonic_01.mp4',
+      'Videos/sonic_02.mp4'
+    ];
+    const sonicStage = document.getElementById('sonicStage');
+    const sonicVideo = document.getElementById('sonicVideo');
+    const sonicCounter = document.getElementById('sonicCounter');
+    const sonicMeta = document.getElementById('sonicMeta');
+    const sonicPrevBtn = document.getElementById('sonicPrev');
+    const sonicNextBtn = document.getElementById('sonicNext');
+    const sonicAudioCta = document.createElement('button');
+    sonicAudioCta.type = 'button';
+    sonicAudioCta.className = 'series-audio-cta';
+    sonicAudioCta.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg><span>Activar audio</span>';
+    sonicStage.appendChild(sonicAudioCta);
+    const sonicClip = document.querySelector('.clip[data-id="c2"]');
+    let sonicIndex = 0;
+    let sonicSwipeStartX = 0;
+    let sonicSwipeStartY = 0;
+    let sonicSwipeActive = false;
+    let sonicAudioArmed = false;
+
+    function renderSonicClip(index, autoplay = true){
+      sonicIndex = (index + sonicClips.length) % sonicClips.length;
+      sonicVideo.src = sonicClips[sonicIndex];
+      sonicVideo.volume = 1;
+      sonicVideo.load();
+      sonicCounter.textContent = `${sonicIndex + 1}/${sonicClips.length}`;
+      sonicMeta.innerHTML = `<strong>Sonic</strong> • Opening ${sonicIndex + 1}`;
+      if(autoplay){
+        sonicVideo.play().then(()=>{
+          sonicAudioCta.classList.remove('show');
+        }).catch(()=>{
+          sonicAudioCta.classList.add('show');
+        });
+      }
+    }
+
+    function moveSonic(delta){
+      renderSonicClip(sonicIndex + delta, true);
+    }
+
+    function playSonicWithAudio(){
+      sonicAudioArmed = true;
+      sonicVideo.muted = false;
+      sonicVideo.volume = 1;
+      sonicVideo.play().then(()=>{
+        sonicAudioCta.classList.remove('show');
+      }).catch(()=>{
+        sonicAudioCta.classList.add('show');
+      });
+    }
+
+    sonicPrevBtn.addEventListener('click', ()=>moveSonic(-1));
+    sonicNextBtn.addEventListener('click', ()=>moveSonic(1));
+    sonicAudioCta.addEventListener('click', playSonicWithAudio);
+    sonicVideo.addEventListener('ended', ()=>moveSonic(1));
+
+    sonicStage.addEventListener('pointerdown', (e)=>{
+      sonicSwipeActive = true;
+      sonicSwipeStartX = e.clientX;
+      sonicSwipeStartY = e.clientY;
+    });
+    sonicStage.addEventListener('pointerup', (e)=>{
+      if(!sonicSwipeActive) return;
+      sonicSwipeActive = false;
+      const dx = e.clientX - sonicSwipeStartX;
+      const dy = e.clientY - sonicSwipeStartY;
+      if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
+        if(dx < 0) moveSonic(1);
+        else moveSonic(-1);
+      }
+    });
+    sonicStage.addEventListener('pointercancel', ()=>{ sonicSwipeActive = false; });
+
+    const sonicObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.target !== sonicClip) return;
+        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
+          if(sonicAudioArmed) playSonicWithAudio();
+          else renderSonicClip(sonicIndex, true);
+        }else{
+          sonicVideo.pause();
+        }
+      });
+    }, { threshold: 0.6 });
+    sonicObserver.observe(sonicClip);
+
+    renderSonicClip(0, false);
 
     // Serie piloto Sailor Moon: navegación horizontal dentro del mismo personaje.
     const sailorMoonClips = [
