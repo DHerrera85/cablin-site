@@ -1054,6 +1054,63 @@
           </div>
         </div>
       </section>
+
+      <section class="clip" data-theme="comic" data-id="c8" data-canal="humor">
+        <div class="video series-stage" id="aladdinStage" aria-label="Serie Aladdin">
+          <video class="series-video" id="aladdinVideo" preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="aladdinMeta"><strong>Aladdin</strong> • Opening</div>
+            <div class="series-nav">
+              <button class="series-btn" id="aladdinPrev" aria-label="Clip anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="series-counter" id="aladdinCounter">1/2</div>
+              <button class="series-btn" id="aladdinNext" aria-label="Clip siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="crt"></div><div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">6.6K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">188</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar">
+              <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
+            </div>
+            <div class="handle">
+              <div class="name">@aladdin</div>
+              <div class="desc">Un mundo ideal 🧞</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">Aladdin — Opening</div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <nav class="bottomnav" aria-label="Navegación inferior">
@@ -1122,6 +1179,12 @@
             <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
           </div>
           <div class="ptxt">Jem</div>
+        </button>
+        <button class="pcard" data-filter="aladdin" role="listitem" aria-label="Filtrar Aladdin">
+          <div class="pimg">
+            <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
+          </div>
+          <div class="ptxt">Aladdin</div>
         </button>
         <button class="pcard" data-filter="action-man" role="listitem" aria-label="Filtrar Action Man">
           <div class="pimg" style="background:
@@ -1312,6 +1375,11 @@
         const filter = card.dataset.filter;
         toast('Filtro: ' + card.querySelector('.ptxt').textContent);
         closeSheet();
+        if(filter === 'aladdin'){
+          feed.scrollTo({top: aladdinClip.offsetTop, behavior:'smooth'});
+          renderAladdinClip(0, true);
+          return;
+        }
         if(filter === 'saint-seiya'){
           feed.scrollTo({top: caballerosClip.offsetTop, behavior:'smooth'});
           renderCaballerosClip(0, true);
@@ -1587,6 +1655,97 @@
     jemObserver.observe(jemClip);
 
     renderJemClip(false);
+
+    // Serie piloto Aladdin: navegación horizontal (2 clips).
+    const aladdinClips = [
+      'Videos/aladdin_01.mp4',
+      'Videos/aladdin_02.mp4'
+    ];
+    const aladdinStage = document.getElementById('aladdinStage');
+    const aladdinVideo = document.getElementById('aladdinVideo');
+    const aladdinCounter = document.getElementById('aladdinCounter');
+    const aladdinMeta = document.getElementById('aladdinMeta');
+    const aladdinPrevBtn = document.getElementById('aladdinPrev');
+    const aladdinNextBtn = document.getElementById('aladdinNext');
+    const aladdinAudioCta = document.createElement('button');
+    aladdinAudioCta.type = 'button';
+    aladdinAudioCta.className = 'series-audio-cta';
+    aladdinAudioCta.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg><span>Activar audio</span>';
+    aladdinStage.appendChild(aladdinAudioCta);
+    const aladdinClip = document.querySelector('.clip[data-id="c8"]');
+    let aladdinIndex = 0;
+    let aladdinSwipeStartX = 0;
+    let aladdinSwipeStartY = 0;
+    let aladdinSwipeActive = false;
+    let aladdinAudioArmed = false;
+
+    function renderAladdinClip(index, autoplay = true){
+      aladdinIndex = (index + aladdinClips.length) % aladdinClips.length;
+      aladdinVideo.src = aladdinClips[aladdinIndex];
+      aladdinVideo.volume = 1;
+      aladdinVideo.load();
+      aladdinCounter.textContent = `${aladdinIndex + 1}/${aladdinClips.length}`;
+      aladdinMeta.innerHTML = `<strong>Aladdin</strong> • Opening ${aladdinIndex + 1}`;
+      if(autoplay){
+        aladdinVideo.play().then(()=>{
+          aladdinAudioCta.classList.remove('show');
+        }).catch(()=>{
+          aladdinAudioCta.classList.add('show');
+        });
+      }
+    }
+
+    function moveAladdin(delta){
+      renderAladdinClip(aladdinIndex + delta, true);
+    }
+
+    function playAladdinWithAudio(){
+      aladdinAudioArmed = true;
+      aladdinVideo.muted = false;
+      aladdinVideo.volume = 1;
+      aladdinVideo.play().then(()=>{
+        aladdinAudioCta.classList.remove('show');
+      }).catch(()=>{
+        aladdinAudioCta.classList.add('show');
+      });
+    }
+
+    aladdinPrevBtn.addEventListener('click', ()=>moveAladdin(-1));
+    aladdinNextBtn.addEventListener('click', ()=>moveAladdin(1));
+    aladdinAudioCta.addEventListener('click', playAladdinWithAudio);
+    aladdinVideo.addEventListener('ended', ()=>moveAladdin(1));
+
+    aladdinStage.addEventListener('pointerdown', (e)=>{
+      aladdinSwipeActive = true;
+      aladdinSwipeStartX = e.clientX;
+      aladdinSwipeStartY = e.clientY;
+    });
+    aladdinStage.addEventListener('pointerup', (e)=>{
+      if(!aladdinSwipeActive) return;
+      aladdinSwipeActive = false;
+      const dx = e.clientX - aladdinSwipeStartX;
+      const dy = e.clientY - aladdinSwipeStartY;
+      if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
+        if(dx < 0) moveAladdin(1);
+        else moveAladdin(-1);
+      }
+    });
+    aladdinStage.addEventListener('pointercancel', ()=>{ aladdinSwipeActive = false; });
+
+    const aladdinObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.target !== aladdinClip) return;
+        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
+          if(aladdinAudioArmed) playAladdinWithAudio();
+          else renderAladdinClip(aladdinIndex, true);
+        }else{
+          aladdinVideo.pause();
+        }
+      });
+    }, { threshold: 0.6 });
+    aladdinObserver.observe(aladdinClip);
+
+    renderAladdinClip(0, false);
 
     // Serie piloto Sailor Moon: navegación horizontal dentro del mismo personaje.
     const sailorMoonClips = [
