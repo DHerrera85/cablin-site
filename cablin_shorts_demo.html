@@ -992,6 +992,50 @@
           </div>
         </div>
       </section>
+
+      <section class="clip" data-theme="retro" data-id="c7" data-canal="humor">
+        <div class="video series-stage" id="jemStage" aria-label="Serie Jem and the Holograms">
+          <video class="series-video" id="jemVideo" preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="jemMeta"><strong>Jem</strong> • Opening 1/1</div>
+          </div>
+        </div>
+        <div class="crt"></div><div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">7.2K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">245</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar">
+              <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
+            </div>
+            <div class="handle">
+              <div class="name">@jem_holograms</div>
+              <div class="desc">Truly outrageous 🎤✨</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">Jem and the Holograms — Opening</div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <nav class="bottomnav" aria-label="Navegación inferior">
@@ -1250,6 +1294,11 @@
         const filter = card.dataset.filter;
         toast('Filtro: ' + card.querySelector('.ptxt').textContent);
         closeSheet();
+        if(filter === 'jem'){
+          feed.scrollTo({top: jemClip.offsetTop, behavior:'smooth'});
+          renderJemClip(true);
+          return;
+        }
         if(filter === 'sonic'){
           feed.scrollTo({top: sonicClip.offsetTop, behavior:'smooth'});
           renderSonicClip(0, true);
@@ -1368,6 +1417,62 @@
     sonicObserver.observe(sonicClip);
 
     renderSonicClip(0, false);
+
+    // Serie piloto Jem: clip unico por ahora.
+    const jemClipPath = 'Videos/jem_01.mp4';
+    const jemStage = document.getElementById('jemStage');
+    const jemVideo = document.getElementById('jemVideo');
+    const jemMeta = document.getElementById('jemMeta');
+    const jemAudioCta = document.createElement('button');
+    jemAudioCta.type = 'button';
+    jemAudioCta.className = 'series-audio-cta';
+    jemAudioCta.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg><span>Activar audio</span>';
+    jemStage.appendChild(jemAudioCta);
+    const jemClip = document.querySelector('.clip[data-id="c7"]');
+    let jemAudioArmed = false;
+
+    function renderJemClip(autoplay = true){
+      if(jemVideo.src.indexOf(jemClipPath) === -1){
+        jemVideo.src = jemClipPath;
+        jemVideo.load();
+      }
+      jemMeta.innerHTML = '<strong>Jem</strong> • Opening 1/1';
+      if(autoplay){
+        jemVideo.play().then(()=>{
+          jemAudioCta.classList.remove('show');
+        }).catch(()=>{
+          jemAudioCta.classList.add('show');
+        });
+      }
+    }
+
+    function playJemWithAudio(){
+      jemAudioArmed = true;
+      jemVideo.muted = false;
+      jemVideo.volume = 1;
+      jemVideo.play().then(()=>{
+        jemAudioCta.classList.remove('show');
+      }).catch(()=>{
+        jemAudioCta.classList.add('show');
+      });
+    }
+
+    jemAudioCta.addEventListener('click', playJemWithAudio);
+
+    const jemObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.target !== jemClip) return;
+        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
+          if(jemAudioArmed) playJemWithAudio();
+          else renderJemClip(true);
+        }else{
+          jemVideo.pause();
+        }
+      });
+    }, { threshold: 0.6 });
+    jemObserver.observe(jemClip);
+
+    renderJemClip(false);
 
     // Serie piloto Sailor Moon: navegación horizontal dentro del mismo personaje.
     const sailorMoonClips = [
