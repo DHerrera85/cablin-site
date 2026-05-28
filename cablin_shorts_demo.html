@@ -539,6 +539,81 @@
       padding:3px 8px;border-radius:999px;
       white-space:nowrap;
     }
+
+    /* Ranking semanal de canales */
+    #sheetRanking{
+      padding:16px 14px calc(16px + var(--safe-bot));
+      background:
+        radial-gradient(500px 260px at 20% -15%, rgba(57,215,255,.14), transparent 60%),
+        linear-gradient(180deg, rgba(8,11,64,.96), rgba(7,6,26,.97));
+      border-top:1px solid rgba(57,215,255,.20);
+      max-height:78svh;
+      overflow:auto;
+    }
+    .ranking-headline{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+    .ranking-kicker{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:900;font-size:11px;letter-spacing:.45px;text-transform:uppercase;
+      color:rgba(255,255,255,.7);
+    }
+    .ranking-title{font-weight:1000;font-size:22px;line-height:1;color:#f2f5ff}
+    .ranking-subtitle{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:800;font-size:12px;
+      color:rgba(255,255,255,.76);
+    }
+    .ranking-subtitle strong{color:var(--yellow)}
+    .ranking-table{
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .ranking-row{
+      display:grid;
+      grid-template-columns:36px minmax(0,1fr) auto;
+      gap:10px;align-items:center;
+      border-radius:16px;
+      padding:10px 12px;
+      border:1px solid rgba(122,77,255,.30);
+      background:linear-gradient(90deg, rgba(30,50,173,.65), rgba(20,31,116,.68));
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
+    }
+    .ranking-pos{
+      width:28px;height:28px;border-radius:50%;
+      display:grid;place-items:center;
+      font-family:"Nunito",system-ui,sans-serif;
+      font-size:14px;font-weight:900;
+      color:#fff;
+      background:linear-gradient(135deg, #ff5574, #ff3c95);
+      border:1px solid rgba(255,255,255,.25);
+    }
+    .ranking-channel{
+      min-width:0;
+      display:flex;flex-direction:column;gap:2px;
+    }
+    .ranking-handle{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-size:14px;font-weight:900;
+      color:#f5f8ff;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .ranking-meta{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-size:11px;font-weight:800;
+      color:rgba(255,255,255,.68);
+    }
+    .ranking-views{
+      font-family:"Nunito",system-ui,sans-serif;
+      font-size:16px;font-weight:900;
+      color:#8dff7a;
+      text-shadow:0 2px 10px rgba(0,0,0,.35);
+      white-space:nowrap;
+    }
+    .ranking-footnote{
+      margin-top:12px;
+      font-family:"Nunito",system-ui,sans-serif;
+      font-weight:800;font-size:11px;
+      color:rgba(255,255,255,.62);
+      line-height:1.25;
+    }
   </style>
 </head>
 
@@ -565,6 +640,13 @@
             <path d="m21 21-4.35-4.35"></path>
           </svg>
         </button>
+        <button class="iconbtn" id="btnRanking" title="Ranking semanal" aria-label="Ver ranking semanal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 20V10"></path>
+            <path d="M12 20V4"></path>
+            <path d="M6 20v-6"></path>
+          </svg>
+        </button>
         <!-- Chip XP -->
         <button class="xp-chip" id="btnXP" title="Mi nivel" aria-label="Ver mi nivel">
           <div class="xp-chip-icon">
@@ -587,7 +669,7 @@
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
               </button>
-              <div class="series-counter" id="caballerosCounter">1/2</div>
+              <div class="series-counter" id="caballerosCounter">1/1</div>
               <button class="series-btn" id="caballerosNext" aria-label="Clip siguiente">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="9 18 15 12 9 6"></polyline>
@@ -1315,6 +1397,20 @@
       </div>
     </section>
 
+    <section class="sheet" id="sheetRanking" aria-label="Ranking semanal de canales">
+      <div class="sheethead">
+        <div class="ranking-headline">
+          <span class="ranking-kicker">Top 10 canales</span>
+          <div class="ranking-title">Ranking semanal</div>
+          <div class="ranking-subtitle">Periodo relevado: <strong id="rankingPeriod">-</strong></div>
+        </div>
+        <button class="close" id="closeRanking" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div class="ranking-table" id="rankingBody" role="list"></div>
+      <p class="ranking-footnote">Datos reales del proyecto: se actualiza con cada clip visto en este demo y se guarda en tu navegador (localStorage).</p>
+    </section>
+
     <div class="toast" id="toast" aria-live="polite"><span></span></div>
   </div>
 
@@ -1347,6 +1443,7 @@
 
     document.getElementById('btnPersonajes').addEventListener('click', openSheet);
     document.getElementById('btnBuscar').addEventListener('click', ()=>toast('Buscar: modal / overlay (demo)'));
+    document.getElementById('btnRanking').addEventListener('click', openRanking);
 
     const sheet = document.getElementById('sheetPersonajes');
 
@@ -1357,6 +1454,32 @@
 
     const feed = document.getElementById('feed');
     const clips = Array.from(document.querySelectorAll('.clip'));
+    const canalesConVideo = ['c1', 'c2', 'c3', 'c7', 'c8'];
+    let ultimoCanalOrigenAuto = null;
+
+    function irACanalAleatorio(desdeId){
+      let candidatos = canalesConVideo.filter(id => id !== desdeId && id !== ultimoCanalOrigenAuto);
+      if(!candidatos.length){
+        candidatos = canalesConVideo.filter(id => id !== desdeId);
+      }
+      if(!candidatos.length) return;
+
+      const targetId = candidatos[Math.floor(Math.random() * candidatos.length)];
+      const targetClip = document.querySelector(`.clip[data-id="${targetId}"]`);
+      if(!targetClip) return;
+
+      ultimoCanalOrigenAuto = desdeId;
+
+      feed.scrollTo({top: targetClip.offsetTop, behavior:'smooth'});
+
+      setTimeout(()=>{
+        if(targetId === 'c1') renderCaballerosClip(0, true);
+        if(targetId === 'c2') renderSonicClip(0, true);
+        if(targetId === 'c3') renderSailorMoonClip(0, true);
+        if(targetId === 'c7') renderJemClip(true);
+        if(targetId === 'c8') renderAladdinClip(0, true);
+      }, 280);
+    }
 
     function scrollToClipByFilter(filter){
       const target = clips.find(clip=>{
@@ -1420,8 +1543,7 @@
 
     // Serie piloto Caballeros del Zodiaco: navegación horizontal (2 clips).
     const caballerosClips = [
-      'Videos/caballeros_zodiaco_01.mp4',
-      'Videos/caballeros_zodiaco_02.mp4'
+      'Videos/caballeros_zodiaco_01.mp4'
     ];
     const caballerosStage = document.getElementById('caballerosStage');
     const caballerosVideo = document.getElementById('caballerosVideo');
@@ -1475,7 +1597,10 @@
     caballerosPrevBtn.addEventListener('click', ()=>moveCaballeros(-1));
     caballerosNextBtn.addEventListener('click', ()=>moveCaballeros(1));
     caballerosAudioCta.addEventListener('click', playCaballerosWithAudio);
-    caballerosVideo.addEventListener('ended', ()=>moveCaballeros(1));
+    caballerosVideo.addEventListener('ended', ()=>{
+      if(caballerosIndex < caballerosClips.length - 1) moveCaballeros(1);
+      else irACanalAleatorio('c1');
+    });
 
     caballerosStage.addEventListener('pointerdown', (e)=>{
       caballerosSwipeActive = true;
@@ -1566,7 +1691,10 @@
     sonicPrevBtn.addEventListener('click', ()=>moveSonic(-1));
     sonicNextBtn.addEventListener('click', ()=>moveSonic(1));
     sonicAudioCta.addEventListener('click', playSonicWithAudio);
-    sonicVideo.addEventListener('ended', ()=>moveSonic(1));
+    sonicVideo.addEventListener('ended', ()=>{
+      if(sonicIndex < sonicClips.length - 1) moveSonic(1);
+      else irACanalAleatorio('c2');
+    });
 
     sonicStage.addEventListener('pointerdown', (e)=>{
       sonicSwipeActive = true;
@@ -1640,6 +1768,7 @@
     }
 
     jemAudioCta.addEventListener('click', playJemWithAudio);
+    jemVideo.addEventListener('ended', ()=>irACanalAleatorio('c7'));
 
     const jemObserver = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
@@ -1713,7 +1842,10 @@
     aladdinPrevBtn.addEventListener('click', ()=>moveAladdin(-1));
     aladdinNextBtn.addEventListener('click', ()=>moveAladdin(1));
     aladdinAudioCta.addEventListener('click', playAladdinWithAudio);
-    aladdinVideo.addEventListener('ended', ()=>moveAladdin(1));
+    aladdinVideo.addEventListener('ended', ()=>{
+      if(aladdinIndex < aladdinClips.length - 1) moveAladdin(1);
+      else irACanalAleatorio('c8');
+    });
 
     aladdinStage.addEventListener('pointerdown', (e)=>{
       aladdinSwipeActive = true;
@@ -1805,7 +1937,10 @@
     sailorPrevBtn.addEventListener('click', ()=>moveSailorMoon(-1));
     sailorNextBtn.addEventListener('click', ()=>moveSailorMoon(1));
     sailorAudioCta.addEventListener('click', playSailorMoonWithAudio);
-    sailorMoonVideo.addEventListener('ended', ()=>moveSailorMoon(1));
+    sailorMoonVideo.addEventListener('ended', ()=>{
+      if(sailorMoonIndex < sailorMoonClips.length - 1) moveSailorMoon(1);
+      else irACanalAleatorio('c3');
+    });
 
     sailorMoonStage.addEventListener('pointerdown', (e)=>{
       sailorMoonSwipeActive = true;
@@ -1882,7 +2017,11 @@
     });
 
     document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape') closeSheet();
+      if(e.key === 'Escape'){
+        closeSheet();
+        closeXP();
+        closeRanking();
+      }
       if(e.key.toLowerCase() === 'p') openSheet();
       
       // Navegación tipo TikTok con flechas
@@ -1919,6 +2058,9 @@
     // ── SISTEMA XP / NIVELES ──────────────────────────
     const XP_KEY = 'cablin_xp';
     const XP_VISTO_KEY = 'cablin_vistos';
+    const RANK_EVENTS_KEY = 'cablin_channel_view_events';
+    const VIEW_EVENT_COOLDOWN_MS = 4000;
+    const lastChannelViewAt = new Map();
 
     const niveles = [
       { nombre: 'Espectador', min: 0,   emoji: '📺', id: 'xpM1', labelId: 'xpLabelA' },
@@ -1930,6 +2072,89 @@
     function getXP(){ return parseInt(localStorage.getItem(XP_KEY) || '0', 10); }
     function setXP(v){ localStorage.setItem(XP_KEY, Math.max(0, Math.floor(v))); }
     function getVistos(){ return JSON.parse(localStorage.getItem(XP_VISTO_KEY) || '[]'); }
+    function getRankingEvents(){
+      try{
+        const raw = JSON.parse(localStorage.getItem(RANK_EVENTS_KEY) || '[]');
+        return Array.isArray(raw) ? raw : [];
+      }catch{
+        return [];
+      }
+    }
+    function setRankingEvents(events){
+      localStorage.setItem(RANK_EVENTS_KEY, JSON.stringify(events));
+    }
+    function formatViews(v){
+      return new Intl.NumberFormat('es-AR').format(v);
+    }
+    function getCatalogChannels(){
+      const channels = new Set();
+      document.querySelectorAll('.clip .handle .name').forEach(el=>{
+        const handle = (el.textContent || '').trim().toLowerCase();
+        if(handle.startsWith('@')) channels.add(handle);
+      });
+      document.querySelectorAll('.pcard[data-filter]').forEach(card=>{
+        const handle = '@' + card.dataset.filter.replace(/-/g, '_').toLowerCase();
+        channels.add(handle);
+      });
+      return Array.from(channels);
+    }
+    function getWeeklyRange(){
+      const end = new Date();
+      const start = new Date(end.getTime() - (7 * 24 * 60 * 60 * 1000));
+      return { start, end };
+    }
+    function formatDate(d){
+      return d.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit' });
+    }
+    function buildWeeklyRanking(limit = 10){
+      const now = Date.now();
+      const weekAgo = now - (7 * 24 * 60 * 60 * 1000);
+      const counts = new Map();
+
+      getCatalogChannels().forEach(ch => counts.set(ch, 0));
+      getRankingEvents().forEach(evt=>{
+        if(!evt || typeof evt.channel !== 'string' || !Number.isFinite(evt.ts)) return;
+        if(evt.ts < weekAgo || evt.ts > now) return;
+        const ch = evt.channel.toLowerCase();
+        counts.set(ch, (counts.get(ch) || 0) + 1);
+      });
+
+      return Array.from(counts.entries())
+        .map(([channel, views]) => ({ channel, views }))
+        .sort((a,b) => (b.views - a.views) || a.channel.localeCompare(b.channel))
+        .slice(0, limit);
+    }
+    function actualizarRankingUI(){
+      const rankingBody = document.getElementById('rankingBody');
+      const rankingPeriod = document.getElementById('rankingPeriod');
+      const rows = buildWeeklyRanking(10);
+      const range = getWeeklyRange();
+
+      rankingPeriod.textContent = `${formatDate(range.start)} al ${formatDate(range.end)}`;
+      rankingBody.innerHTML = rows.map((row, idx)=>`
+        <div class="ranking-row" role="listitem">
+          <span class="ranking-pos">${idx + 1}</span>
+          <div class="ranking-channel">
+            <span class="ranking-handle">${row.channel}</span>
+          </div>
+          <span class="ranking-views">${formatViews(row.views)} views</span>
+        </div>
+      `).join('');
+    }
+    function registrarVistaCanal(channel){
+      if(!channel) return;
+      const normalized = channel.toLowerCase();
+      const now = Date.now();
+      const last = lastChannelViewAt.get(normalized) || 0;
+      if(now - last < VIEW_EVENT_COOLDOWN_MS) return;
+
+      lastChannelViewAt.set(normalized, now);
+      const events = getRankingEvents();
+      events.push({ channel: normalized, ts: now });
+      if(events.length > 8000) events.splice(0, events.length - 8000);
+      setRankingEvents(events);
+      actualizarRankingUI();
+    }
     function addVisto(id){
       const v = getVistos();
       if(!v.includes(id)){ v.push(id); localStorage.setItem(XP_VISTO_KEY, JSON.stringify(v)); }
@@ -2000,11 +2225,22 @@
     document.getElementById('btnXP').addEventListener('click', openXP);
     document.getElementById('closeXP').addEventListener('click', closeXP);
 
+    // Sheet Ranking
+    const sheetRanking = document.getElementById('sheetRanking');
+    function openRanking(){
+      actualizarRankingUI();
+      sheetRanking.classList.add('open');
+    }
+    function closeRanking(){ sheetRanking.classList.remove('open'); }
+    document.getElementById('closeRanking').addEventListener('click', closeRanking);
+
     // XP por ver clips (IntersectionObserver — sin tocar el scroll existente)
     const clipObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if(entry.isIntersecting && entry.intersectionRatio > 0.7){
           const id = entry.target.dataset.id;
+          const channel = entry.target.querySelector('.handle .name')?.textContent?.trim();
+          registrarVistaCanal(channel);
           const vistos = getVistos();
           if(id && !vistos.includes(id)){
             addVisto(id);
@@ -2017,6 +2253,7 @@
 
     // Inicializar UI al cargar
     actualizarXPUI();
+    actualizarRankingUI();
     // ── FIN SISTEMA XP ────────────────────────────────
 
   </script>
