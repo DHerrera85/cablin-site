@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
@@ -7,1411 +8,2018 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+    rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#0b0620;
-      --pink:#ff4aa3;
-      --yellow:#ffd54a;
-      --cyan:#39d7ff;
-      --violet:#7a4dff;
-      --lime:#8dff7a;
-      --white:#ffffff;
-      --muted:rgba(255,255,255,.72);
-      --muted2:rgba(255,255,255,.55);
+    :root {
+      --bg: #0b0620;
+      --pink: #ff4aa3;
+      --yellow: #ffd54a;
+      --cyan: #39d7ff;
+      --violet: #7a4dff;
+      --lime: #8dff7a;
+      --white: #ffffff;
+      --muted: rgba(255, 255, 255, .72);
+      --muted2: rgba(255, 255, 255, .55);
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bot: env(safe-area-inset-bottom, 0px);
       --topbar-h: 50px;
       --strip-h: 0px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Fredoka", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--white);
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      font-family: "Fredoka", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--white);
       background:
-        radial-gradient(1200px 520px at 20% -10%, rgba(255,74,163,.22), transparent 60%),
-        radial-gradient(1000px 520px at 110% 10%, rgba(57,215,255,.14), transparent 60%),
-        radial-gradient(900px 600px at 50% 120%, rgba(122,77,255,.22), transparent 65%),
+        radial-gradient(1200px 520px at 20% -10%, rgba(255, 74, 163, .22), transparent 60%),
+        radial-gradient(1000px 520px at 110% 10%, rgba(57, 215, 255, .14), transparent 60%),
+        radial-gradient(900px 600px at 50% 120%, rgba(122, 77, 255, .22), transparent 65%),
         linear-gradient(180deg, #050311, var(--bg));
-      overflow:hidden;
+      overflow: hidden;
     }
 
-    .app{height:100%;width:100%;position:relative;display:flex;flex-direction:column}
-
-    .topbar{
-      position:fixed;top:0;left:0;right:0;z-index:50;
-      padding:calc(4px + var(--safe-top)) 10px 4px;
-      display:flex;align-items:center;justify-content:space-between;gap:8px;
-      pointer-events:none;
-      background:rgba(8,4,20,.80);
-      backdrop-filter:blur(16px) saturate(1.4);
-      border-bottom:1px solid rgba(255,255,255,.06);
+    .app {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column
     }
-    .topbar>*{pointer-events:auto}
 
-    .brand{display:flex;align-items:center;gap:0;min-width:0}
-    .logo{
-      width:32px;height:32px;border-radius:11px;
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: calc(4px + var(--safe-top)) 10px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      pointer-events: none;
+      background: rgba(8, 4, 20, .80);
+      backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .topbar>* {
+      pointer-events: auto
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      min-width: 0
+    }
+
+    .classic-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .18);
+      color: var(--white);
+      text-decoration: none;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+      backdrop-filter: blur(10px);
+      transition: background .15s ease, transform .15s ease;
+    }
+
+    .classic-link:hover {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .classic-link:active {
+      transform: scale(.97);
+    }
+
+    .classic-link svg {
+      flex: none;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
       background:
-        radial-gradient(16px 16px at 30% 30%, rgba(255,255,255,.25), transparent 60%),
+        radial-gradient(16px 16px at 30% 30%, rgba(255, 255, 255, .25), transparent 60%),
         linear-gradient(135deg, var(--yellow), var(--pink));
-      box-shadow:0 10px 25px rgba(255,74,163,.22);
-      display:grid;place-items:center;font-weight:900;color:#220a2c;letter-spacing:.5px;
-    }
-    .top-actions{display:flex;align-items:center;gap:8px}
-    .iconbtn{
-      width:34px;height:34px;border-radius:13px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.18);
-      backdrop-filter:blur(10px);
-      display:grid;place-items:center;
-      box-shadow:0 12px 30px rgba(0,0,0,.35);
-      color:var(--white);
-      cursor:pointer;
-    }
-    .iconbtn:active{transform:scale(.98)}
-    .iconbtn svg{display:block}
-
-    .feed{
-      height:100%;
-      width:100%;
-      overflow-y:auto;
-      scroll-snap-type:y mandatory;
-      scroll-snap-stop:always;
-      scroll-behavior:smooth;
-      scrollbar-width:none;
-      padding-top:calc(var(--topbar-h) + var(--strip-h) + var(--safe-top));
-      scroll-padding-top:calc(var(--topbar-h) + var(--strip-h) + var(--safe-top));
-      padding-bottom:calc(76px + var(--safe-bot));
-    }
-    .feed::-webkit-scrollbar{display:none}
-
-    .clip{
-      position:relative;
-      height:calc(100svh - var(--topbar-h) - var(--strip-h) - var(--safe-top) - 76px - var(--safe-bot));
-      width:100%;
-      scroll-snap-align:start;
-      overflow:hidden;
+      box-shadow: 0 10px 25px rgba(255, 74, 163, .22);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #220a2c;
+      letter-spacing: .5px;
     }
 
-    .video{
-      position:absolute;inset:0;
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .iconbtn {
+      width: 34px;
+      height: 34px;
+      border-radius: 13px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .18);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .iconbtn:active {
+      transform: scale(.98)
+    }
+
+    .iconbtn svg {
+      display: block
+    }
+
+    .feed {
+      height: 100%;
+      width: 100%;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-snap-stop: always;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding-top: calc(var(--topbar-h) + var(--strip-h) + var(--safe-top));
+      scroll-padding-top: calc(var(--topbar-h) + var(--strip-h) + var(--safe-top));
+      padding-bottom: calc(76px + var(--safe-bot));
+    }
+
+    .feed::-webkit-scrollbar {
+      display: none
+    }
+
+    .clip {
+      position: relative;
+      height: calc(100svh - var(--topbar-h) - var(--strip-h) - var(--safe-top) - 76px - var(--safe-bot));
+      width: 100%;
+      scroll-snap-align: start;
+      overflow: hidden;
+    }
+
+    .video {
+      position: absolute;
+      inset: 0;
       background:
-        radial-gradient(900px 460px at 50% 100%, rgba(0,0,0,.25), transparent 55%),
-        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.65));
-    }
-    .video::before{content:"";position:absolute;inset:-20%}
-
-    .series-stage{touch-action:pan-y}
-    .series-stage .series-video{
-      position:absolute;inset:0;
-      width:100%;height:100%;
-      object-fit:cover;
-      background:#000;
-    }
-    .series-stage .series-ui{
-      position:absolute;inset:0;
-      display:flex;flex-direction:column;justify-content:space-between;
-      padding:12px 12px 16px;
-      pointer-events:none;
-    }
-    .series-chip{
-      align-self:flex-start;
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.20);
-      backdrop-filter:blur(8px);
-      box-shadow:0 10px 24px rgba(0,0,0,.24);
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:11px;letter-spacing:.35px;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.88);
-      pointer-events:none;
-    }
-    .series-chip strong{color:var(--yellow)}
-    .series-nav{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      pointer-events:auto;
-    }
-    .series-audio-cta{
-      position:absolute;
-      left:50%;top:50%;
-      transform:translate(-50%,-50%);
-      display:none;
-      align-items:center;gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(0,0,0,.42);
-      backdrop-filter:blur(10px);
-      box-shadow:0 14px 32px rgba(0,0,0,.35);
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:12px;
-      color:rgba(255,255,255,.92);
-      pointer-events:auto;
-      cursor:pointer;
-      z-index:5;
-    }
-    .series-audio-cta.show{display:inline-flex}
-    .series-audio-cta svg{display:block}
-    .series-btn{
-      width:42px;height:42px;border-radius:16px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(0,0,0,.22);
-      backdrop-filter:blur(8px);
-      display:grid;place-items:center;
-      color:var(--white);
-      cursor:pointer;
-      box-shadow:0 10px 22px rgba(0,0,0,.28);
-    }
-    .series-btn:active{transform:scale(.97)}
-    .series-btn svg{display:block}
-    .series-counter{
-      min-width:66px;
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:7px 12px;border-radius:999px;
-      background:rgba(0,0,0,.22);
-      border:1px solid rgba(255,255,255,.12);
-      backdrop-filter:blur(8px);
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:11px;letter-spacing:.35px;
-      color:rgba(255,255,255,.82);
-      box-shadow:0 10px 22px rgba(0,0,0,.20);
+        radial-gradient(900px 460px at 50% 100%, rgba(0, 0, 0, .25), transparent 55%),
+        linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, .65));
     }
 
-    .clip[data-theme="cablin"] .video::before{
+    .video::before {
+      content: "";
+      position: absolute;
+      inset: -20%
+    }
+
+    .series-stage {
+      touch-action: pan-y
+    }
+
+    .series-stage .series-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .series-stage .series-ui {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 12px 12px 16px;
+      pointer-events: none;
+    }
+
+    .series-chip {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .20);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .24);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .88);
+      pointer-events: none;
+    }
+
+    .series-chip strong {
+      color: var(--yellow)
+    }
+
+    .series-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      pointer-events: auto;
+    }
+
+    .series-audio-cta {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      background: rgba(0, 0, 0, .42);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, .35);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .92);
+      pointer-events: auto;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .series-audio-cta.show {
+      display: inline-flex
+    }
+
+    .series-audio-cta svg {
+      display: block
+    }
+
+    .series-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      background: rgba(0, 0, 0, .22);
+      backdrop-filter: blur(8px);
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, .28);
+    }
+
+    .series-btn:active {
+      transform: scale(.97)
+    }
+
+    .series-btn svg {
+      display: block
+    }
+
+    .series-counter {
+      min-width: 66px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .22);
+      border: 1px solid rgba(255, 255, 255, .12);
+      backdrop-filter: blur(8px);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: .35px;
+      color: rgba(255, 255, 255, .82);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, .20);
+    }
+
+    .clip[data-theme="cablin"] .video::before {
       background:
-        radial-gradient(380px 220px at 25% 25%, rgba(255,213,74,.55), transparent 60%),
-        radial-gradient(440px 260px at 70% 30%, rgba(255,74,163,.55), transparent 60%),
-        radial-gradient(520px 320px at 50% 90%, rgba(57,215,255,.35), transparent 62%),
-        linear-gradient(135deg, rgba(122,77,255,.55), rgba(0,0,0,0));
+        radial-gradient(380px 220px at 25% 25%, rgba(255, 213, 74, .55), transparent 60%),
+        radial-gradient(440px 260px at 70% 30%, rgba(255, 74, 163, .55), transparent 60%),
+        radial-gradient(520px 320px at 50% 90%, rgba(57, 215, 255, .35), transparent 62%),
+        linear-gradient(135deg, rgba(122, 77, 255, .55), rgba(0, 0, 0, 0));
     }
-    .clip[data-theme="comic"] .video::before{
+
+    .clip[data-theme="comic"] .video::before {
       background:
-        radial-gradient(420px 240px at 20% 20%, rgba(141,255,122,.50), transparent 62%),
-        radial-gradient(420px 240px at 80% 35%, rgba(57,215,255,.52), transparent 62%),
-        radial-gradient(560px 320px at 50% 95%, rgba(255,74,163,.32), transparent 65%),
-        linear-gradient(135deg, rgba(255,213,74,.45), rgba(0,0,0,0));
+        radial-gradient(420px 240px at 20% 20%, rgba(141, 255, 122, .50), transparent 62%),
+        radial-gradient(420px 240px at 80% 35%, rgba(57, 215, 255, .52), transparent 62%),
+        radial-gradient(560px 320px at 50% 95%, rgba(255, 74, 163, .32), transparent 65%),
+        linear-gradient(135deg, rgba(255, 213, 74, .45), rgba(0, 0, 0, 0));
     }
-    .clip[data-theme="retro"] .video::before{
+
+    .clip[data-theme="retro"] .video::before {
       background:
-        radial-gradient(420px 240px at 18% 24%, rgba(122,77,255,.58), transparent 62%),
-        radial-gradient(460px 260px at 80% 35%, rgba(255,213,74,.38), transparent 62%),
-        radial-gradient(620px 360px at 55% 95%, rgba(255,74,163,.38), transparent 65%),
-        linear-gradient(135deg, rgba(57,215,255,.38), rgba(0,0,0,0));
+        radial-gradient(420px 240px at 18% 24%, rgba(122, 77, 255, .58), transparent 62%),
+        radial-gradient(460px 260px at 80% 35%, rgba(255, 213, 74, .38), transparent 62%),
+        radial-gradient(620px 360px at 55% 95%, rgba(255, 74, 163, .38), transparent 65%),
+        linear-gradient(135deg, rgba(57, 215, 255, .38), rgba(0, 0, 0, 0));
     }
 
-    .crt{
-      pointer-events:none;position:absolute;inset:0;
-      mix-blend-mode:overlay;opacity:.18;
-      background:repeating-linear-gradient(180deg, rgba(255,255,255,.12) 0 1px, rgba(0,0,0,0) 1px 3px);
-    }
-    .noise{
-      pointer-events:none;position:absolute;inset:0;opacity:.08;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
-      background-size:120px 120px;
+    .crt {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: overlay;
+      opacity: .18;
+      background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .12) 0 1px, rgba(0, 0, 0, 0) 1px 3px);
     }
 
-    @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:.75}}
-
-    .actions{
-      position:absolute;right:12px;
-      bottom:calc(34px + var(--safe-bot));
-      display:flex;flex-direction:column;align-items:center;gap:14px;z-index:20;
-    }
-    .act{width:54px;display:flex;flex-direction:column;align-items:center;gap:6px;user-select:none}
-    .actbtn{
-      width:50px;height:50px;border-radius:18px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.18);
-      backdrop-filter:blur(10px);
-      display:grid;place-items:center;font-size:20px;
-      box-shadow:0 14px 30px rgba(0,0,0,.35);
-      color:var(--white);
-      cursor:pointer;
-    }
-    .actbtn:active{transform:scale(.98)}
-    .actbtn svg{display:block}
-    .actbtn[data-action="like"].liked svg{fill:var(--pink);stroke:var(--pink)}
-    .count{
-      font-family:"Nunito", system-ui, sans-serif;
-      font-weight:900;font-size:12px;color:var(--muted);
-      text-shadow:0 2px 10px rgba(0,0,0,.6);
-      text-align:center;
+    .noise {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      opacity: .08;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+      background-size: 120px 120px;
     }
 
-    .meta{
-      position:absolute;left:14px;right:86px;
-      bottom:calc(20px + var(--safe-bot));
-      z-index:20;display:flex;flex-direction:column;gap:6px;
-    }
-    .who{display:flex;align-items:center;gap:10px;min-width:0}
-    .avatar{
-      width:44px;height:44px;border-radius:18px;
-      background:linear-gradient(135deg, var(--yellow), var(--pink));
-      border:1px solid rgba(255,255,255,.20);
-      box-shadow:0 14px 28px rgba(0,0,0,.35);
-      display:grid;place-items:center;color:#240a2f;font-weight:1000;letter-spacing:.3px;
-      overflow:hidden;
-    }
-    .avatar img{width:100%;height:100%;object-fit:cover}
-    .handle{min-width:0;display:flex;flex-direction:column;gap:2px}
-    .handle .name{
-      font-weight:1000;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-      text-shadow:0 2px 14px rgba(0,0,0,.65);
-    }
-    .handle .desc{
-      font-family:"Nunito", system-ui, sans-serif;
-      font-weight:900;font-size:12px;color:var(--muted2);
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-      text-shadow:0 2px 14px rgba(0,0,0,.65);
-      display:none;
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1
+      }
+
+      50% {
+        transform: scale(1.12);
+        opacity: .75
+      }
     }
 
-    .caption{
-      border-radius:18px;border:1px solid rgba(255,255,255,.08);
-      background:rgba(0,0,0,.16);
-      backdrop-filter:blur(6px);
-      padding:12px;
-      box-shadow:0 10px 24px rgba(0,0,0,.24);
-      display:none;
+    .actions {
+      position: absolute;
+      right: 12px;
+      bottom: calc(34px + var(--safe-bot));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      z-index: 20;
     }
-    .caption .title{font-weight:1000;font-size:14px;line-height:1.2}
-    .tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px;font-size:12px;color:var(--muted);font-weight:900}
-    .tag{padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06)}
 
-    .bottomnav{
-      position:fixed;left:0;right:0;bottom:0;z-index:60;
-      padding:10px 12px calc(10px + var(--safe-bot));
-      background:rgba(0,0,0,.35);
-      border-top:1px solid rgba(255,255,255,.12);
-      backdrop-filter:blur(12px);
+    .act {
+      width: 54px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      user-select: none
     }
-    .navrow{
-      display:grid;grid-template-columns:repeat(3,1fr);
-      gap:8px;align-items:center;
-      max-width:520px;margin:0 auto;
-    }
-    .navbtn{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.06);
-      border-radius:18px;
-      padding:10px 8px;
-      display:flex;flex-direction:column;align-items:center;gap:6px;
-      font-weight:1000;color:var(--muted);font-size:11px;
-      user-select:none;
-      cursor:pointer;
-    }
-    .navbtn strong{font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center}
-    .navbtn strong svg{display:block}
-    .navbtn.active{
-      background:linear-gradient(135deg, rgba(255,213,74,.22), rgba(255,74,163,.18));
-      border-color:rgba(255,74,163,.35);
-      color:var(--white);
-      box-shadow:0 16px 34px rgba(255,74,163,.12);
-    }
-    .navbtn:active{transform:scale(.99)}
 
-    .sheet,.toast{position:fixed;left:0;right:0;z-index:80;display:none}
-    .sheet{
-      bottom:0;
-      padding:14px 14px calc(14px + var(--safe-bot));
-      background:rgba(10,6,28,.92);
-      backdrop-filter:blur(14px);
-      border-top:1px solid rgba(255,255,255,.14);
-      border-radius:22px 22px 0 0;
-      box-shadow:0 -30px 70px rgba(0,0,0,.55);
-      max-width:680px;margin:0 auto;
+    .actbtn {
+      width: 50px;
+      height: 50px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .18);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, .35);
+      color: var(--white);
+      cursor: pointer;
     }
-    .sheet.open{display:block}
-    .sheethead{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .sheettitle{font-weight:1000;display:flex;align-items:center;gap:10px}
-    .pill{
-      padding:8px 10px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      font-size:12px;color:var(--muted);font-weight:900;
-    }
-    .close{
-      width:44px;height:44px;border-radius:16px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      display:grid;place-items:center;font-size:18px;
-    }
-    .close:active{transform:scale(.98)}
 
-    .grid{margin-top:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-    .pcard{
-      border-radius:18px;border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      overflow:hidden;padding:10px;
-      display:flex;flex-direction:column;gap:8px;
+    .actbtn:active {
+      transform: scale(.98)
     }
-    .pimg{
-      height:64px;border-radius:14px;
+
+    .actbtn svg {
+      display: block
+    }
+
+    .actbtn[data-action="like"].liked svg {
+      fill: var(--pink);
+      stroke: var(--pink)
+    }
+
+    .count {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--muted);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .6);
+      text-align: center;
+    }
+
+    .meta {
+      position: absolute;
+      left: 14px;
+      right: 86px;
+      bottom: calc(20px + var(--safe-bot));
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .who {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--yellow), var(--pink));
+      border: 1px solid rgba(255, 255, 255, .20);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      color: #240a2f;
+      font-weight: 1000;
+      letter-spacing: .3px;
+      overflow: hidden;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .handle {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .handle .name {
+      font-weight: 1000;
+      font-size: 16px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .65);
+    }
+
+    .handle .desc {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--muted2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .65);
+      display: none;
+    }
+
+    .caption {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(0, 0, 0, .16);
+      backdrop-filter: blur(6px);
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .24);
+      display: none;
+    }
+
+    .caption .title {
+      font-weight: 1000;
+      font-size: 14px;
+      line-height: 1.2
+    }
+
+    .tags {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .bottomnav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      padding: 10px 12px calc(10px + var(--safe-bot));
+      background: rgba(0, 0, 0, .35);
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      backdrop-filter: blur(12px);
+    }
+
+    .navrow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      align-items: center;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .navbtn {
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .06);
+      border-radius: 18px;
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-weight: 1000;
+      color: var(--muted);
+      font-size: 11px;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .navbtn strong {
+      font-size: 18px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .navbtn strong svg {
+      display: block
+    }
+
+    .navbtn.active {
+      background: linear-gradient(135deg, rgba(255, 213, 74, .22), rgba(255, 74, 163, .18));
+      border-color: rgba(255, 74, 163, .35);
+      color: var(--white);
+      box-shadow: 0 16px 34px rgba(255, 74, 163, .12);
+    }
+
+    .navbtn:active {
+      transform: scale(.99)
+    }
+
+    .sheet,
+    .toast {
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: 80;
+      display: none
+    }
+
+    .sheet {
+      bottom: 0;
+      padding: 14px 14px calc(14px + var(--safe-bot));
+      background: rgba(10, 6, 28, .92);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 22px 22px 0 0;
+      box-shadow: 0 -30px 70px rgba(0, 0, 0, .55);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .sheet.open {
+      display: block
+    }
+
+    .sheethead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .sheettitle {
+      font-weight: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .pill {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .close {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .close:active {
+      transform: scale(.98)
+    }
+
+    .grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px
+    }
+
+    .pcard {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      overflow: hidden;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pimg {
+      height: 64px;
+      border-radius: 14px;
       background:
-        radial-gradient(60px 40px at 25% 25%, rgba(255,213,74,.55), transparent 60%),
-        radial-gradient(60px 40px at 80% 45%, rgba(57,215,255,.45), transparent 60%),
-        linear-gradient(135deg, rgba(122,77,255,.45), rgba(255,74,163,.25));
-      border:1px solid rgba(255,255,255,.12);
-      overflow:hidden;
-      display:flex;align-items:center;justify-content:center;
+        radial-gradient(60px 40px at 25% 25%, rgba(255, 213, 74, .55), transparent 60%),
+        radial-gradient(60px 40px at 80% 45%, rgba(57, 215, 255, .45), transparent 60%),
+        linear-gradient(135deg, rgba(122, 77, 255, .45), rgba(255, 74, 163, .25));
+      border: 1px solid rgba(255, 255, 255, .12);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .pimg img{width:auto;height:100%;object-fit:contain}
-    .ptxt{font-family:"Nunito", system-ui, sans-serif;font-weight:900;font-size:12px;color:var(--muted);line-height:1.1}
 
-    .toast{top:calc(10px + var(--safe-top));text-align:center;pointer-events:none}
-    .toast span{
-      display:inline-block;max-width:86vw;
-      padding:10px 14px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.55);
-      backdrop-filter:blur(10px);
-      font-family:"Nunito", system-ui, sans-serif;font-weight:900;font-size:12px;color:var(--muted);
-      box-shadow:0 16px 40px rgba(0,0,0,.45);
-      opacity:0;transform:translateY(-6px);
-      transition:opacity .18s ease, transform .18s ease;
+    .pimg img {
+      width: auto;
+      height: 100%;
+      object-fit: contain
     }
-    .toast.show span{opacity:1;transform:translateY(0)}
 
-    @media (min-width: 760px){
-      .feed{max-width:520px;margin:0 auto;border-left:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08)}
-      .topbar{max-width:520px;margin:0 auto}
-      .bottomnav{background:rgba(0,0,0,.42)}
+    .ptxt {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.1
+    }
+
+    .toast {
+      top: calc(10px + var(--safe-top));
+      text-align: center;
+      pointer-events: none
+    }
+
+    .toast span {
+      display: inline-block;
+      max-width: 86vw;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(10px);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--muted);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .45);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity .18s ease, transform .18s ease;
+    }
+
+    .toast.show span {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    @media (min-width: 760px) {
+      .feed {
+        max-width: 520px;
+        margin: 0 auto;
+        border-left: 1px solid rgba(255, 255, 255, .08);
+        border-right: 1px solid rgba(255, 255, 255, .08)
+      }
+
+      .topbar {
+        max-width: 520px;
+        margin: 0 auto
+      }
+
+      .bottomnav {
+        background: rgba(0, 0, 0, .42)
+      }
     }
 
     /* ── Sistema XP / Niveles ─────────────────────────── */
 
     /* Chip de XP en el topbar */
-    .xp-chip{
-      display:flex;align-items:center;gap:5px;
-      padding:3px 7px;border-radius:999px;
-      border:1px solid rgba(255,213,74,.30);
-      background:rgba(255,213,74,.10);
-      backdrop-filter:blur(8px);
-      cursor:pointer;
-      transition:background .2s;
+    .xp-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 213, 74, .30);
+      background: rgba(255, 213, 74, .10);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      transition: background .2s;
     }
-    .xp-chip:active{transform:scale(.97)}
-    .xp-chip-icon{
-      width:16px;height:16px;border-radius:6px;
-      background:linear-gradient(135deg,var(--yellow),var(--pink));
-      display:grid;place-items:center;flex-shrink:0;overflow:hidden;
+
+    .xp-chip:active {
+      transform: scale(.97)
     }
-    .xp-chip-icon img{width:100%;height:100%;object-fit:contain}
-    .xp-chip-pts{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:11px;
-      color:var(--yellow);
-      white-space:nowrap;
+
+    .xp-chip-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--yellow), var(--pink));
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .xp-chip-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain
+    }
+
+    .xp-chip-pts {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      color: var(--yellow);
+      white-space: nowrap;
     }
 
     /* Sheet de nivel (mismo base que .sheet) */
-    #sheetXP{
-      bottom:0;
-      padding:18px 16px calc(18px + var(--safe-bot));
-      background:rgba(10,6,28,.96);
-      backdrop-filter:blur(16px);
-      border-top:1px solid rgba(255,213,74,.20);
-      border-radius:24px 24px 0 0;
-      box-shadow:0 -30px 70px rgba(0,0,0,.65);
-      max-width:680px;margin:0 auto;
+    #sheetXP {
+      bottom: 0;
+      padding: 18px 16px calc(18px + var(--safe-bot));
+      background: rgba(10, 6, 28, .96);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 213, 74, .20);
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -30px 70px rgba(0, 0, 0, .65);
+      max-width: 680px;
+      margin: 0 auto;
     }
 
     /* Cabecera del sheet */
-    .xp-titulo{font-weight:900;font-size:18px;line-height:1.1;margin:0}
-    .xp-nivel-badge{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:5px 12px;border-radius:999px;
-      background:linear-gradient(135deg,rgba(255,213,74,.22),rgba(255,74,163,.18));
-      border:1px solid rgba(255,213,74,.30);
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:12px;letter-spacing:.4px;text-transform:uppercase;
-      color:var(--yellow);
+    .xp-titulo {
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 1.1;
+      margin: 0
+    }
+
+    .xp-nivel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 213, 74, .22), rgba(255, 74, 163, .18));
+      border: 1px solid rgba(255, 213, 74, .30);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      color: var(--yellow);
     }
 
     /* Barra de progreso estilo Mostaza */
-    .xp-track-wrap{
-      position:relative;
-      margin:20px 0 10px;
-      padding:0 10px;
+    .xp-track-wrap {
+      position: relative;
+      margin: 20px 0 10px;
+      padding: 0 10px;
     }
-    .xp-labels{
-      display:flex;justify-content:space-between;
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:10px;letter-spacing:.4px;text-transform:uppercase;
-      color:var(--muted2);
-      margin-bottom:6px;
+
+    .xp-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 10px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin-bottom: 6px;
     }
-    .xp-labels span.active-nivel{color:var(--yellow)}
-    .xp-track{
-      height:8px;border-radius:999px;
-      background:rgba(255,255,255,.10);
-      position:relative;overflow:visible;
+
+    .xp-labels span.active-nivel {
+      color: var(--yellow)
     }
-    .xp-track-fill{
-      height:100%;border-radius:999px;
-      background:linear-gradient(90deg,var(--violet),var(--pink),var(--yellow));
-      transition:width .6s cubic-bezier(.34,1.56,.64,1);
-      position:relative;
+
+    .xp-track {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .10);
+      position: relative;
+      overflow: visible;
     }
+
+    .xp-track-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--violet), var(--pink), var(--yellow));
+      transition: width .6s cubic-bezier(.34, 1.56, .64, 1);
+      position: relative;
+    }
+
     /* Logo Cablin deslizándose sobre la barra */
-    .xp-mascot{
-      position:absolute;
-      top:50%;right:-14px;
-      transform:translateY(-50%);
-      width:28px;height:28px;border-radius:10px;
-      background:linear-gradient(135deg,var(--yellow),var(--pink));
-      border:2px solid rgba(255,255,255,.30);
-      box-shadow:0 4px 14px rgba(255,74,163,.45),0 0 0 4px rgba(255,213,74,.12);
-      display:grid;place-items:center;overflow:hidden;
-      transition:right .6s cubic-bezier(.34,1.56,.64,1);
+    .xp-mascot {
+      position: absolute;
+      top: 50%;
+      right: -14px;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--yellow), var(--pink));
+      border: 2px solid rgba(255, 255, 255, .30);
+      box-shadow: 0 4px 14px rgba(255, 74, 163, .45), 0 0 0 4px rgba(255, 213, 74, .12);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      transition: right .6s cubic-bezier(.34, 1.56, .64, 1);
     }
-    .xp-mascot img{width:100%;height:100%;object-fit:contain}
+
+    .xp-mascot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain
+    }
+
     /* Hitos (checkpoints) */
-    .xp-milestones{
-      display:flex;justify-content:space-between;
-      margin-top:12px;gap:6px;
+    .xp-milestones {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      gap: 6px;
     }
-    .xp-milestone{
-      flex:1;border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      padding:10px 8px;
-      display:flex;flex-direction:column;align-items:center;gap:4px;
-      position:relative;
+
+    .xp-milestone {
+      flex: 1;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .04);
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      position: relative;
     }
-    .xp-milestone.desbloqueado{
-      border-color:rgba(255,213,74,.30);
-      background:rgba(255,213,74,.08);
+
+    .xp-milestone.desbloqueado {
+      border-color: rgba(255, 213, 74, .30);
+      background: rgba(255, 213, 74, .08);
     }
-    .xp-milestone-icon{font-size:20px;line-height:1}
-    .xp-milestone-label{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:9px;letter-spacing:.4px;text-transform:uppercase;
-      color:var(--muted2);text-align:center;
+
+    .xp-milestone-icon {
+      font-size: 20px;
+      line-height: 1
     }
-    .xp-milestone.desbloqueado .xp-milestone-label{color:var(--yellow)}
-    .xp-milestone-pts{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:10px;color:var(--muted2);
+
+    .xp-milestone-label {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 9px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      color: var(--muted2);
+      text-align: center;
     }
-    .xp-milestone.desbloqueado .xp-milestone-pts{color:var(--white)}
+
+    .xp-milestone.desbloqueado .xp-milestone-label {
+      color: var(--yellow)
+    }
+
+    .xp-milestone-pts {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 10px;
+      color: var(--muted2);
+    }
+
+    .xp-milestone.desbloqueado .xp-milestone-pts {
+      color: var(--white)
+    }
+
     /* check sobre el milestone desbloqueado */
-    .xp-milestone.desbloqueado::after{
-      content:"✓";
-      position:absolute;top:-7px;right:-5px;
-      width:16px;height:16px;border-radius:50%;
-      background:var(--yellow);color:#220a2c;
-      font-size:9px;font-weight:900;
-      display:grid;place-items:center;
+    .xp-milestone.desbloqueado::after {
+      content: "✓";
+      position: absolute;
+      top: -7px;
+      right: -5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: #220a2c;
+      font-size: 9px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
     }
 
     /* Acciones de XP */
-    .xp-acciones{
-      margin-top:16px;
-      display:flex;flex-direction:column;gap:8px;
+    .xp-acciones {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .xp-accion-row{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      padding:10px 12px;border-radius:16px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.04);
+
+    .xp-accion-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(255, 255, 255, .04);
     }
-    .xp-accion-info{display:flex;align-items:center;gap:8px}
-    .xp-accion-ico{font-size:18px;line-height:1}
-    .xp-accion-txt{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:800;font-size:12px;color:var(--muted);
+
+    .xp-accion-info {
+      display: flex;
+      align-items: center;
+      gap: 8px
     }
-    .xp-accion-pts{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:12px;
-      color:var(--yellow);
-      background:rgba(255,213,74,.12);
-      border:1px solid rgba(255,213,74,.20);
-      padding:3px 8px;border-radius:999px;
-      white-space:nowrap;
+
+    .xp-accion-ico {
+      font-size: 18px;
+      line-height: 1
+    }
+
+    .xp-accion-txt {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .xp-accion-pts {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--yellow);
+      background: rgba(255, 213, 74, .12);
+      border: 1px solid rgba(255, 213, 74, .20);
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
     }
 
     /* Ranking semanal de canales */
-    #sheetRanking{
-      padding:16px 14px calc(16px + var(--safe-bot));
+    #sheetRanking {
+      padding: 16px 14px calc(16px + var(--safe-bot));
       background:
-        radial-gradient(500px 260px at 20% -15%, rgba(57,215,255,.14), transparent 60%),
-        linear-gradient(180deg, rgba(8,11,64,.96), rgba(7,6,26,.97));
-      border-top:1px solid rgba(57,215,255,.20);
-      max-height:78svh;
-      overflow:auto;
+        radial-gradient(500px 260px at 20% -15%, rgba(57, 215, 255, .14), transparent 60%),
+        linear-gradient(180deg, rgba(8, 11, 64, .96), rgba(7, 6, 26, .97));
+      border-top: 1px solid rgba(57, 215, 255, .20);
+      max-height: 78svh;
+      overflow: auto;
     }
-    .ranking-headline{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
-    .ranking-kicker{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:900;font-size:11px;letter-spacing:.45px;text-transform:uppercase;
-      color:rgba(255,255,255,.7);
+
+    .ranking-headline {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 12px
     }
-    .ranking-title{font-weight:1000;font-size:22px;line-height:1;color:#f2f5ff}
-    .ranking-subtitle{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:800;font-size:12px;
-      color:rgba(255,255,255,.76);
+
+    .ranking-kicker {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: .45px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .7);
     }
-    .ranking-subtitle strong{color:var(--yellow)}
-    .ranking-table{
-      display:flex;flex-direction:column;gap:8px;
+
+    .ranking-title {
+      font-weight: 1000;
+      font-size: 22px;
+      line-height: 1;
+      color: #f2f5ff
     }
-    .ranking-row{
-      display:grid;
-      grid-template-columns:36px minmax(0,1fr) auto;
-      gap:10px;align-items:center;
-      border-radius:16px;
-      padding:10px 12px;
-      border:1px solid rgba(122,77,255,.30);
-      background:linear-gradient(90deg, rgba(30,50,173,.65), rgba(20,31,116,.68));
-      box-shadow:0 10px 24px rgba(0,0,0,.25);
+
+    .ranking-subtitle {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .76);
     }
-    .ranking-pos{
-      width:28px;height:28px;border-radius:50%;
-      display:grid;place-items:center;
-      font-family:"Nunito",system-ui,sans-serif;
-      font-size:14px;font-weight:900;
-      color:#fff;
-      background:linear-gradient(135deg, #ff5574, #ff3c95);
-      border:1px solid rgba(255,255,255,.25);
+
+    .ranking-subtitle strong {
+      color: var(--yellow)
     }
-    .ranking-channel{
-      min-width:0;
-      display:flex;flex-direction:column;gap:2px;
+
+    .ranking-table {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .ranking-handle{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-size:14px;font-weight:900;
-      color:#f5f8ff;
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+
+    .ranking-row {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      border-radius: 16px;
+      padding: 10px 12px;
+      border: 1px solid rgba(122, 77, 255, .30);
+      background: linear-gradient(90deg, rgba(30, 50, 173, .65), rgba(20, 31, 116, .68));
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
     }
-    .ranking-meta{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-size:11px;font-weight:800;
-      color:rgba(255,255,255,.68);
+
+    .ranking-pos {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, #ff5574, #ff3c95);
+      border: 1px solid rgba(255, 255, 255, .25);
     }
-    .ranking-views{
-      font-family:"Nunito",system-ui,sans-serif;
-      font-size:16px;font-weight:900;
-      color:#8dff7a;
-      text-shadow:0 2px 10px rgba(0,0,0,.35);
-      white-space:nowrap;
+
+    .ranking-channel {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
-    .ranking-footnote{
-      margin-top:12px;
-      font-family:"Nunito",system-ui,sans-serif;
-      font-weight:800;font-size:11px;
-      color:rgba(255,255,255,.62);
-      line-height:1.25;
+
+    .ranking-handle {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      color: #f5f8ff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ranking-meta {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, .68);
+    }
+
+    .ranking-views {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      color: #8dff7a;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .35);
+      white-space: nowrap;
+    }
+
+    .ranking-footnote {
+      margin-top: 12px;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      color: rgba(255, 255, 255, .62);
+      line-height: 1.25;
     }
   </style>
 </head>
 
 <body>
   <div class="app">
-    <div class="topbar" aria-label="Cablin top bar">
-      <div class="brand">
-        <div class="logo" title="Cablin">
-          <img src="img/logos/cablin-logo.png" alt="Cablin" style="width:100%;height:100%;object-fit:contain;">
+    <div class="brand">
+      <div class="logo" title="Cablin">
+        <img src="img/logos/cablin-logo.png" alt="Cablin" style="width:100%;height:100%;object-fit:contain;">
+      </div>
+
+      <a href="https://dherrera85.github.io/cablin-site/" class="classic-link" title="Ir a Cablín clásico"
+        aria-label="Ir a la página clásica de Cablín">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>Cablín clásico</span>
+      </a>
+    </div>
+    <button class="iconbtn" id="btnPersonajes" title="Personajes">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+    </button>
+    <button class="iconbtn" id="btnBuscar" title="Buscar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+    </button>
+    <button class="iconbtn" id="btnRanking" title="Ranking semanal" aria-label="Ver ranking semanal">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 20V10"></path>
+        <path d="M12 20V4"></path>
+        <path d="M6 20v-6"></path>
+      </svg>
+    </button>
+    <!-- Chip XP -->
+    <button class="xp-chip" id="btnXP" title="Mi nivel" aria-label="Ver mi nivel">
+      <div class="xp-chip-icon">
+        <img src="img/logos/cablin-logo.png" alt="Cablin XP">
+      </div>
+      <span class="xp-chip-pts" id="xpChipPts">0 pts</span>
+    </button>
+  </div>
+  </div>
+
+  <main class="feed" id="feed" aria-label="Feed de shorts">
+    <section class="clip" data-theme="cablin" data-id="c1" data-canal="anime">
+      <div class="video series-stage" id="caballerosStage" aria-label="Serie Caballeros del Zodiaco">
+        <video class="series-video" id="caballerosVideo" preload="metadata"></video>
+        <div class="series-ui">
+          <div class="series-chip" id="caballerosMeta"><strong>Caballeros</strong> • Opening</div>
+          <div class="series-nav">
+            <button class="series-btn" id="caballerosPrev" aria-label="Clip anterior">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="series-counter" id="caballerosCounter">1/1</div>
+            <button class="series-btn" id="caballerosNext" aria-label="Clip siguiente">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-      <div class="top-actions">
-        <button class="iconbtn" id="btnPersonajes" title="Personajes">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="crt"></div>
+      <div class="noise"></div>
+
+      <div class="actions">
+        <div class="act">
+          <button class="actbtn" data-action="like" aria-label="Me gusta">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
+          </button>
+          <div class="count" data-count="like">12.4K</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="comment" aria-label="Comentarios">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+          <div class="count">321</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="share" aria-label="Compartir">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+          </button>
+          <div class="count">Compartir</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="more" aria-label="Más">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="1"></circle>
+              <circle cx="12" cy="5" r="1"></circle>
+              <circle cx="12" cy="19" r="1"></circle>
+            </svg>
+          </button>
+          <div class="count">Más</div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="who">
+          <div class="avatar">
+            <img src="img/round/saint-seiya-150x150.png" alt="Caballeros del Zodíaco">
+          </div>
+          <div class="handle">
+            <div class="name">@caballeros_zodiaco</div>
+            <div class="desc">Pegaso con su Cosmo ardiente ⚡</div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="title">¡Pegaso Meteoro de Pegaso! 🌠 El poder del Cosmo en acción 💫</div>
+          <div class="tags">
+            <span class="tag">#Cablin</span>
+            <span class="tag">#SaintSeiya</span>
+            <span class="tag">#Anime90s</span>
+            <span class="tag">#Nostalgia</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clip" data-theme="comic" data-id="c2" data-canal="accion">
+      <div class="video series-stage" id="sonicStage" aria-label="Serie Sonic">
+        <video class="series-video" id="sonicVideo" preload="metadata"></video>
+        <div class="series-ui">
+          <div class="series-chip" id="sonicMeta"><strong>Sonic</strong> • Opening</div>
+          <div class="series-nav">
+            <button class="series-btn" id="sonicPrev" aria-label="Clip anterior">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="series-counter" id="sonicCounter">1/2</div>
+            <button class="series-btn" id="sonicNext" aria-label="Clip siguiente">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="crt"></div>
+      <div class="noise"></div>
+
+      <div class="actions">
+        <div class="act">
+          <button class="actbtn" data-action="like" aria-label="Me gusta">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
+          </button>
+          <div class="count" data-count="like">8.1K</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="comment" aria-label="Comentarios">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+          <div class="count">187</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="share" aria-label="Compartir">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+          </button>
+          <div class="count">Compartir</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="vote" aria-label="Votar">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 15h10M7 11h10M7 7h4"></path>
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            </svg>
+          </button>
+          <div class="count">Votá</div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="who">
+          <div class="avatar" style="background:linear-gradient(135deg,var(--cyan),var(--lime));">
+            <img src="img/round/sonic-150x150.png" alt="Sonic">
+          </div>
+          <div class="handle">
+            <div class="name">@sonic</div>
+            <div class="desc">Gotta go fast! 💨</div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="title">¡Sonic corriendo a toda velocidad! 🦔💨 ¿Podrás seguirle el ritmo?</div>
+          <div class="tags">
+            <span class="tag">#Sonic</span>
+            <span class="tag">#Velocidad</span>
+            <span class="tag">#Cablin90s</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clip" data-theme="retro" data-id="c3" data-canal="anime">
+      <div class="video series-stage" id="sailorMoonStage" aria-label="Serie Sailor Moon">
+        <video class="series-video" id="sailorMoonVideo" preload="metadata"></video>
+        <div class="series-ui">
+          <div class="series-chip" id="sailorMoonMeta"><strong>Sailor Moon</strong> • Opening</div>
+          <div class="series-nav">
+            <button class="series-btn" id="sailorPrev" aria-label="Clip anterior">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="series-counter" id="sailorCounter">1/3</div>
+            <button class="series-btn" id="sailorNext" aria-label="Clip siguiente">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="crt"></div>
+      <div class="noise"></div>
+
+      <div class="actions">
+        <div class="act">
+          <button class="actbtn" data-action="like" aria-label="Me gusta">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
+          </button>
+          <div class="count" data-count="like">22.0K</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="comment" aria-label="Comentarios">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+          <div class="count">902</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="share" aria-label="Compartir">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+          </button>
+          <div class="count">Compartir</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </button>
+          <div class="count">Perfil</div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="who">
+          <div class="avatar" style="background:linear-gradient(135deg,var(--violet),var(--yellow));">
+            <img src="img/round/sailor-moon-150x150.png" alt="Sailor Moon">
+          </div>
+          <div class="handle">
+            <div class="name">@sailor_moon</div>
+            <div class="desc">¡En el nombre de la Luna! 🌙✨</div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="title">"¡Castigo Lunar!" 🌙💖 Sailor Moon transforma y defiende el amor</div>
+          <div class="tags">
+            <span class="tag">#SailorMoon</span>
+            <span class="tag">#MagicalGirl</span>
+            <span class="tag">#Anime</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clip" data-theme="cablin" data-id="c4" data-canal="accion">
+      <div class="video" role="img" aria-label="Clip demo 4"></div>
+      <div class="crt"></div>
+      <div class="noise"></div>
+
+      <div class="actions">
+        <div class="act">
+          <button class="actbtn" data-action="like" aria-label="Me gusta">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
+          </button>
+          <div class="count" data-count="like">15.2K</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="comment" aria-label="Comentarios">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+          <div class="count">542</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="share" aria-label="Compartir">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+          </button>
+          <div class="count">Compartir</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </button>
+          <div class="count">Perfil</div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="who">
+          <div class="avatar" style="background:linear-gradient(135deg,var(--pink),var(--violet));">
+            <img src="img/round/action-man-150x150.png" alt="Action Man">
+          </div>
+          <div class="handle">
+            <div class="name">@action_man</div>
+            <div class="desc">¡Siempre listo para la acción! 💪</div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="title">¡Misión extrema! Action Man en su mejor momento 🚁💥</div>
+          <div class="tags">
+            <span class="tag">#ActionMan</span>
+            <span class="tag">#Héroe</span>
+            <span class="tag">#Aventura</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clip" data-theme="comic" data-id="c5" data-canal="humor">
+      <div class="video" role="img" aria-label="Clip demo 5"></div>
+      <div class="crt"></div>
+      <div class="noise"></div>
+
+      <div class="actions">
+        <div class="act">
+          <button class="actbtn" data-action="like" aria-label="Me gusta">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
+          </button>
+          <div class="count" data-count="like">9.8K</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="comment" aria-label="Comentarios">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+          <div class="count">234</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="share" aria-label="Compartir">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+          </button>
+          <div class="count">Compartir</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="more" aria-label="Más">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="1"></circle>
+              <circle cx="12" cy="5" r="1"></circle>
+              <circle cx="12" cy="19" r="1"></circle>
+            </svg>
+          </button>
+          <div class="count">Más</div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="who">
+          <div class="avatar" style="background:linear-gradient(135deg,var(--yellow),var(--cyan));">
+            <img src="img/round/garfield-and-friends-150x150.png" alt="Garfield">
+          </div>
+          <div class="handle">
+            <div class="name">@garfield</div>
+            <div class="desc">Amante de la lasaña 🍝😺</div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="title">¡Garfield odia los lunes! 😾☕ Momento clásico del gato más perezoso</div>
+          <div class="tags">
+            <span class="tag">#Garfield</span>
+            <span class="tag">#Comedia</span>
+            <span class="tag">#Lunes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clip" data-theme="retro" data-id="c6" data-canal="bumpers">
+      <div class="video" role="img" aria-label="Clip demo 6"></div>
+      <div class="crt"></div>
+      <div class="noise"></div>
+
+      <div class="actions">
+        <div class="act">
+          <button class="actbtn" data-action="like" aria-label="Me gusta">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
+          </button>
+          <div class="count" data-count="like">18.5K</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="comment" aria-label="Comentarios">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+          <div class="count">678</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="share" aria-label="Compartir">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+              <polyline points="16 6 12 2 8 6"></polyline>
+              <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+          </button>
+          <div class="count">Compartir</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="vote" aria-label="Votar">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 15h10M7 11h10M7 7h4"></path>
+              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+            </svg>
+          </button>
+          <div class="count">Votá</div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="who">
+          <div class="avatar" style="background:linear-gradient(135deg,var(--lime),var(--pink));">
+            <img src="img/round/super-mario-bros-150x150.png" alt="Super Mario">
+          </div>
+          <div class="handle">
+            <div class="name">@super_mario_bros</div>
+            <div class="desc">¡It's-a me, Mario! 🍄</div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="title">¡Mario salva a la princesa una vez más! 🍄👑 Aventura clásica</div>
+          <div class="tags">
+            <span class="tag">#Mario</span>
+            <span class="tag">#Nintendo</span>
+            <span class="tag">#Retro</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clip" data-theme="retro" data-id="c7" data-canal="humor">
+      <div class="video series-stage" id="jemStage" aria-label="Serie Jem and the Holograms">
+        <video class="series-video" id="jemVideo" preload="metadata"></video>
+        <div class="series-ui">
+          <div class="series-chip" id="jemMeta"><strong>Jem</strong> • Opening 1/1</div>
+        </div>
+      </div>
+      <div class="crt"></div>
+      <div class="noise"></div>
+
+      <div class="actions">
+        <div class="act">
+          <button class="actbtn" data-action="like" aria-label="Me gusta">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
+          </button>
+          <div class="count" data-count="like">7.2K</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="comment" aria-label="Comentarios">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+          <div class="count">245</div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="who">
+          <div class="avatar">
+            <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
+          </div>
+          <div class="handle">
+            <div class="name">@jem_holograms</div>
+            <div class="desc">Truly outrageous 🎤✨</div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="title">Jem and the Holograms — Opening</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clip" data-theme="comic" data-id="c8" data-canal="humor">
+      <div class="video series-stage" id="aladdinStage" aria-label="Serie Aladdin">
+        <video class="series-video" id="aladdinVideo" preload="metadata"></video>
+        <div class="series-ui">
+          <div class="series-chip" id="aladdinMeta"><strong>Aladdin</strong> • Opening</div>
+          <div class="series-nav">
+            <button class="series-btn" id="aladdinPrev" aria-label="Clip anterior">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <div class="series-counter" id="aladdinCounter">1/2</div>
+            <button class="series-btn" id="aladdinNext" aria-label="Clip siguiente">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="crt"></div>
+      <div class="noise"></div>
+
+      <div class="actions">
+        <div class="act">
+          <button class="actbtn" data-action="like" aria-label="Me gusta">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
+          </button>
+          <div class="count" data-count="like">6.6K</div>
+        </div>
+        <div class="act">
+          <button class="actbtn" data-action="comment" aria-label="Comentarios">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </button>
+          <div class="count">188</div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="who">
+          <div class="avatar">
+            <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
+          </div>
+          <div class="handle">
+            <div class="name">@aladdin</div>
+            <div class="desc">Un mundo ideal 🧞</div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="title">Aladdin — Opening</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottomnav" aria-label="Navegación inferior">
+    <div class="navrow">
+      <button class="navbtn active" data-tab="home">
+        <strong>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </strong>Inicio
+      </button>
+      <button class="navbtn" data-tab="personajes">
+        <strong>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
             <circle cx="9" cy="7" r="4"></circle>
             <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
           </svg>
-        </button>
-        <button class="iconbtn" id="btnBuscar" title="Buscar">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.35-4.35"></path>
+        </strong>Personajes
+      </button>
+      <button class="navbtn" data-tab="xp" title="Mi nivel">
+        <strong>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+            </polygon>
           </svg>
-        </button>
-        <button class="iconbtn" id="btnRanking" title="Ranking semanal" aria-label="Ver ranking semanal">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 20V10"></path>
-            <path d="M12 20V4"></path>
-            <path d="M6 20v-6"></path>
-          </svg>
-        </button>
-        <!-- Chip XP -->
-        <button class="xp-chip" id="btnXP" title="Mi nivel" aria-label="Ver mi nivel">
-          <div class="xp-chip-icon">
-            <img src="img/logos/cablin-logo.png" alt="Cablin XP">
-          </div>
-          <span class="xp-chip-pts" id="xpChipPts">0 pts</span>
-        </button>
-      </div>
+        </strong>Mi Nivel
+      </button>
+    </div>
+  </nav>
+
+  <section class="sheet" id="sheetPersonajes" aria-label="Panel de personajes">
+    <div class="sheethead">
+      <div class="sheettitle">🎭 Personajes <span class="pill">tap para filtrar (demo)</span></div>
+      <button class="close" id="closeSheet" aria-label="Cerrar">✕</button>
     </div>
 
-    <main class="feed" id="feed" aria-label="Feed de shorts">
-      <section class="clip" data-theme="cablin" data-id="c1" data-canal="anime">
-        <div class="video series-stage" id="caballerosStage" aria-label="Serie Caballeros del Zodiaco">
-          <video class="series-video" id="caballerosVideo" preload="metadata"></video>
-          <div class="series-ui">
-            <div class="series-chip" id="caballerosMeta"><strong>Caballeros</strong> • Opening</div>
-            <div class="series-nav">
-              <button class="series-btn" id="caballerosPrev" aria-label="Clip anterior">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <div class="series-counter" id="caballerosCounter">1/1</div>
-              <button class="series-btn" id="caballerosNext" aria-label="Clip siguiente">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            </div>
-          </div>
+    <div class="grid" role="list">
+      <button class="pcard" data-filter="saint-seiya" role="listitem" aria-label="Filtrar Caballeros del Zodíaco">
+        <div class="pimg">
+          <img src="img/round/saint-seiya-150x150.png" alt="Saint Seiya">
         </div>
-        <div class="crt"></div><div class="noise"></div>
-
-        <div class="actions">
-          <div class="act">
-            <button class="actbtn" data-action="like" aria-label="Me gusta">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-            </button>
-            <div class="count" data-count="like">12.4K</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="comment" aria-label="Comentarios">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </button>
-            <div class="count">321</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="share" aria-label="Compartir">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                <polyline points="16 6 12 2 8 6"></polyline>
-                <line x1="12" y1="2" x2="12" y2="15"></line>
-              </svg>
-            </button>
-            <div class="count">Compartir</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="more" aria-label="Más">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="1"></circle>
-                <circle cx="12" cy="5" r="1"></circle>
-                <circle cx="12" cy="19" r="1"></circle>
-              </svg>
-            </button>
-            <div class="count">Más</div>
-          </div>
-        </div>
-
-        <div class="meta">
-          <div class="who">
-            <div class="avatar">
-              <img src="img/round/saint-seiya-150x150.png" alt="Caballeros del Zodíaco">
-            </div>
-            <div class="handle">
-              <div class="name">@caballeros_zodiaco</div>
-              <div class="desc">Pegaso con su Cosmo ardiente ⚡</div>
-            </div>
-          </div>
-          <div class="caption">
-            <div class="title">¡Pegaso Meteoro de Pegaso! 🌠 El poder del Cosmo en acción 💫</div>
-            <div class="tags">
-              <span class="tag">#Cablin</span>
-              <span class="tag">#SaintSeiya</span>
-              <span class="tag">#Anime90s</span>
-              <span class="tag">#Nostalgia</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="clip" data-theme="comic" data-id="c2" data-canal="accion">
-        <div class="video series-stage" id="sonicStage" aria-label="Serie Sonic">
-          <video class="series-video" id="sonicVideo" preload="metadata"></video>
-          <div class="series-ui">
-            <div class="series-chip" id="sonicMeta"><strong>Sonic</strong> • Opening</div>
-            <div class="series-nav">
-              <button class="series-btn" id="sonicPrev" aria-label="Clip anterior">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <div class="series-counter" id="sonicCounter">1/2</div>
-              <button class="series-btn" id="sonicNext" aria-label="Clip siguiente">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="crt"></div><div class="noise"></div>
-
-        <div class="actions">
-          <div class="act">
-            <button class="actbtn" data-action="like" aria-label="Me gusta">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-            </button>
-            <div class="count" data-count="like">8.1K</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="comment" aria-label="Comentarios">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </button>
-            <div class="count">187</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="share" aria-label="Compartir">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                <polyline points="16 6 12 2 8 6"></polyline>
-                <line x1="12" y1="2" x2="12" y2="15"></line>
-              </svg>
-            </button>
-            <div class="count">Compartir</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="vote" aria-label="Votar">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 15h10M7 11h10M7 7h4"></path>
-                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-              </svg>
-            </button>
-            <div class="count">Votá</div>
-          </div>
-        </div>
-
-        <div class="meta">
-          <div class="who">
-            <div class="avatar" style="background:linear-gradient(135deg,var(--cyan),var(--lime));">
-              <img src="img/round/sonic-150x150.png" alt="Sonic">
-            </div>
-            <div class="handle">
-              <div class="name">@sonic</div>
-              <div class="desc">Gotta go fast! 💨</div>
-            </div>
-          </div>
-          <div class="caption">
-            <div class="title">¡Sonic corriendo a toda velocidad! 🦔💨 ¿Podrás seguirle el ritmo?</div>
-            <div class="tags">
-              <span class="tag">#Sonic</span>
-              <span class="tag">#Velocidad</span>
-              <span class="tag">#Cablin90s</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="clip" data-theme="retro" data-id="c3" data-canal="anime">
-        <div class="video series-stage" id="sailorMoonStage" aria-label="Serie Sailor Moon">
-          <video class="series-video" id="sailorMoonVideo" preload="metadata"></video>
-          <div class="series-ui">
-            <div class="series-chip" id="sailorMoonMeta"><strong>Sailor Moon</strong> • Opening</div>
-            <div class="series-nav">
-              <button class="series-btn" id="sailorPrev" aria-label="Clip anterior">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <div class="series-counter" id="sailorCounter">1/3</div>
-              <button class="series-btn" id="sailorNext" aria-label="Clip siguiente">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="crt"></div><div class="noise"></div>
-
-        <div class="actions">
-          <div class="act">
-            <button class="actbtn" data-action="like" aria-label="Me gusta">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-            </button>
-            <div class="count" data-count="like">22.0K</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="comment" aria-label="Comentarios">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </button>
-            <div class="count">902</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="share" aria-label="Compartir">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                <polyline points="16 6 12 2 8 6"></polyline>
-                <line x1="12" y1="2" x2="12" y2="15"></line>
-              </svg>
-            </button>
-            <div class="count">Compartir</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </button>
-            <div class="count">Perfil</div>
-          </div>
-        </div>
-
-        <div class="meta">
-          <div class="who">
-            <div class="avatar" style="background:linear-gradient(135deg,var(--violet),var(--yellow));">
-              <img src="img/round/sailor-moon-150x150.png" alt="Sailor Moon">
-            </div>
-            <div class="handle">
-              <div class="name">@sailor_moon</div>
-              <div class="desc">¡En el nombre de la Luna! 🌙✨</div>
-            </div>
-          </div>
-          <div class="caption">
-            <div class="title">"¡Castigo Lunar!" 🌙💖 Sailor Moon transforma y defiende el amor</div>
-            <div class="tags">
-              <span class="tag">#SailorMoon</span>
-              <span class="tag">#MagicalGirl</span>
-              <span class="tag">#Anime</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="clip" data-theme="cablin" data-id="c4" data-canal="accion">
-        <div class="video" role="img" aria-label="Clip demo 4"></div>
-        <div class="crt"></div><div class="noise"></div>
-
-        <div class="actions">
-          <div class="act">
-            <button class="actbtn" data-action="like" aria-label="Me gusta">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-            </button>
-            <div class="count" data-count="like">15.2K</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="comment" aria-label="Comentarios">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </button>
-            <div class="count">542</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="share" aria-label="Compartir">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                <polyline points="16 6 12 2 8 6"></polyline>
-                <line x1="12" y1="2" x2="12" y2="15"></line>
-              </svg>
-            </button>
-            <div class="count">Compartir</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </button>
-            <div class="count">Perfil</div>
-          </div>
-        </div>
-
-        <div class="meta">
-          <div class="who">
-            <div class="avatar" style="background:linear-gradient(135deg,var(--pink),var(--violet));">
-              <img src="img/round/action-man-150x150.png" alt="Action Man">
-            </div>
-            <div class="handle">
-              <div class="name">@action_man</div>
-              <div class="desc">¡Siempre listo para la acción! 💪</div>
-            </div>
-          </div>
-          <div class="caption">
-            <div class="title">¡Misión extrema! Action Man en su mejor momento 🚁💥</div>
-            <div class="tags">
-              <span class="tag">#ActionMan</span>
-              <span class="tag">#Héroe</span>
-              <span class="tag">#Aventura</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="clip" data-theme="comic" data-id="c5" data-canal="humor">
-        <div class="video" role="img" aria-label="Clip demo 5"></div>
-        <div class="crt"></div><div class="noise"></div>
-
-        <div class="actions">
-          <div class="act">
-            <button class="actbtn" data-action="like" aria-label="Me gusta">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-            </button>
-            <div class="count" data-count="like">9.8K</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="comment" aria-label="Comentarios">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </button>
-            <div class="count">234</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="share" aria-label="Compartir">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                <polyline points="16 6 12 2 8 6"></polyline>
-                <line x1="12" y1="2" x2="12" y2="15"></line>
-              </svg>
-            </button>
-            <div class="count">Compartir</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="more" aria-label="Más">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="1"></circle>
-                <circle cx="12" cy="5" r="1"></circle>
-                <circle cx="12" cy="19" r="1"></circle>
-              </svg>
-            </button>
-            <div class="count">Más</div>
-          </div>
-        </div>
-
-        <div class="meta">
-          <div class="who">
-            <div class="avatar" style="background:linear-gradient(135deg,var(--yellow),var(--cyan));">
-              <img src="img/round/garfield-and-friends-150x150.png" alt="Garfield">
-            </div>
-            <div class="handle">
-              <div class="name">@garfield</div>
-              <div class="desc">Amante de la lasaña 🍝😺</div>
-            </div>
-          </div>
-          <div class="caption">
-            <div class="title">¡Garfield odia los lunes! 😾☕ Momento clásico del gato más perezoso</div>
-            <div class="tags">
-              <span class="tag">#Garfield</span>
-              <span class="tag">#Comedia</span>
-              <span class="tag">#Lunes</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="clip" data-theme="retro" data-id="c6" data-canal="bumpers">
-        <div class="video" role="img" aria-label="Clip demo 6"></div>
-        <div class="crt"></div><div class="noise"></div>
-
-        <div class="actions">
-          <div class="act">
-            <button class="actbtn" data-action="like" aria-label="Me gusta">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-            </button>
-            <div class="count" data-count="like">18.5K</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="comment" aria-label="Comentarios">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </button>
-            <div class="count">678</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="share" aria-label="Compartir">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-                <polyline points="16 6 12 2 8 6"></polyline>
-                <line x1="12" y1="2" x2="12" y2="15"></line>
-              </svg>
-            </button>
-            <div class="count">Compartir</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="vote" aria-label="Votar">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 15h10M7 11h10M7 7h4"></path>
-                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-              </svg>
-            </button>
-            <div class="count">Votá</div>
-          </div>
-        </div>
-
-        <div class="meta">
-          <div class="who">
-            <div class="avatar" style="background:linear-gradient(135deg,var(--lime),var(--pink));">
-              <img src="img/round/super-mario-bros-150x150.png" alt="Super Mario">
-            </div>
-            <div class="handle">
-              <div class="name">@super_mario_bros</div>
-              <div class="desc">¡It's-a me, Mario! 🍄</div>
-            </div>
-          </div>
-          <div class="caption">
-            <div class="title">¡Mario salva a la princesa una vez más! 🍄👑 Aventura clásica</div>
-            <div class="tags">
-              <span class="tag">#Mario</span>
-              <span class="tag">#Nintendo</span>
-              <span class="tag">#Retro</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="clip" data-theme="retro" data-id="c7" data-canal="humor">
-        <div class="video series-stage" id="jemStage" aria-label="Serie Jem and the Holograms">
-          <video class="series-video" id="jemVideo" preload="metadata"></video>
-          <div class="series-ui">
-            <div class="series-chip" id="jemMeta"><strong>Jem</strong> • Opening 1/1</div>
-          </div>
-        </div>
-        <div class="crt"></div><div class="noise"></div>
-
-        <div class="actions">
-          <div class="act">
-            <button class="actbtn" data-action="like" aria-label="Me gusta">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-            </button>
-            <div class="count" data-count="like">7.2K</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="comment" aria-label="Comentarios">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </button>
-            <div class="count">245</div>
-          </div>
-        </div>
-
-        <div class="meta">
-          <div class="who">
-            <div class="avatar">
-              <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
-            </div>
-            <div class="handle">
-              <div class="name">@jem_holograms</div>
-              <div class="desc">Truly outrageous 🎤✨</div>
-            </div>
-          </div>
-          <div class="caption">
-            <div class="title">Jem and the Holograms — Opening</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="clip" data-theme="comic" data-id="c8" data-canal="humor">
-        <div class="video series-stage" id="aladdinStage" aria-label="Serie Aladdin">
-          <video class="series-video" id="aladdinVideo" preload="metadata"></video>
-          <div class="series-ui">
-            <div class="series-chip" id="aladdinMeta"><strong>Aladdin</strong> • Opening</div>
-            <div class="series-nav">
-              <button class="series-btn" id="aladdinPrev" aria-label="Clip anterior">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              <div class="series-counter" id="aladdinCounter">1/2</div>
-              <button class="series-btn" id="aladdinNext" aria-label="Clip siguiente">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="crt"></div><div class="noise"></div>
-
-        <div class="actions">
-          <div class="act">
-            <button class="actbtn" data-action="like" aria-label="Me gusta">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-              </svg>
-            </button>
-            <div class="count" data-count="like">6.6K</div>
-          </div>
-          <div class="act">
-            <button class="actbtn" data-action="comment" aria-label="Comentarios">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </button>
-            <div class="count">188</div>
-          </div>
-        </div>
-
-        <div class="meta">
-          <div class="who">
-            <div class="avatar">
-              <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
-            </div>
-            <div class="handle">
-              <div class="name">@aladdin</div>
-              <div class="desc">Un mundo ideal 🧞</div>
-            </div>
-          </div>
-          <div class="caption">
-            <div class="title">Aladdin — Opening</div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <nav class="bottomnav" aria-label="Navegación inferior">
-      <div class="navrow">
-        <button class="navbtn active" data-tab="home">
-          <strong>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-          </strong>Inicio
-        </button>
-        <button class="navbtn" data-tab="personajes">
-          <strong>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-          </strong>Personajes
-        </button>
-        <button class="navbtn" data-tab="xp" title="Mi nivel">
-          <strong>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
-          </strong>Mi Nivel
-        </button>
-      </div>
-    </nav>
-
-    <section class="sheet" id="sheetPersonajes" aria-label="Panel de personajes">
-      <div class="sheethead">
-        <div class="sheettitle">🎭 Personajes <span class="pill">tap para filtrar (demo)</span></div>
-        <button class="close" id="closeSheet" aria-label="Cerrar">✕</button>
-      </div>
-
-      <div class="grid" role="list">
-        <button class="pcard" data-filter="saint-seiya" role="listitem" aria-label="Filtrar Caballeros del Zodíaco">
-          <div class="pimg">
-            <img src="img/round/saint-seiya-150x150.png" alt="Saint Seiya">
-          </div>
-          <div class="ptxt">Saint Seiya</div>
-        </button>
-        <button class="pcard" data-filter="sonic" role="listitem" aria-label="Filtrar Sonic">
-          <div class="pimg" style="background:
+        <div class="ptxt">Saint Seiya</div>
+      </button>
+      <button class="pcard" data-filter="sonic" role="listitem" aria-label="Filtrar Sonic">
+        <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(141,255,122,.50), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(57,215,255,.45), transparent 60%),
             linear-gradient(135deg, rgba(255,213,74,.35), rgba(255,74,163,.20));">
-            <img src="img/round/sonic-150x150.png" alt="Sonic">
-          </div>
-          <div class="ptxt">Sonic</div>
-        </button>
-        <button class="pcard" data-filter="sailor-moon" role="listitem" aria-label="Filtrar Sailor Moon">
-          <div class="pimg" style="background:
+          <img src="img/round/sonic-150x150.png" alt="Sonic">
+        </div>
+        <div class="ptxt">Sonic</div>
+      </button>
+      <button class="pcard" data-filter="sailor-moon" role="listitem" aria-label="Filtrar Sailor Moon">
+        <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(122,77,255,.55), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(255,213,74,.35), transparent 60%),
             linear-gradient(135deg, rgba(57,215,255,.28), rgba(255,74,163,.18));">
-            <img src="img/round/sailor-moon-150x150.png" alt="Sailor Moon">
-          </div>
-          <div class="ptxt">Sailor Moon</div>
-        </button>
-        <button class="pcard" data-filter="jem" role="listitem" aria-label="Filtrar Jem and the Holograms">
-          <div class="pimg">
-            <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
-          </div>
-          <div class="ptxt">Jem</div>
-        </button>
-        <button class="pcard" data-filter="aladdin" role="listitem" aria-label="Filtrar Aladdin">
-          <div class="pimg">
-            <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
-          </div>
-          <div class="ptxt">Aladdin</div>
-        </button>
-        <button class="pcard" data-filter="action-man" role="listitem" aria-label="Filtrar Action Man">
-          <div class="pimg" style="background:
+          <img src="img/round/sailor-moon-150x150.png" alt="Sailor Moon">
+        </div>
+        <div class="ptxt">Sailor Moon</div>
+      </button>
+      <button class="pcard" data-filter="jem" role="listitem" aria-label="Filtrar Jem and the Holograms">
+        <div class="pimg">
+          <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
+        </div>
+        <div class="ptxt">Jem</div>
+      </button>
+      <button class="pcard" data-filter="aladdin" role="listitem" aria-label="Filtrar Aladdin">
+        <div class="pimg">
+          <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
+        </div>
+        <div class="ptxt">Aladdin</div>
+      </button>
+      <button class="pcard" data-filter="action-man" role="listitem" aria-label="Filtrar Action Man">
+        <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(255,74,163,.55), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(122,77,255,.45), transparent 60%),
             linear-gradient(135deg, rgba(255,213,74,.28), rgba(57,215,255,.18));">
-            <img src="img/round/action-man-150x150.png" alt="Action Man">
-          </div>
-          <div class="ptxt">Action Man</div>
-        </button>
-        <button class="pcard" data-filter="garfield" role="listitem" aria-label="Filtrar Garfield">
-          <div class="pimg" style="background:
+          <img src="img/round/action-man-150x150.png" alt="Action Man">
+        </div>
+        <div class="ptxt">Action Man</div>
+      </button>
+      <button class="pcard" data-filter="garfield" role="listitem" aria-label="Filtrar Garfield">
+        <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(255,213,74,.60), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(57,215,255,.40), transparent 60%),
             linear-gradient(135deg, rgba(141,255,122,.25), rgba(255,74,163,.15));">
-            <img src="img/round/garfield-and-friends-150x150.png" alt="Garfield">
-          </div>
-          <div class="ptxt">Garfield</div>
-        </button>
-        <button class="pcard" data-filter="super-mario" role="listitem" aria-label="Filtrar Super Mario">
-          <div class="pimg" style="background:
+          <img src="img/round/garfield-and-friends-150x150.png" alt="Garfield">
+        </div>
+        <div class="ptxt">Garfield</div>
+      </button>
+      <button class="pcard" data-filter="super-mario" role="listitem" aria-label="Filtrar Super Mario">
+        <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(141,255,122,.58), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(255,74,163,.42), transparent 60%),
             linear-gradient(135deg, rgba(255,213,74,.28), rgba(57,215,255,.15));">
-            <img src="img/round/super-mario-bros-150x150.png" alt="Super Mario">
+          <img src="img/round/super-mario-bros-150x150.png" alt="Super Mario">
+        </div>
+        <div class="ptxt">Super Mario</div>
+      </button>
+      <button class="pcard" data-filter="phantom" role="listitem" aria-label="Filtrar Phantom 2040">
+        <div class="pimg">
+          <img src="img/round/phantom-2040-150x150.png" alt="Phantom 2040">
+        </div>
+        <div class="ptxt">Phantom 2040</div>
+      </button>
+      <button class="pcard" data-filter="virtua-fighter" role="listitem" aria-label="Filtrar Virtua Fighter">
+        <div class="pimg">
+          <img src="img/round/virtua-fighter-150x150.png" alt="Virtua Fighter">
+        </div>
+        <div class="ptxt">Virtua Fighter</div>
+      </button>
+      <button class="pcard" data-filter="robocop" role="listitem" aria-label="Filtrar Robocop">
+        <div class="pimg">
+          <img src="img/round/robocop-150x150.png" alt="Robocop">
+        </div>
+        <div class="ptxt">Robocop</div>
+      </button>
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:10px;">
+      <button class="pill" id="clearFilter" style="flex:1;text-align:center;border-radius:18px;">Ver todo</button>
+      <button class="pill" id="hint" style="flex:1;text-align:center;border-radius:18px;">Idea UX</button>
+    </div>
+
+    <p
+      style="margin:10px 2px 0;font-family:Nunito,system-ui,sans-serif;font-weight:800;color:var(--muted2);font-size:12px;line-height:1.25;">
+      Este panel reemplaza el “selector de personajes” de escritorio: en mobile se convierte en un filtro rápido +
+      acceso al perfil.
+    </p>
+  </section>
+
+  <!-- Sheet de Nivel XP -->
+  <section class="sheet" id="sheetXP" aria-label="Mi nivel en Cablin">
+    <div class="sheethead">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <p class="xp-titulo">Tu nivel en Cablin</p>
+        <span class="xp-nivel-badge" id="xpNivelBadge">⭐ ESPECTADOR</span>
+      </div>
+      <button class="close" id="closeXP" aria-label="Cerrar">✕</button>
+    </div>
+
+    <!-- Barra de progreso estilo Mostaza -->
+    <div class="xp-track-wrap">
+      <div class="xp-labels">
+        <span id="xpLabelA">Espectador</span>
+        <span id="xpLabelB">Fan</span>
+        <span id="xpLabelC">Cablinero</span>
+      </div>
+      <div class="xp-track">
+        <div class="xp-track-fill" id="xpTrackFill" style="width:0%">
+          <!-- Logo Cablin deslizándose -->
+          <div class="xp-mascot" id="xpMascot">
+            <img src="img/logos/cablin-logo.png" alt="">
           </div>
-          <div class="ptxt">Super Mario</div>
-        </button>
-        <button class="pcard" data-filter="phantom" role="listitem" aria-label="Filtrar Phantom 2040">
-          <div class="pimg">
-            <img src="img/round/phantom-2040-150x150.png" alt="Phantom 2040">
-          </div>
-          <div class="ptxt">Phantom 2040</div>
-        </button>
-        <button class="pcard" data-filter="virtua-fighter" role="listitem" aria-label="Filtrar Virtua Fighter">
-          <div class="pimg">
-            <img src="img/round/virtua-fighter-150x150.png" alt="Virtua Fighter">
-          </div>
-          <div class="ptxt">Virtua Fighter</div>
-        </button>
-        <button class="pcard" data-filter="robocop" role="listitem" aria-label="Filtrar Robocop">
-          <div class="pimg">
-            <img src="img/round/robocop-150x150.png" alt="Robocop">
-          </div>
-          <div class="ptxt">Robocop</div>
-        </button>
-      </div>
-
-      <div style="margin-top:12px;display:flex;gap:10px;">
-        <button class="pill" id="clearFilter" style="flex:1;text-align:center;border-radius:18px;">Ver todo</button>
-        <button class="pill" id="hint" style="flex:1;text-align:center;border-radius:18px;">Idea UX</button>
-      </div>
-
-      <p style="margin:10px 2px 0;font-family:Nunito,system-ui,sans-serif;font-weight:800;color:var(--muted2);font-size:12px;line-height:1.25;">
-        Este panel reemplaza el “selector de personajes” de escritorio: en mobile se convierte en un filtro rápido + acceso al perfil.
-      </p>
-    </section>
-
-    <!-- Sheet de Nivel XP -->
-    <section class="sheet" id="sheetXP" aria-label="Mi nivel en Cablin">
-      <div class="sheethead">
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <p class="xp-titulo">Tu nivel en Cablin</p>
-          <span class="xp-nivel-badge" id="xpNivelBadge">⭐ ESPECTADOR</span>
-        </div>
-        <button class="close" id="closeXP" aria-label="Cerrar">✕</button>
-      </div>
-
-      <!-- Barra de progreso estilo Mostaza -->
-      <div class="xp-track-wrap">
-        <div class="xp-labels">
-          <span id="xpLabelA">Espectador</span>
-          <span id="xpLabelB">Fan</span>
-          <span id="xpLabelC">Cablinero</span>
-        </div>
-        <div class="xp-track">
-          <div class="xp-track-fill" id="xpTrackFill" style="width:0%">
-            <!-- Logo Cablin deslizándose -->
-            <div class="xp-mascot" id="xpMascot">
-              <img src="img/logos/cablin-logo.png" alt="">
-            </div>
-          </div>
         </div>
       </div>
+    </div>
 
-      <!-- Hitos desbloqueables -->
-      <div class="xp-milestones">
-        <div class="xp-milestone" id="xpM1">
-          <span class="xp-milestone-icon">📺</span>
-          <span class="xp-milestone-label">Espectador</span>
-          <span class="xp-milestone-pts">0 pts</span>
-        </div>
-        <div class="xp-milestone" id="xpM2">
-          <span class="xp-milestone-icon">🎭</span>
-          <span class="xp-milestone-label">Fan</span>
-          <span class="xp-milestone-pts">50 pts</span>
-        </div>
-        <div class="xp-milestone" id="xpM3">
-          <span class="xp-milestone-icon">🏆</span>
-          <span class="xp-milestone-label">Cablinero</span>
-          <span class="xp-milestone-pts">150 pts</span>
-        </div>
-        <div class="xp-milestone" id="xpM4">
-          <span class="xp-milestone-icon">📼</span>
-          <span class="xp-milestone-label">Leyenda</span>
-          <span class="xp-milestone-pts">300 pts</span>
-        </div>
+    <!-- Hitos desbloqueables -->
+    <div class="xp-milestones">
+      <div class="xp-milestone" id="xpM1">
+        <span class="xp-milestone-icon">📺</span>
+        <span class="xp-milestone-label">Espectador</span>
+        <span class="xp-milestone-pts">0 pts</span>
       </div>
-
-      <!-- Cómo ganar XP -->
-      <div class="xp-acciones">
-        <div class="xp-accion-row">
-          <div class="xp-accion-info"><span class="xp-accion-ico">❤️</span><span class="xp-accion-txt">Dar like a un clip</span></div>
-          <span class="xp-accion-pts">+10 pts</span>
-        </div>
-        <div class="xp-accion-row">
-          <div class="xp-accion-info"><span class="xp-accion-ico">📺</span><span class="xp-accion-txt">Ver un clip completo</span></div>
-          <span class="xp-accion-pts">+5 pts</span>
-        </div>
-        <div class="xp-accion-row">
-          <div class="xp-accion-info"><span class="xp-accion-ico">↗️</span><span class="xp-accion-txt">Compartir un clip</span></div>
-          <span class="xp-accion-pts">+20 pts</span>
-        </div>
-        <div class="xp-accion-row">
-          <div class="xp-accion-info"><span class="xp-accion-ico">📡</span><span class="xp-accion-txt">Ver todos los bloques</span></div>
-          <span class="xp-accion-pts">+30 pts</span>
-        </div>
+      <div class="xp-milestone" id="xpM2">
+        <span class="xp-milestone-icon">🎭</span>
+        <span class="xp-milestone-label">Fan</span>
+        <span class="xp-milestone-pts">50 pts</span>
       </div>
-    </section>
-
-    <section class="sheet" id="sheetRanking" aria-label="Ranking semanal de canales">
-      <div class="sheethead">
-        <div class="ranking-headline">
-          <span class="ranking-kicker">Top 10 canales</span>
-          <div class="ranking-title">Ranking semanal</div>
-          <div class="ranking-subtitle">Periodo relevado: <strong id="rankingPeriod">-</strong></div>
-        </div>
-        <button class="close" id="closeRanking" aria-label="Cerrar">✕</button>
+      <div class="xp-milestone" id="xpM3">
+        <span class="xp-milestone-icon">🏆</span>
+        <span class="xp-milestone-label">Cablinero</span>
+        <span class="xp-milestone-pts">150 pts</span>
       </div>
+      <div class="xp-milestone" id="xpM4">
+        <span class="xp-milestone-icon">📼</span>
+        <span class="xp-milestone-label">Leyenda</span>
+        <span class="xp-milestone-pts">300 pts</span>
+      </div>
+    </div>
 
-      <div class="ranking-table" id="rankingBody" role="list"></div>
-      <p class="ranking-footnote">Datos reales del proyecto: se actualiza con cada clip visto en este demo y se guarda en tu navegador (localStorage).</p>
-    </section>
+    <!-- Cómo ganar XP -->
+    <div class="xp-acciones">
+      <div class="xp-accion-row">
+        <div class="xp-accion-info"><span class="xp-accion-ico">❤️</span><span class="xp-accion-txt">Dar like a un
+            clip</span></div>
+        <span class="xp-accion-pts">+10 pts</span>
+      </div>
+      <div class="xp-accion-row">
+        <div class="xp-accion-info"><span class="xp-accion-ico">📺</span><span class="xp-accion-txt">Ver un clip
+            completo</span></div>
+        <span class="xp-accion-pts">+5 pts</span>
+      </div>
+      <div class="xp-accion-row">
+        <div class="xp-accion-info"><span class="xp-accion-ico">↗️</span><span class="xp-accion-txt">Compartir un
+            clip</span></div>
+        <span class="xp-accion-pts">+20 pts</span>
+      </div>
+      <div class="xp-accion-row">
+        <div class="xp-accion-info"><span class="xp-accion-ico">📡</span><span class="xp-accion-txt">Ver todos los
+            bloques</span></div>
+        <span class="xp-accion-pts">+30 pts</span>
+      </div>
+    </div>
+  </section>
 
-    <div class="toast" id="toast" aria-live="polite"><span></span></div>
+  <section class="sheet" id="sheetRanking" aria-label="Ranking semanal de canales">
+    <div class="sheethead">
+      <div class="ranking-headline">
+        <span class="ranking-kicker">Top 10 canales</span>
+        <div class="ranking-title">Ranking semanal</div>
+        <div class="ranking-subtitle">Periodo relevado: <strong id="rankingPeriod">-</strong></div>
+      </div>
+      <button class="close" id="closeRanking" aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="ranking-table" id="rankingBody" role="list"></div>
+    <p class="ranking-footnote">Datos reales del proyecto: se actualiza con cada clip visto en este demo y se guarda
+      en tu navegador (localStorage).</p>
+  </section>
+
+  <div class="toast" id="toast" aria-live="polite"><span></span></div>
   </div>
 
   <script>
@@ -1419,36 +2027,36 @@
     const toastSpan = toastEl.querySelector('span');
     let toastTimer;
 
-    function toast(msg){
+    function toast(msg) {
       toastSpan.textContent = msg;
       toastEl.classList.add('show');
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1200);
     }
 
-    document.querySelectorAll('.navbtn').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        document.querySelectorAll('.navbtn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.navbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.navbtn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
         const tab = btn.dataset.tab;
-        if(tab === 'personajes') openSheet();
-        else if(tab === 'xp') openXP();
+        if (tab === 'personajes') openSheet();
+        else if (tab === 'xp') openXP();
         else {
           toast('Inicio');
-          document.getElementById('feed').scrollTo({top:0, behavior:'smooth'});
+          document.getElementById('feed').scrollTo({ top: 0, behavior: 'smooth' });
         }
       });
     });
 
     document.getElementById('btnPersonajes').addEventListener('click', openSheet);
-    document.getElementById('btnBuscar').addEventListener('click', ()=>toast('Buscar: modal / overlay (demo)'));
+    document.getElementById('btnBuscar').addEventListener('click', () => toast('Buscar: modal / overlay (demo)'));
     document.getElementById('btnRanking').addEventListener('click', openRanking);
 
     const sheet = document.getElementById('sheetPersonajes');
 
-    function openSheet(){ sheet.classList.add('open'); }
-    function closeSheet(){ sheet.classList.remove('open'); }
+    function openSheet() { sheet.classList.add('open'); }
+    function closeSheet() { sheet.classList.remove('open'); }
 
     document.getElementById('closeSheet').addEventListener('click', closeSheet);
 
@@ -1457,69 +2065,69 @@
     const canalesConVideo = ['c1', 'c2', 'c3', 'c7', 'c8'];
     let ultimoCanalOrigenAuto = null;
 
-    function irACanalAleatorio(desdeId){
+    function irACanalAleatorio(desdeId) {
       let candidatos = canalesConVideo.filter(id => id !== desdeId && id !== ultimoCanalOrigenAuto);
-      if(!candidatos.length){
+      if (!candidatos.length) {
         candidatos = canalesConVideo.filter(id => id !== desdeId);
       }
-      if(!candidatos.length) return;
+      if (!candidatos.length) return;
 
       const targetId = candidatos[Math.floor(Math.random() * candidatos.length)];
       const targetClip = document.querySelector(`.clip[data-id="${targetId}"]`);
-      if(!targetClip) return;
+      if (!targetClip) return;
 
       ultimoCanalOrigenAuto = desdeId;
 
-      feed.scrollTo({top: targetClip.offsetTop, behavior:'smooth'});
+      feed.scrollTo({ top: targetClip.offsetTop, behavior: 'smooth' });
 
-      setTimeout(()=>{
-        if(targetId === 'c1') renderCaballerosClip(0, true);
-        if(targetId === 'c2') renderSonicClip(0, true);
-        if(targetId === 'c3') renderSailorMoonClip(0, true);
-        if(targetId === 'c7') renderJemClip(true);
-        if(targetId === 'c8') renderAladdinClip(0, true);
+      setTimeout(() => {
+        if (targetId === 'c1') renderCaballerosClip(0, true);
+        if (targetId === 'c2') renderSonicClip(0, true);
+        if (targetId === 'c3') renderSailorMoonClip(0, true);
+        if (targetId === 'c7') renderJemClip(true);
+        if (targetId === 'c8') renderAladdinClip(0, true);
       }, 280);
     }
 
-    function scrollToClipByFilter(filter){
-      const target = clips.find(clip=>{
+    function scrollToClipByFilter(filter) {
+      const target = clips.find(clip => {
         const who = clip.querySelector('.handle .name');
         return who && who.textContent.toLowerCase().includes(filter.toLowerCase());
       });
-      if(!target){
+      if (!target) {
         toast('Aun no hay clips cargados para este personaje');
         return;
       }
-      feed.scrollTo({top: target.offsetTop, behavior:'smooth'});
+      feed.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
     }
 
-    document.querySelectorAll('.pcard[data-filter]').forEach(card=>{
-      card.addEventListener('click', ()=>{
+    document.querySelectorAll('.pcard[data-filter]').forEach(card => {
+      card.addEventListener('click', () => {
         const filter = card.dataset.filter;
         toast('Filtro: ' + card.querySelector('.ptxt').textContent);
         closeSheet();
-        if(filter === 'aladdin'){
-          feed.scrollTo({top: aladdinClip.offsetTop, behavior:'smooth'});
+        if (filter === 'aladdin') {
+          feed.scrollTo({ top: aladdinClip.offsetTop, behavior: 'smooth' });
           renderAladdinClip(0, true);
           return;
         }
-        if(filter === 'saint-seiya'){
-          feed.scrollTo({top: caballerosClip.offsetTop, behavior:'smooth'});
+        if (filter === 'saint-seiya') {
+          feed.scrollTo({ top: caballerosClip.offsetTop, behavior: 'smooth' });
           renderCaballerosClip(0, true);
           return;
         }
-        if(filter === 'jem'){
-          feed.scrollTo({top: jemClip.offsetTop, behavior:'smooth'});
+        if (filter === 'jem') {
+          feed.scrollTo({ top: jemClip.offsetTop, behavior: 'smooth' });
           renderJemClip(true);
           return;
         }
-        if(filter === 'sonic'){
-          feed.scrollTo({top: sonicClip.offsetTop, behavior:'smooth'});
+        if (filter === 'sonic') {
+          feed.scrollTo({ top: sonicClip.offsetTop, behavior: 'smooth' });
           renderSonicClip(0, true);
           return;
         }
-        if(filter === 'sailor-moon'){
-          feed.scrollTo({top: sailorMoonClip.offsetTop, behavior:'smooth'});
+        if (filter === 'sailor-moon') {
+          feed.scrollTo({ top: sailorMoonClip.offsetTop, behavior: 'smooth' });
           renderSailorMoonClip(0, true);
           return;
         }
@@ -1527,18 +2135,18 @@
       });
     });
 
-    document.getElementById('clearFilter').addEventListener('click', ()=>{
+    document.getElementById('clearFilter').addEventListener('click', () => {
       toast('Ver todo');
       closeSheet();
-      feed.scrollTo({top:0, behavior:'smooth'});
+      feed.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    document.getElementById('hint').addEventListener('click', ()=>toast('⌨️ Navegación: ↑/↓ cambiar videos | L dar like | P personajes'));
+    document.getElementById('hint').addEventListener('click', () => toast('⌨️ Navegación: ↑/↓ cambiar videos | L dar like | P personajes'));
 
     // Limpieza visual: dejamos solo Corazón y Mensajes en el rail derecho.
     document.querySelectorAll('.actbtn:not([data-action="like"]):not([data-action="comment"])').forEach(btn => {
       const item = btn.closest('.act');
-      if(item) item.remove();
+      if (item) item.remove();
     });
 
     // Serie piloto Caballeros del Zodiaco: navegación horizontal (2 clips).
@@ -1563,69 +2171,69 @@
     let caballerosSwipeActive = false;
     let caballerosAudioArmed = false;
 
-    function renderCaballerosClip(index, autoplay = true){
+    function renderCaballerosClip(index, autoplay = true) {
       caballerosIndex = (index + caballerosClips.length) % caballerosClips.length;
       caballerosVideo.src = caballerosClips[caballerosIndex];
       caballerosVideo.volume = 1;
       caballerosVideo.load();
       caballerosCounter.textContent = `${caballerosIndex + 1}/${caballerosClips.length}`;
       caballerosMeta.innerHTML = `<strong>Caballeros</strong> • Opening ${caballerosIndex + 1}`;
-      if(autoplay){
-        caballerosVideo.play().then(()=>{
+      if (autoplay) {
+        caballerosVideo.play().then(() => {
           caballerosAudioCta.classList.remove('show');
-        }).catch(()=>{
+        }).catch(() => {
           caballerosAudioCta.classList.add('show');
         });
       }
     }
 
-    function moveCaballeros(delta){
+    function moveCaballeros(delta) {
       renderCaballerosClip(caballerosIndex + delta, true);
     }
 
-    function playCaballerosWithAudio(){
+    function playCaballerosWithAudio() {
       caballerosAudioArmed = true;
       caballerosVideo.muted = false;
       caballerosVideo.volume = 1;
-      caballerosVideo.play().then(()=>{
+      caballerosVideo.play().then(() => {
         caballerosAudioCta.classList.remove('show');
-      }).catch(()=>{
+      }).catch(() => {
         caballerosAudioCta.classList.add('show');
       });
     }
 
-    caballerosPrevBtn.addEventListener('click', ()=>moveCaballeros(-1));
-    caballerosNextBtn.addEventListener('click', ()=>moveCaballeros(1));
+    caballerosPrevBtn.addEventListener('click', () => moveCaballeros(-1));
+    caballerosNextBtn.addEventListener('click', () => moveCaballeros(1));
     caballerosAudioCta.addEventListener('click', playCaballerosWithAudio);
-    caballerosVideo.addEventListener('ended', ()=>{
-      if(caballerosIndex < caballerosClips.length - 1) moveCaballeros(1);
+    caballerosVideo.addEventListener('ended', () => {
+      if (caballerosIndex < caballerosClips.length - 1) moveCaballeros(1);
       else irACanalAleatorio('c1');
     });
 
-    caballerosStage.addEventListener('pointerdown', (e)=>{
+    caballerosStage.addEventListener('pointerdown', (e) => {
       caballerosSwipeActive = true;
       caballerosSwipeStartX = e.clientX;
       caballerosSwipeStartY = e.clientY;
     });
-    caballerosStage.addEventListener('pointerup', (e)=>{
-      if(!caballerosSwipeActive) return;
+    caballerosStage.addEventListener('pointerup', (e) => {
+      if (!caballerosSwipeActive) return;
       caballerosSwipeActive = false;
       const dx = e.clientX - caballerosSwipeStartX;
       const dy = e.clientY - caballerosSwipeStartY;
-      if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
-        if(dx < 0) moveCaballeros(1);
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) moveCaballeros(1);
         else moveCaballeros(-1);
       }
     });
-    caballerosStage.addEventListener('pointercancel', ()=>{ caballerosSwipeActive = false; });
+    caballerosStage.addEventListener('pointercancel', () => { caballerosSwipeActive = false; });
 
-    const caballerosObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.target !== caballerosClip) return;
-        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
-          if(caballerosAudioArmed) playCaballerosWithAudio();
+    const caballerosObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== caballerosClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (caballerosAudioArmed) playCaballerosWithAudio();
           else renderCaballerosClip(caballerosIndex, true);
-        }else{
+        } else {
           caballerosVideo.pause();
         }
       });
@@ -1657,69 +2265,69 @@
     let sonicSwipeActive = false;
     let sonicAudioArmed = false;
 
-    function renderSonicClip(index, autoplay = true){
+    function renderSonicClip(index, autoplay = true) {
       sonicIndex = (index + sonicClips.length) % sonicClips.length;
       sonicVideo.src = sonicClips[sonicIndex];
       sonicVideo.volume = 1;
       sonicVideo.load();
       sonicCounter.textContent = `${sonicIndex + 1}/${sonicClips.length}`;
       sonicMeta.innerHTML = `<strong>Sonic</strong> • Opening ${sonicIndex + 1}`;
-      if(autoplay){
-        sonicVideo.play().then(()=>{
+      if (autoplay) {
+        sonicVideo.play().then(() => {
           sonicAudioCta.classList.remove('show');
-        }).catch(()=>{
+        }).catch(() => {
           sonicAudioCta.classList.add('show');
         });
       }
     }
 
-    function moveSonic(delta){
+    function moveSonic(delta) {
       renderSonicClip(sonicIndex + delta, true);
     }
 
-    function playSonicWithAudio(){
+    function playSonicWithAudio() {
       sonicAudioArmed = true;
       sonicVideo.muted = false;
       sonicVideo.volume = 1;
-      sonicVideo.play().then(()=>{
+      sonicVideo.play().then(() => {
         sonicAudioCta.classList.remove('show');
-      }).catch(()=>{
+      }).catch(() => {
         sonicAudioCta.classList.add('show');
       });
     }
 
-    sonicPrevBtn.addEventListener('click', ()=>moveSonic(-1));
-    sonicNextBtn.addEventListener('click', ()=>moveSonic(1));
+    sonicPrevBtn.addEventListener('click', () => moveSonic(-1));
+    sonicNextBtn.addEventListener('click', () => moveSonic(1));
     sonicAudioCta.addEventListener('click', playSonicWithAudio);
-    sonicVideo.addEventListener('ended', ()=>{
-      if(sonicIndex < sonicClips.length - 1) moveSonic(1);
+    sonicVideo.addEventListener('ended', () => {
+      if (sonicIndex < sonicClips.length - 1) moveSonic(1);
       else irACanalAleatorio('c2');
     });
 
-    sonicStage.addEventListener('pointerdown', (e)=>{
+    sonicStage.addEventListener('pointerdown', (e) => {
       sonicSwipeActive = true;
       sonicSwipeStartX = e.clientX;
       sonicSwipeStartY = e.clientY;
     });
-    sonicStage.addEventListener('pointerup', (e)=>{
-      if(!sonicSwipeActive) return;
+    sonicStage.addEventListener('pointerup', (e) => {
+      if (!sonicSwipeActive) return;
       sonicSwipeActive = false;
       const dx = e.clientX - sonicSwipeStartX;
       const dy = e.clientY - sonicSwipeStartY;
-      if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
-        if(dx < 0) moveSonic(1);
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) moveSonic(1);
         else moveSonic(-1);
       }
     });
-    sonicStage.addEventListener('pointercancel', ()=>{ sonicSwipeActive = false; });
+    sonicStage.addEventListener('pointercancel', () => { sonicSwipeActive = false; });
 
-    const sonicObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.target !== sonicClip) return;
-        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
-          if(sonicAudioArmed) playSonicWithAudio();
+    const sonicObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== sonicClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (sonicAudioArmed) playSonicWithAudio();
           else renderSonicClip(sonicIndex, true);
-        }else{
+        } else {
           sonicVideo.pause();
         }
       });
@@ -1741,42 +2349,42 @@
     const jemClip = document.querySelector('.clip[data-id="c7"]');
     let jemAudioArmed = false;
 
-    function renderJemClip(autoplay = true){
-      if(jemVideo.src.indexOf(jemClipPath) === -1){
+    function renderJemClip(autoplay = true) {
+      if (jemVideo.src.indexOf(jemClipPath) === -1) {
         jemVideo.src = jemClipPath;
         jemVideo.load();
       }
       jemMeta.innerHTML = '<strong>Jem</strong> • Opening 1/1';
-      if(autoplay){
-        jemVideo.play().then(()=>{
+      if (autoplay) {
+        jemVideo.play().then(() => {
           jemAudioCta.classList.remove('show');
-        }).catch(()=>{
+        }).catch(() => {
           jemAudioCta.classList.add('show');
         });
       }
     }
 
-    function playJemWithAudio(){
+    function playJemWithAudio() {
       jemAudioArmed = true;
       jemVideo.muted = false;
       jemVideo.volume = 1;
-      jemVideo.play().then(()=>{
+      jemVideo.play().then(() => {
         jemAudioCta.classList.remove('show');
-      }).catch(()=>{
+      }).catch(() => {
         jemAudioCta.classList.add('show');
       });
     }
 
     jemAudioCta.addEventListener('click', playJemWithAudio);
-    jemVideo.addEventListener('ended', ()=>irACanalAleatorio('c7'));
+    jemVideo.addEventListener('ended', () => irACanalAleatorio('c7'));
 
-    const jemObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.target !== jemClip) return;
-        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
-          if(jemAudioArmed) playJemWithAudio();
+    const jemObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== jemClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (jemAudioArmed) playJemWithAudio();
           else renderJemClip(true);
-        }else{
+        } else {
           jemVideo.pause();
         }
       });
@@ -1808,69 +2416,69 @@
     let aladdinSwipeActive = false;
     let aladdinAudioArmed = false;
 
-    function renderAladdinClip(index, autoplay = true){
+    function renderAladdinClip(index, autoplay = true) {
       aladdinIndex = (index + aladdinClips.length) % aladdinClips.length;
       aladdinVideo.src = aladdinClips[aladdinIndex];
       aladdinVideo.volume = 1;
       aladdinVideo.load();
       aladdinCounter.textContent = `${aladdinIndex + 1}/${aladdinClips.length}`;
       aladdinMeta.innerHTML = `<strong>Aladdin</strong> • Opening ${aladdinIndex + 1}`;
-      if(autoplay){
-        aladdinVideo.play().then(()=>{
+      if (autoplay) {
+        aladdinVideo.play().then(() => {
           aladdinAudioCta.classList.remove('show');
-        }).catch(()=>{
+        }).catch(() => {
           aladdinAudioCta.classList.add('show');
         });
       }
     }
 
-    function moveAladdin(delta){
+    function moveAladdin(delta) {
       renderAladdinClip(aladdinIndex + delta, true);
     }
 
-    function playAladdinWithAudio(){
+    function playAladdinWithAudio() {
       aladdinAudioArmed = true;
       aladdinVideo.muted = false;
       aladdinVideo.volume = 1;
-      aladdinVideo.play().then(()=>{
+      aladdinVideo.play().then(() => {
         aladdinAudioCta.classList.remove('show');
-      }).catch(()=>{
+      }).catch(() => {
         aladdinAudioCta.classList.add('show');
       });
     }
 
-    aladdinPrevBtn.addEventListener('click', ()=>moveAladdin(-1));
-    aladdinNextBtn.addEventListener('click', ()=>moveAladdin(1));
+    aladdinPrevBtn.addEventListener('click', () => moveAladdin(-1));
+    aladdinNextBtn.addEventListener('click', () => moveAladdin(1));
     aladdinAudioCta.addEventListener('click', playAladdinWithAudio);
-    aladdinVideo.addEventListener('ended', ()=>{
-      if(aladdinIndex < aladdinClips.length - 1) moveAladdin(1);
+    aladdinVideo.addEventListener('ended', () => {
+      if (aladdinIndex < aladdinClips.length - 1) moveAladdin(1);
       else irACanalAleatorio('c8');
     });
 
-    aladdinStage.addEventListener('pointerdown', (e)=>{
+    aladdinStage.addEventListener('pointerdown', (e) => {
       aladdinSwipeActive = true;
       aladdinSwipeStartX = e.clientX;
       aladdinSwipeStartY = e.clientY;
     });
-    aladdinStage.addEventListener('pointerup', (e)=>{
-      if(!aladdinSwipeActive) return;
+    aladdinStage.addEventListener('pointerup', (e) => {
+      if (!aladdinSwipeActive) return;
       aladdinSwipeActive = false;
       const dx = e.clientX - aladdinSwipeStartX;
       const dy = e.clientY - aladdinSwipeStartY;
-      if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
-        if(dx < 0) moveAladdin(1);
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) moveAladdin(1);
         else moveAladdin(-1);
       }
     });
-    aladdinStage.addEventListener('pointercancel', ()=>{ aladdinSwipeActive = false; });
+    aladdinStage.addEventListener('pointercancel', () => { aladdinSwipeActive = false; });
 
-    const aladdinObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.target !== aladdinClip) return;
-        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
-          if(aladdinAudioArmed) playAladdinWithAudio();
+    const aladdinObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== aladdinClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (aladdinAudioArmed) playAladdinWithAudio();
           else renderAladdinClip(aladdinIndex, true);
-        }else{
+        } else {
           aladdinVideo.pause();
         }
       });
@@ -1903,69 +2511,69 @@
     let sailorMoonSwipeActive = false;
     let sailorMoonAudioArmed = false;
 
-    function renderSailorMoonClip(index, autoplay = true){
+    function renderSailorMoonClip(index, autoplay = true) {
       sailorMoonIndex = (index + sailorMoonClips.length) % sailorMoonClips.length;
       sailorMoonVideo.src = sailorMoonClips[sailorMoonIndex];
       sailorMoonVideo.volume = 1;
       sailorMoonVideo.load();
       sailorMoonCounter.textContent = `${sailorMoonIndex + 1}/${sailorMoonClips.length}`;
       sailorMoonMeta.innerHTML = `<strong>Sailor Moon</strong> • Opening ${sailorMoonIndex + 1}`;
-      if(autoplay){
-        sailorMoonVideo.play().then(()=>{
+      if (autoplay) {
+        sailorMoonVideo.play().then(() => {
           sailorAudioCta.classList.remove('show');
-        }).catch(()=>{
+        }).catch(() => {
           sailorAudioCta.classList.add('show');
         });
       }
     }
 
-    function moveSailorMoon(delta){
+    function moveSailorMoon(delta) {
       renderSailorMoonClip(sailorMoonIndex + delta, true);
     }
 
-    function playSailorMoonWithAudio(){
+    function playSailorMoonWithAudio() {
       sailorMoonAudioArmed = true;
       sailorMoonVideo.muted = false;
       sailorMoonVideo.volume = 1;
-      sailorMoonVideo.play().then(()=>{
+      sailorMoonVideo.play().then(() => {
         sailorAudioCta.classList.remove('show');
-      }).catch(()=>{
+      }).catch(() => {
         sailorAudioCta.classList.add('show');
       });
     }
 
-    sailorPrevBtn.addEventListener('click', ()=>moveSailorMoon(-1));
-    sailorNextBtn.addEventListener('click', ()=>moveSailorMoon(1));
+    sailorPrevBtn.addEventListener('click', () => moveSailorMoon(-1));
+    sailorNextBtn.addEventListener('click', () => moveSailorMoon(1));
     sailorAudioCta.addEventListener('click', playSailorMoonWithAudio);
-    sailorMoonVideo.addEventListener('ended', ()=>{
-      if(sailorMoonIndex < sailorMoonClips.length - 1) moveSailorMoon(1);
+    sailorMoonVideo.addEventListener('ended', () => {
+      if (sailorMoonIndex < sailorMoonClips.length - 1) moveSailorMoon(1);
       else irACanalAleatorio('c3');
     });
 
-    sailorMoonStage.addEventListener('pointerdown', (e)=>{
+    sailorMoonStage.addEventListener('pointerdown', (e) => {
       sailorMoonSwipeActive = true;
       sailorMoonSwipeStartX = e.clientX;
       sailorMoonSwipeStartY = e.clientY;
     });
-    sailorMoonStage.addEventListener('pointerup', (e)=>{
-      if(!sailorMoonSwipeActive) return;
+    sailorMoonStage.addEventListener('pointerup', (e) => {
+      if (!sailorMoonSwipeActive) return;
       sailorMoonSwipeActive = false;
       const dx = e.clientX - sailorMoonSwipeStartX;
       const dy = e.clientY - sailorMoonSwipeStartY;
-      if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)){
-        if(dx < 0) moveSailorMoon(1);
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) moveSailorMoon(1);
         else moveSailorMoon(-1);
       }
     });
-    sailorMoonStage.addEventListener('pointercancel', ()=>{ sailorMoonSwipeActive = false; });
+    sailorMoonStage.addEventListener('pointercancel', () => { sailorMoonSwipeActive = false; });
 
-    const sailorMoonObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.target !== sailorMoonClip) return;
-        if(entry.isIntersecting && entry.intersectionRatio > 0.6){
-          if(sailorMoonAudioArmed) playSailorMoonWithAudio();
+    const sailorMoonObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== sailorMoonClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (sailorMoonAudioArmed) playSailorMoonWithAudio();
           else renderSailorMoonClip(sailorMoonIndex, true);
-        }else{
+        } else {
           sailorMoonVideo.pause();
         }
       });
@@ -1974,84 +2582,84 @@
 
     renderSailorMoonClip(0, false);
 
-    document.querySelectorAll('.actbtn').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.actbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
         const action = btn.dataset.action;
         const clip = btn.closest('.clip');
         const who = clip.querySelector('.name')?.textContent ?? 'clip';
 
-        if(action === 'like'){
+        if (action === 'like') {
           const countEl = clip.querySelector('[data-count="like"]');
-          if(countEl) countEl.textContent = bumpCount(countEl.textContent);
+          if (countEl) countEl.textContent = bumpCount(countEl.textContent);
           const yaLiked = btn.classList.contains('liked');
           btn.classList.toggle('liked');
-          if(!yaLiked) sumarXP(10, '❤️ like');
+          if (!yaLiked) sumarXP(10, '❤️ like');
           else toast('❤️ ' + who);
-          btn.animate([{transform:'scale(1)'},{transform:'scale(1.18)'},{transform:'scale(1)'}], {duration:220});
-        }else if(action === 'comment') toast('💬 Comentarios (demo)');
-        else if(action === 'share'){ sumarXP(20, '↗️ compartido'); }
-        else if(action === 'vote') toast('🗳️ Votá: ¿te reíste? (demo)');
-        else if(action === 'profile') toast('👤 Perfil del personaje (demo)');
+          btn.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.18)' }, { transform: 'scale(1)' }], { duration: 220 });
+        } else if (action === 'comment') toast('💬 Comentarios (demo)');
+        else if (action === 'share') { sumarXP(20, '↗️ compartido'); }
+        else if (action === 'vote') toast('🗳️ Votá: ¿te reíste? (demo)');
+        else if (action === 'profile') toast('👤 Perfil del personaje (demo)');
         else toast('⋯ Más opciones (demo)');
       });
     });
 
-    function bumpCount(txt){
+    function bumpCount(txt) {
       const m = String(txt).trim().match(/^(\d+(\.\d+)?)K$/i);
-      if(m){
+      if (m) {
         const v = parseFloat(m[1]);
         return (v + 0.1).toFixed(1) + 'K';
       }
-      const n = parseInt(txt.replace(/[^\d]/g,''), 10);
-      if(Number.isFinite(n)) return String(n + 1);
+      const n = parseInt(txt.replace(/[^\d]/g, ''), 10);
+      if (Number.isFinite(n)) return String(n + 1);
       return txt;
     }
 
     const avatars = Array.from(document.querySelectorAll('.avatar'));
-    avatars.forEach(a=>{
-      a.addEventListener('click', (e)=>{
+    avatars.forEach(a => {
+      a.addEventListener('click', (e) => {
         e.stopPropagation();
         openSheet();
         toast('Personajes: elegí uno');
       });
     });
 
-    document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape'){
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
         closeSheet();
         closeXP();
         closeRanking();
       }
-      if(e.key.toLowerCase() === 'p') openSheet();
-      
+      if (e.key.toLowerCase() === 'p') openSheet();
+
       // Navegación tipo TikTok con flechas
-      if(e.key === 'ArrowDown' || e.key === 'ArrowUp'){
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();
         const currentScroll = feed.scrollTop;
         const clipHeight = window.innerHeight;
         const currentIndex = Math.round(currentScroll / clipHeight);
-        
+
         let nextIndex;
-        if(e.key === 'ArrowDown'){
+        if (e.key === 'ArrowDown') {
           nextIndex = Math.min(currentIndex + 1, clips.length - 1);
           toast('⬇️ Siguiente video');
         } else {
           nextIndex = Math.max(currentIndex - 1, 0);
           toast('⬆️ Video anterior');
         }
-        
-        feed.scrollTo({top: nextIndex * clipHeight, behavior:'smooth'});
+
+        feed.scrollTo({ top: nextIndex * clipHeight, behavior: 'smooth' });
       }
-      
+
       // Like con tecla L
-      if(e.key.toLowerCase() === 'l'){
+      if (e.key.toLowerCase() === 'l') {
         const currentScroll = feed.scrollTop;
         const clipHeight = window.innerHeight;
         const currentIndex = Math.round(currentScroll / clipHeight);
         const currentClip = clips[currentIndex];
-        if(currentClip){
+        if (currentClip) {
           const likeBtn = currentClip.querySelector('[data-action="like"]');
-          if(likeBtn) likeBtn.click();
+          if (likeBtn) likeBtn.click();
         }
       }
     });
@@ -2063,75 +2671,75 @@
     const lastChannelViewAt = new Map();
 
     const niveles = [
-      { nombre: 'Espectador', min: 0,   emoji: '📺', id: 'xpM1', labelId: 'xpLabelA' },
-      { nombre: 'Fans',        min: 50,  emoji: '🎭', id: 'xpM2', labelId: 'xpLabelB' },
-      { nombre: 'Cablinero',  min: 150, emoji: '🏆', id: 'xpM3', labelId: 'xpLabelC' },
-      { nombre: 'Leyenda',    min: 300, emoji: '📼', id: 'xpM4', labelId: null       }
+      { nombre: 'Espectador', min: 0, emoji: '📺', id: 'xpM1', labelId: 'xpLabelA' },
+      { nombre: 'Fans', min: 50, emoji: '🎭', id: 'xpM2', labelId: 'xpLabelB' },
+      { nombre: 'Cablinero', min: 150, emoji: '🏆', id: 'xpM3', labelId: 'xpLabelC' },
+      { nombre: 'Leyenda', min: 300, emoji: '📼', id: 'xpM4', labelId: null }
     ];
 
-    function getXP(){ return parseInt(localStorage.getItem(XP_KEY) || '0', 10); }
-    function setXP(v){ localStorage.setItem(XP_KEY, Math.max(0, Math.floor(v))); }
-    function getVistos(){ return JSON.parse(localStorage.getItem(XP_VISTO_KEY) || '[]'); }
-    function getRankingEvents(){
-      try{
+    function getXP() { return parseInt(localStorage.getItem(XP_KEY) || '0', 10); }
+    function setXP(v) { localStorage.setItem(XP_KEY, Math.max(0, Math.floor(v))); }
+    function getVistos() { return JSON.parse(localStorage.getItem(XP_VISTO_KEY) || '[]'); }
+    function getRankingEvents() {
+      try {
         const raw = JSON.parse(localStorage.getItem(RANK_EVENTS_KEY) || '[]');
         return Array.isArray(raw) ? raw : [];
-      }catch{
+      } catch {
         return [];
       }
     }
-    function setRankingEvents(events){
+    function setRankingEvents(events) {
       localStorage.setItem(RANK_EVENTS_KEY, JSON.stringify(events));
     }
-    function formatViews(v){
+    function formatViews(v) {
       return new Intl.NumberFormat('es-AR').format(v);
     }
-    function getCatalogChannels(){
+    function getCatalogChannels() {
       const channels = new Set();
-      document.querySelectorAll('.clip .handle .name').forEach(el=>{
+      document.querySelectorAll('.clip .handle .name').forEach(el => {
         const handle = (el.textContent || '').trim().toLowerCase();
-        if(handle.startsWith('@')) channels.add(handle);
+        if (handle.startsWith('@')) channels.add(handle);
       });
-      document.querySelectorAll('.pcard[data-filter]').forEach(card=>{
+      document.querySelectorAll('.pcard[data-filter]').forEach(card => {
         const handle = '@' + card.dataset.filter.replace(/-/g, '_').toLowerCase();
         channels.add(handle);
       });
       return Array.from(channels);
     }
-    function getWeeklyRange(){
+    function getWeeklyRange() {
       const end = new Date();
       const start = new Date(end.getTime() - (7 * 24 * 60 * 60 * 1000));
       return { start, end };
     }
-    function formatDate(d){
+    function formatDate(d) {
       return d.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit' });
     }
-    function buildWeeklyRanking(limit = 10){
+    function buildWeeklyRanking(limit = 10) {
       const now = Date.now();
       const weekAgo = now - (7 * 24 * 60 * 60 * 1000);
       const counts = new Map();
 
       getCatalogChannels().forEach(ch => counts.set(ch, 0));
-      getRankingEvents().forEach(evt=>{
-        if(!evt || typeof evt.channel !== 'string' || !Number.isFinite(evt.ts)) return;
-        if(evt.ts < weekAgo || evt.ts > now) return;
+      getRankingEvents().forEach(evt => {
+        if (!evt || typeof evt.channel !== 'string' || !Number.isFinite(evt.ts)) return;
+        if (evt.ts < weekAgo || evt.ts > now) return;
         const ch = evt.channel.toLowerCase();
         counts.set(ch, (counts.get(ch) || 0) + 1);
       });
 
       return Array.from(counts.entries())
         .map(([channel, views]) => ({ channel, views }))
-        .sort((a,b) => (b.views - a.views) || a.channel.localeCompare(b.channel))
+        .sort((a, b) => (b.views - a.views) || a.channel.localeCompare(b.channel))
         .slice(0, limit);
     }
-    function actualizarRankingUI(){
+    function actualizarRankingUI() {
       const rankingBody = document.getElementById('rankingBody');
       const rankingPeriod = document.getElementById('rankingPeriod');
       const rows = buildWeeklyRanking(10);
       const range = getWeeklyRange();
 
       rankingPeriod.textContent = `${formatDate(range.start)} al ${formatDate(range.end)}`;
-      rankingBody.innerHTML = rows.map((row, idx)=>`
+      rankingBody.innerHTML = rows.map((row, idx) => `
         <div class="ranking-row" role="listitem">
           <span class="ranking-pos">${idx + 1}</span>
           <div class="ranking-channel">
@@ -2141,43 +2749,43 @@
         </div>
       `).join('');
     }
-    function registrarVistaCanal(channel){
-      if(!channel) return;
+    function registrarVistaCanal(channel) {
+      if (!channel) return;
       const normalized = channel.toLowerCase();
       const now = Date.now();
       const last = lastChannelViewAt.get(normalized) || 0;
-      if(now - last < VIEW_EVENT_COOLDOWN_MS) return;
+      if (now - last < VIEW_EVENT_COOLDOWN_MS) return;
 
       lastChannelViewAt.set(normalized, now);
       const events = getRankingEvents();
       events.push({ channel: normalized, ts: now });
-      if(events.length > 8000) events.splice(0, events.length - 8000);
+      if (events.length > 8000) events.splice(0, events.length - 8000);
       setRankingEvents(events);
       actualizarRankingUI();
     }
-    function addVisto(id){
+    function addVisto(id) {
       const v = getVistos();
-      if(!v.includes(id)){ v.push(id); localStorage.setItem(XP_VISTO_KEY, JSON.stringify(v)); }
+      if (!v.includes(id)) { v.push(id); localStorage.setItem(XP_VISTO_KEY, JSON.stringify(v)); }
       return !getVistos().includes(id); // true = era nuevo
     }
 
-    function nivelActual(xp){
+    function nivelActual(xp) {
       let nivel = niveles[0];
-      for(const n of niveles){ if(xp >= n.min) nivel = n; }
+      for (const n of niveles) { if (xp >= n.min) nivel = n; }
       return nivel;
     }
 
-    function pctEnNivel(xp){
+    function pctEnNivel(xp) {
       const idx = niveles.findIndex(n => n === nivelActual(xp));
       const actual = niveles[idx];
       const siguiente = niveles[idx + 1];
-      if(!siguiente) return 100;
+      if (!siguiente) return 100;
       const rango = siguiente.min - actual.min;
       const avance = xp - actual.min;
       return Math.min(100, Math.round((avance / rango) * 100));
     }
 
-    function sumarXP(pts, motivo){
+    function sumarXP(pts, motivo) {
       const xpPrev = getXP();
       const nivelPrev = nivelActual(xpPrev).nombre;
       setXP(xpPrev + pts);
@@ -2186,12 +2794,12 @@
       actualizarXPUI();
       toast(`+${pts} pts ${motivo}`);
       // Subida de nivel
-      if(nivelNew !== nivelPrev){
+      if (nivelNew !== nivelPrev) {
         setTimeout(() => toast(`🎉 ¡Subiste de nivel! Ahora sos ${nivelNew}`), 800);
       }
     }
 
-    function actualizarXPUI(){
+    function actualizarXPUI() {
       const xp = getXP();
       const nivel = nivelActual(xp);
       const pct = pctEnNivel(xp);
@@ -2209,40 +2817,40 @@
 
       // Labels activos
       niveles.forEach(n => {
-        if(n.labelId){
+        if (n.labelId) {
           const el = document.getElementById(n.labelId);
-          if(el) el.classList.toggle('active-nivel', n === nivel);
+          if (el) el.classList.toggle('active-nivel', n === nivel);
         }
         const m = document.getElementById(n.id);
-        if(m) m.classList.toggle('desbloqueado', xp >= n.min);
+        if (m) m.classList.toggle('desbloqueado', xp >= n.min);
       });
     }
 
     // Sheet XP
     const sheetXP = document.getElementById('sheetXP');
-    function openXP(){ sheetXP.classList.add('open'); }
-    function closeXP(){ sheetXP.classList.remove('open'); }
+    function openXP() { sheetXP.classList.add('open'); }
+    function closeXP() { sheetXP.classList.remove('open'); }
     document.getElementById('btnXP').addEventListener('click', openXP);
     document.getElementById('closeXP').addEventListener('click', closeXP);
 
     // Sheet Ranking
     const sheetRanking = document.getElementById('sheetRanking');
-    function openRanking(){
+    function openRanking() {
       actualizarRankingUI();
       sheetRanking.classList.add('open');
     }
-    function closeRanking(){ sheetRanking.classList.remove('open'); }
+    function closeRanking() { sheetRanking.classList.remove('open'); }
     document.getElementById('closeRanking').addEventListener('click', closeRanking);
 
     // XP por ver clips (IntersectionObserver — sin tocar el scroll existente)
     const clipObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if(entry.isIntersecting && entry.intersectionRatio > 0.7){
+        if (entry.isIntersecting && entry.intersectionRatio > 0.7) {
           const id = entry.target.dataset.id;
           const channel = entry.target.querySelector('.handle .name')?.textContent?.trim();
           registrarVistaCanal(channel);
           const vistos = getVistos();
-          if(id && !vistos.includes(id)){
+          if (id && !vistos.includes(id)) {
             addVisto(id);
             sumarXP(5, '📺 clip visto');
           }
@@ -2258,4 +2866,5 @@
 
   </script>
 </body>
+
 </html>
