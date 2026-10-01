@@ -737,23 +737,23 @@
       transform: translateY(0)
     }
 
-@media (min-width: 760px) {
-  .feed {
-    max-width: 520px;
-    margin: 0 auto;
-    border-left: 1px solid rgba(255, 255, 255, .08);
-    border-right: 1px solid rgba(255, 255, 255, .08)
-  }
+    @media (min-width: 760px) {
+      .feed {
+        max-width: 520px;
+        margin: 0 auto;
+        border-left: 1px solid rgba(255, 255, 255, .08);
+        border-right: 1px solid rgba(255, 255, 255, .08)
+      }
 
-  .topbar {
-    max-width: 520px;
-    margin: 0 auto
-  }
+      .topbar {
+        max-width: 520px;
+        margin: 0 auto
+      }
 
-  .bottomnav {
-    background: rgba(0, 0, 0, .42)
-  }
-}
+      .bottomnav {
+        background: rgba(0, 0, 0, .42)
+      }
+    }
 
     /* ── Sistema XP / Niveles ─────────────────────────── */
 
@@ -1145,665 +1145,28 @@
 
 <body>
   <div class="app">
-    <div class="brand">
-      <div class="logo" title="Cablin">
-        <img src="img/logos/cablin-logo.png" alt="Cablin" style="width:100%;height:100%;object-fit:contain;">
-      </div>
 
-      <a href="https://dherrera85.github.io/cablin-site/" class="classic-link" title="Ir a Cablín clásico"
-        aria-label="Ir a la página clásica de Cablín">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-        <span>Cablín clásico</span>
-      </a>
-    </div>
-    <button class="iconbtn" id="btnPersonajes" title="Personajes">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-        <circle cx="9" cy="7" r="4"></circle>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-      </svg>
-    </button>
-    <button class="iconbtn" id="btnBuscar" title="Buscar">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-        stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.35-4.35"></path>
-      </svg>
-    </button>
-    <button class="iconbtn" id="btnRanking" title="Ranking semanal" aria-label="Ver ranking semanal">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
-        stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 20V10"></path>
-        <path d="M12 20V4"></path>
-        <path d="M6 20v-6"></path>
-      </svg>
-    </button>
-    <!-- Chip XP -->
-    <button class="xp-chip" id="btnXP" title="Mi nivel" aria-label="Ver mi nivel">
-      <div class="xp-chip-icon">
-        <img src="img/logos/cablin-logo.png" alt="Cablin XP">
-      </div>
-      <span class="xp-chip-pts" id="xpChipPts">0 pts</span>
-    </button>
-  </div>
-  </div>
+    <div class="topbar" aria-label="Cablin top bar">
 
-  <main class="feed" id="feed" aria-label="Feed de shorts">
-    <section class="clip" data-theme="cablin" data-id="c1" data-canal="anime">
-      <div class="video series-stage" id="caballerosStage" aria-label="Serie Caballeros del Zodiaco">
-        <video class="series-video" id="caballerosVideo" preload="metadata"></video>
-        <div class="series-ui">
-          <div class="series-chip" id="caballerosMeta"><strong>Caballeros</strong> • Opening</div>
-          <div class="series-nav">
-            <button class="series-btn" id="caballerosPrev" aria-label="Clip anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-            <div class="series-counter" id="caballerosCounter">1/1</div>
-            <button class="series-btn" id="caballerosNext" aria-label="Clip siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
+      <div class="brand">
+        <div class="logo" title="Cablin">
+          <img src="img/logos/cablin-logo.png" alt="Cablin" style="width:100%;height:100%;object-fit:contain;">
         </div>
-      </div>
-      <div class="crt"></div>
-      <div class="noise"></div>
 
-      <div class="actions">
-        <div class="act">
-          <button class="actbtn" data-action="like" aria-label="Me gusta">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-              </path>
-            </svg>
-          </button>
-          <div class="count" data-count="like">12.4K</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="comment" aria-label="Comentarios">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-          <div class="count">321</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="share" aria-label="Compartir">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-              <polyline points="16 6 12 2 8 6"></polyline>
-              <line x1="12" y1="2" x2="12" y2="15"></line>
-            </svg>
-          </button>
-          <div class="count">Compartir</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="more" aria-label="Más">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="1"></circle>
-              <circle cx="12" cy="5" r="1"></circle>
-              <circle cx="12" cy="19" r="1"></circle>
-            </svg>
-          </button>
-          <div class="count">Más</div>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div class="who">
-          <div class="avatar">
-            <img src="img/round/saint-seiya-150x150.png" alt="Caballeros del Zodíaco">
-          </div>
-          <div class="handle">
-            <div class="name">@caballeros_zodiaco</div>
-            <div class="desc">Pegaso con su Cosmo ardiente ⚡</div>
-          </div>
-        </div>
-        <div class="caption">
-          <div class="title">¡Pegaso Meteoro de Pegaso! 🌠 El poder del Cosmo en acción 💫</div>
-          <div class="tags">
-            <span class="tag">#Cablin</span>
-            <span class="tag">#SaintSeiya</span>
-            <span class="tag">#Anime90s</span>
-            <span class="tag">#Nostalgia</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="clip" data-theme="comic" data-id="c2" data-canal="accion">
-      <div class="video series-stage" id="sonicStage" aria-label="Serie Sonic">
-        <video class="series-video" id="sonicVideo" preload="metadata"></video>
-        <div class="series-ui">
-          <div class="series-chip" id="sonicMeta"><strong>Sonic</strong> • Opening</div>
-          <div class="series-nav">
-            <button class="series-btn" id="sonicPrev" aria-label="Clip anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-            <div class="series-counter" id="sonicCounter">1/2</div>
-            <button class="series-btn" id="sonicNext" aria-label="Clip siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="crt"></div>
-      <div class="noise"></div>
-
-      <div class="actions">
-        <div class="act">
-          <button class="actbtn" data-action="like" aria-label="Me gusta">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-              </path>
-            </svg>
-          </button>
-          <div class="count" data-count="like">8.1K</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="comment" aria-label="Comentarios">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-          <div class="count">187</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="share" aria-label="Compartir">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-              <polyline points="16 6 12 2 8 6"></polyline>
-              <line x1="12" y1="2" x2="12" y2="15"></line>
-            </svg>
-          </button>
-          <div class="count">Compartir</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="vote" aria-label="Votar">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M7 15h10M7 11h10M7 7h4"></path>
-              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-            </svg>
-          </button>
-          <div class="count">Votá</div>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div class="who">
-          <div class="avatar" style="background:linear-gradient(135deg,var(--cyan),var(--lime));">
-            <img src="img/round/sonic-150x150.png" alt="Sonic">
-          </div>
-          <div class="handle">
-            <div class="name">@sonic</div>
-            <div class="desc">Gotta go fast! 💨</div>
-          </div>
-        </div>
-        <div class="caption">
-          <div class="title">¡Sonic corriendo a toda velocidad! 🦔💨 ¿Podrás seguirle el ritmo?</div>
-          <div class="tags">
-            <span class="tag">#Sonic</span>
-            <span class="tag">#Velocidad</span>
-            <span class="tag">#Cablin90s</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="clip" data-theme="retro" data-id="c3" data-canal="anime">
-      <div class="video series-stage" id="sailorMoonStage" aria-label="Serie Sailor Moon">
-        <video class="series-video" id="sailorMoonVideo" preload="metadata"></video>
-        <div class="series-ui">
-          <div class="series-chip" id="sailorMoonMeta"><strong>Sailor Moon</strong> • Opening</div>
-          <div class="series-nav">
-            <button class="series-btn" id="sailorPrev" aria-label="Clip anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-            <div class="series-counter" id="sailorCounter">1/3</div>
-            <button class="series-btn" id="sailorNext" aria-label="Clip siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="crt"></div>
-      <div class="noise"></div>
-
-      <div class="actions">
-        <div class="act">
-          <button class="actbtn" data-action="like" aria-label="Me gusta">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-              </path>
-            </svg>
-          </button>
-          <div class="count" data-count="like">22.0K</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="comment" aria-label="Comentarios">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-          <div class="count">902</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="share" aria-label="Compartir">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-              <polyline points="16 6 12 2 8 6"></polyline>
-              <line x1="12" y1="2" x2="12" y2="15"></line>
-            </svg>
-          </button>
-          <div class="count">Compartir</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </button>
-          <div class="count">Perfil</div>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div class="who">
-          <div class="avatar" style="background:linear-gradient(135deg,var(--violet),var(--yellow));">
-            <img src="img/round/sailor-moon-150x150.png" alt="Sailor Moon">
-          </div>
-          <div class="handle">
-            <div class="name">@sailor_moon</div>
-            <div class="desc">¡En el nombre de la Luna! 🌙✨</div>
-          </div>
-        </div>
-        <div class="caption">
-          <div class="title">"¡Castigo Lunar!" 🌙💖 Sailor Moon transforma y defiende el amor</div>
-          <div class="tags">
-            <span class="tag">#SailorMoon</span>
-            <span class="tag">#MagicalGirl</span>
-            <span class="tag">#Anime</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="clip" data-theme="cablin" data-id="c4" data-canal="accion">
-      <div class="video" role="img" aria-label="Clip demo 4"></div>
-      <div class="crt"></div>
-      <div class="noise"></div>
-
-      <div class="actions">
-        <div class="act">
-          <button class="actbtn" data-action="like" aria-label="Me gusta">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-              </path>
-            </svg>
-          </button>
-          <div class="count" data-count="like">15.2K</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="comment" aria-label="Comentarios">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-          <div class="count">542</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="share" aria-label="Compartir">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-              <polyline points="16 6 12 2 8 6"></polyline>
-              <line x1="12" y1="2" x2="12" y2="15"></line>
-            </svg>
-          </button>
-          <div class="count">Compartir</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </button>
-          <div class="count">Perfil</div>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div class="who">
-          <div class="avatar" style="background:linear-gradient(135deg,var(--pink),var(--violet));">
-            <img src="img/round/action-man-150x150.png" alt="Action Man">
-          </div>
-          <div class="handle">
-            <div class="name">@action_man</div>
-            <div class="desc">¡Siempre listo para la acción! 💪</div>
-          </div>
-        </div>
-        <div class="caption">
-          <div class="title">¡Misión extrema! Action Man en su mejor momento 🚁💥</div>
-          <div class="tags">
-            <span class="tag">#ActionMan</span>
-            <span class="tag">#Héroe</span>
-            <span class="tag">#Aventura</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="clip" data-theme="comic" data-id="c5" data-canal="humor">
-      <div class="video" role="img" aria-label="Clip demo 5"></div>
-      <div class="crt"></div>
-      <div class="noise"></div>
-
-      <div class="actions">
-        <div class="act">
-          <button class="actbtn" data-action="like" aria-label="Me gusta">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-              </path>
-            </svg>
-          </button>
-          <div class="count" data-count="like">9.8K</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="comment" aria-label="Comentarios">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-          <div class="count">234</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="share" aria-label="Compartir">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-              <polyline points="16 6 12 2 8 6"></polyline>
-              <line x1="12" y1="2" x2="12" y2="15"></line>
-            </svg>
-          </button>
-          <div class="count">Compartir</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="more" aria-label="Más">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="1"></circle>
-              <circle cx="12" cy="5" r="1"></circle>
-              <circle cx="12" cy="19" r="1"></circle>
-            </svg>
-          </button>
-          <div class="count">Más</div>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div class="who">
-          <div class="avatar" style="background:linear-gradient(135deg,var(--yellow),var(--cyan));">
-            <img src="img/round/garfield-and-friends-150x150.png" alt="Garfield">
-          </div>
-          <div class="handle">
-            <div class="name">@garfield</div>
-            <div class="desc">Amante de la lasaña 🍝😺</div>
-          </div>
-        </div>
-        <div class="caption">
-          <div class="title">¡Garfield odia los lunes! 😾☕ Momento clásico del gato más perezoso</div>
-          <div class="tags">
-            <span class="tag">#Garfield</span>
-            <span class="tag">#Comedia</span>
-            <span class="tag">#Lunes</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="clip" data-theme="retro" data-id="c6" data-canal="bumpers">
-      <div class="video" role="img" aria-label="Clip demo 6"></div>
-      <div class="crt"></div>
-      <div class="noise"></div>
-
-      <div class="actions">
-        <div class="act">
-          <button class="actbtn" data-action="like" aria-label="Me gusta">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-              </path>
-            </svg>
-          </button>
-          <div class="count" data-count="like">18.5K</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="comment" aria-label="Comentarios">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-          <div class="count">678</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="share" aria-label="Compartir">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-              <polyline points="16 6 12 2 8 6"></polyline>
-              <line x1="12" y1="2" x2="12" y2="15"></line>
-            </svg>
-          </button>
-          <div class="count">Compartir</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="vote" aria-label="Votar">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M7 15h10M7 11h10M7 7h4"></path>
-              <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-            </svg>
-          </button>
-          <div class="count">Votá</div>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div class="who">
-          <div class="avatar" style="background:linear-gradient(135deg,var(--lime),var(--pink));">
-            <img src="img/round/super-mario-bros-150x150.png" alt="Super Mario">
-          </div>
-          <div class="handle">
-            <div class="name">@super_mario_bros</div>
-            <div class="desc">¡It's-a me, Mario! 🍄</div>
-          </div>
-        </div>
-        <div class="caption">
-          <div class="title">¡Mario salva a la princesa una vez más! 🍄👑 Aventura clásica</div>
-          <div class="tags">
-            <span class="tag">#Mario</span>
-            <span class="tag">#Nintendo</span>
-            <span class="tag">#Retro</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="clip" data-theme="retro" data-id="c7" data-canal="humor">
-      <div class="video series-stage" id="jemStage" aria-label="Serie Jem and the Holograms">
-        <video class="series-video" id="jemVideo" preload="metadata"></video>
-        <div class="series-ui">
-          <div class="series-chip" id="jemMeta"><strong>Jem</strong> • Opening 1/1</div>
-        </div>
-      </div>
-      <div class="crt"></div>
-      <div class="noise"></div>
-
-      <div class="actions">
-        <div class="act">
-          <button class="actbtn" data-action="like" aria-label="Me gusta">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-              </path>
-            </svg>
-          </button>
-          <div class="count" data-count="like">7.2K</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="comment" aria-label="Comentarios">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-          <div class="count">245</div>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div class="who">
-          <div class="avatar">
-            <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
-          </div>
-          <div class="handle">
-            <div class="name">@jem_holograms</div>
-            <div class="desc">Truly outrageous 🎤✨</div>
-          </div>
-        </div>
-        <div class="caption">
-          <div class="title">Jem and the Holograms — Opening</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="clip" data-theme="comic" data-id="c8" data-canal="humor">
-      <div class="video series-stage" id="aladdinStage" aria-label="Serie Aladdin">
-        <video class="series-video" id="aladdinVideo" preload="metadata"></video>
-        <div class="series-ui">
-          <div class="series-chip" id="aladdinMeta"><strong>Aladdin</strong> • Opening</div>
-          <div class="series-nav">
-            <button class="series-btn" id="aladdinPrev" aria-label="Clip anterior">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-            <div class="series-counter" id="aladdinCounter">1/2</div>
-            <button class="series-btn" id="aladdinNext" aria-label="Clip siguiente">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="crt"></div>
-      <div class="noise"></div>
-
-      <div class="actions">
-        <div class="act">
-          <button class="actbtn" data-action="like" aria-label="Me gusta">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path
-                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
-              </path>
-            </svg>
-          </button>
-          <div class="count" data-count="like">6.6K</div>
-        </div>
-        <div class="act">
-          <button class="actbtn" data-action="comment" aria-label="Comentarios">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </button>
-          <div class="count">188</div>
-        </div>
-      </div>
-
-      <div class="meta">
-        <div class="who">
-          <div class="avatar">
-            <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
-          </div>
-          <div class="handle">
-            <div class="name">@aladdin</div>
-            <div class="desc">Un mundo ideal 🧞</div>
-          </div>
-        </div>
-        <div class="caption">
-          <div class="title">Aladdin — Opening</div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <nav class="bottomnav" aria-label="Navegación inferior">
-    <div class="navrow">
-      <button class="navbtn active" data-tab="home">
-        <strong>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        <a href="https://dherrera85.github.io/cablin-site/" class="classic-link" title="Ir a Cablín clásico"
+          aria-label="Ir a la página clásica de Cablín">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
-        </strong>Inicio
-      </button>
-      <button class="navbtn" data-tab="personajes">
-        <strong>
+
+          <span>Cablín clásico</span>
+        </a>
+      </div>
+
+      <div class="top-actions">
+
+        <button class="iconbtn" id="btnPersonajes" title="Personajes">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -1811,215 +1174,865 @@
             <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
             <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
           </svg>
-        </strong>Personajes
-      </button>
-      <button class="navbtn" data-tab="xp" title="Mi nivel">
-        <strong>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        </button>
+
+        <button class="iconbtn" id="btnBuscar" title="Buscar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
             stroke-linecap="round" stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-            </polygon>
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
           </svg>
-        </strong>Mi Nivel
-      </button>
-    </div>
-  </nav>
+        </button>
 
-  <section class="sheet" id="sheetPersonajes" aria-label="Panel de personajes">
-    <div class="sheethead">
-      <div class="sheettitle">🎭 Personajes <span class="pill">tap para filtrar (demo)</span></div>
-      <button class="close" id="closeSheet" aria-label="Cerrar">✕</button>
+        <button class="iconbtn" id="btnRanking" title="Ranking semanal" aria-label="Ver ranking semanal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 20V10"></path>
+            <path d="M12 20V4"></path>
+            <path d="M6 20v-6"></path>
+          </svg>
+        </button>
+
+        <button class="xp-chip" id="btnXP" title="Mi nivel" aria-label="Ver mi nivel">
+          <div class="xp-chip-icon">
+            <img src="img/logos/cablin-logo.png" alt="Cablin XP">
+          </div>
+
+          <span class="xp-chip-pts" id="xpChipPts">0 pts</span>
+        </button>
+
+      </div>
     </div>
 
-    <div class="grid" role="list">
-      <button class="pcard" data-filter="saint-seiya" role="listitem" aria-label="Filtrar Caballeros del Zodíaco">
-        <div class="pimg">
-          <img src="img/round/saint-seiya-150x150.png" alt="Saint Seiya">
+    <main class="feed" id="feed" aria-label="Feed de shorts">
+
+      <main class="feed" id="feed" aria-label="Feed de shorts">
+        <section class="clip" data-theme="cablin" data-id="c1" data-canal="anime">
+          <div class="video series-stage" id="caballerosStage" aria-label="Serie Caballeros del Zodiaco">
+            <video class="series-video" id="caballerosVideo" preload="metadata"></video>
+            <div class="series-ui">
+              <div class="series-chip" id="caballerosMeta"><strong>Caballeros</strong> • Opening</div>
+              <div class="series-nav">
+                <button class="series-btn" id="caballerosPrev" aria-label="Clip anterior">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <div class="series-counter" id="caballerosCounter">1/1</div>
+                <button class="series-btn" id="caballerosNext" aria-label="Clip siguiente">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="crt"></div>
+          <div class="noise"></div>
+
+          <div class="actions">
+            <div class="act">
+              <button class="actbtn" data-action="like" aria-label="Me gusta">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                  </path>
+                </svg>
+              </button>
+              <div class="count" data-count="like">12.4K</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="comment" aria-label="Comentarios">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <div class="count">321</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="share" aria-label="Compartir">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                  <polyline points="16 6 12 2 8 6"></polyline>
+                  <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+              </button>
+              <div class="count">Compartir</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="more" aria-label="Más">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg>
+              </button>
+              <div class="count">Más</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="who">
+              <div class="avatar">
+                <img src="img/round/saint-seiya-150x150.png" alt="Caballeros del Zodíaco">
+              </div>
+              <div class="handle">
+                <div class="name">@caballeros_zodiaco</div>
+                <div class="desc">Pegaso con su Cosmo ardiente ⚡</div>
+              </div>
+            </div>
+            <div class="caption">
+              <div class="title">¡Pegaso Meteoro de Pegaso! 🌠 El poder del Cosmo en acción 💫</div>
+              <div class="tags">
+                <span class="tag">#Cablin</span>
+                <span class="tag">#SaintSeiya</span>
+                <span class="tag">#Anime90s</span>
+                <span class="tag">#Nostalgia</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="clip" data-theme="comic" data-id="c2" data-canal="accion">
+          <div class="video series-stage" id="sonicStage" aria-label="Serie Sonic">
+            <video class="series-video" id="sonicVideo" preload="metadata"></video>
+            <div class="series-ui">
+              <div class="series-chip" id="sonicMeta"><strong>Sonic</strong> • Opening</div>
+              <div class="series-nav">
+                <button class="series-btn" id="sonicPrev" aria-label="Clip anterior">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <div class="series-counter" id="sonicCounter">1/2</div>
+                <button class="series-btn" id="sonicNext" aria-label="Clip siguiente">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="crt"></div>
+          <div class="noise"></div>
+
+          <div class="actions">
+            <div class="act">
+              <button class="actbtn" data-action="like" aria-label="Me gusta">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                  </path>
+                </svg>
+              </button>
+              <div class="count" data-count="like">8.1K</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="comment" aria-label="Comentarios">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <div class="count">187</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="share" aria-label="Compartir">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                  <polyline points="16 6 12 2 8 6"></polyline>
+                  <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+              </button>
+              <div class="count">Compartir</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="vote" aria-label="Votar">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 15h10M7 11h10M7 7h4"></path>
+                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                </svg>
+              </button>
+              <div class="count">Votá</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="who">
+              <div class="avatar" style="background:linear-gradient(135deg,var(--cyan),var(--lime));">
+                <img src="img/round/sonic-150x150.png" alt="Sonic">
+              </div>
+              <div class="handle">
+                <div class="name">@sonic</div>
+                <div class="desc">Gotta go fast! 💨</div>
+              </div>
+            </div>
+            <div class="caption">
+              <div class="title">¡Sonic corriendo a toda velocidad! 🦔💨 ¿Podrás seguirle el ritmo?</div>
+              <div class="tags">
+                <span class="tag">#Sonic</span>
+                <span class="tag">#Velocidad</span>
+                <span class="tag">#Cablin90s</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="clip" data-theme="retro" data-id="c3" data-canal="anime">
+          <div class="video series-stage" id="sailorMoonStage" aria-label="Serie Sailor Moon">
+            <video class="series-video" id="sailorMoonVideo" preload="metadata"></video>
+            <div class="series-ui">
+              <div class="series-chip" id="sailorMoonMeta"><strong>Sailor Moon</strong> • Opening</div>
+              <div class="series-nav">
+                <button class="series-btn" id="sailorPrev" aria-label="Clip anterior">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <div class="series-counter" id="sailorCounter">1/3</div>
+                <button class="series-btn" id="sailorNext" aria-label="Clip siguiente">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="crt"></div>
+          <div class="noise"></div>
+
+          <div class="actions">
+            <div class="act">
+              <button class="actbtn" data-action="like" aria-label="Me gusta">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                  </path>
+                </svg>
+              </button>
+              <div class="count" data-count="like">22.0K</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="comment" aria-label="Comentarios">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <div class="count">902</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="share" aria-label="Compartir">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                  <polyline points="16 6 12 2 8 6"></polyline>
+                  <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+              </button>
+              <div class="count">Compartir</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </button>
+              <div class="count">Perfil</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="who">
+              <div class="avatar" style="background:linear-gradient(135deg,var(--violet),var(--yellow));">
+                <img src="img/round/sailor-moon-150x150.png" alt="Sailor Moon">
+              </div>
+              <div class="handle">
+                <div class="name">@sailor_moon</div>
+                <div class="desc">¡En el nombre de la Luna! 🌙✨</div>
+              </div>
+            </div>
+            <div class="caption">
+              <div class="title">"¡Castigo Lunar!" 🌙💖 Sailor Moon transforma y defiende el amor</div>
+              <div class="tags">
+                <span class="tag">#SailorMoon</span>
+                <span class="tag">#MagicalGirl</span>
+                <span class="tag">#Anime</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="clip" data-theme="cablin" data-id="c4" data-canal="accion">
+          <div class="video" role="img" aria-label="Clip demo 4"></div>
+          <div class="crt"></div>
+          <div class="noise"></div>
+
+          <div class="actions">
+            <div class="act">
+              <button class="actbtn" data-action="like" aria-label="Me gusta">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                  </path>
+                </svg>
+              </button>
+              <div class="count" data-count="like">15.2K</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="comment" aria-label="Comentarios">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <div class="count">542</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="share" aria-label="Compartir">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                  <polyline points="16 6 12 2 8 6"></polyline>
+                  <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+              </button>
+              <div class="count">Compartir</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </button>
+              <div class="count">Perfil</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="who">
+              <div class="avatar" style="background:linear-gradient(135deg,var(--pink),var(--violet));">
+                <img src="img/round/action-man-150x150.png" alt="Action Man">
+              </div>
+              <div class="handle">
+                <div class="name">@action_man</div>
+                <div class="desc">¡Siempre listo para la acción! 💪</div>
+              </div>
+            </div>
+            <div class="caption">
+              <div class="title">¡Misión extrema! Action Man en su mejor momento 🚁💥</div>
+              <div class="tags">
+                <span class="tag">#ActionMan</span>
+                <span class="tag">#Héroe</span>
+                <span class="tag">#Aventura</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="clip" data-theme="comic" data-id="c5" data-canal="humor">
+          <div class="video" role="img" aria-label="Clip demo 5"></div>
+          <div class="crt"></div>
+          <div class="noise"></div>
+
+          <div class="actions">
+            <div class="act">
+              <button class="actbtn" data-action="like" aria-label="Me gusta">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                  </path>
+                </svg>
+              </button>
+              <div class="count" data-count="like">9.8K</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="comment" aria-label="Comentarios">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <div class="count">234</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="share" aria-label="Compartir">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                  <polyline points="16 6 12 2 8 6"></polyline>
+                  <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+              </button>
+              <div class="count">Compartir</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="more" aria-label="Más">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="1"></circle>
+                  <circle cx="12" cy="5" r="1"></circle>
+                  <circle cx="12" cy="19" r="1"></circle>
+                </svg>
+              </button>
+              <div class="count">Más</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="who">
+              <div class="avatar" style="background:linear-gradient(135deg,var(--yellow),var(--cyan));">
+                <img src="img/round/garfield-and-friends-150x150.png" alt="Garfield">
+              </div>
+              <div class="handle">
+                <div class="name">@garfield</div>
+                <div class="desc">Amante de la lasaña 🍝😺</div>
+              </div>
+            </div>
+            <div class="caption">
+              <div class="title">¡Garfield odia los lunes! 😾☕ Momento clásico del gato más perezoso</div>
+              <div class="tags">
+                <span class="tag">#Garfield</span>
+                <span class="tag">#Comedia</span>
+                <span class="tag">#Lunes</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="clip" data-theme="retro" data-id="c6" data-canal="bumpers">
+          <div class="video" role="img" aria-label="Clip demo 6"></div>
+          <div class="crt"></div>
+          <div class="noise"></div>
+
+          <div class="actions">
+            <div class="act">
+              <button class="actbtn" data-action="like" aria-label="Me gusta">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                  </path>
+                </svg>
+              </button>
+              <div class="count" data-count="like">18.5K</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="comment" aria-label="Comentarios">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <div class="count">678</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="share" aria-label="Compartir">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                  <polyline points="16 6 12 2 8 6"></polyline>
+                  <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+              </button>
+              <div class="count">Compartir</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="vote" aria-label="Votar">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 15h10M7 11h10M7 7h4"></path>
+                  <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                </svg>
+              </button>
+              <div class="count">Votá</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="who">
+              <div class="avatar" style="background:linear-gradient(135deg,var(--lime),var(--pink));">
+                <img src="img/round/super-mario-bros-150x150.png" alt="Super Mario">
+              </div>
+              <div class="handle">
+                <div class="name">@super_mario_bros</div>
+                <div class="desc">¡It's-a me, Mario! 🍄</div>
+              </div>
+            </div>
+            <div class="caption">
+              <div class="title">¡Mario salva a la princesa una vez más! 🍄👑 Aventura clásica</div>
+              <div class="tags">
+                <span class="tag">#Mario</span>
+                <span class="tag">#Nintendo</span>
+                <span class="tag">#Retro</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="clip" data-theme="retro" data-id="c7" data-canal="humor">
+          <div class="video series-stage" id="jemStage" aria-label="Serie Jem and the Holograms">
+            <video class="series-video" id="jemVideo" preload="metadata"></video>
+            <div class="series-ui">
+              <div class="series-chip" id="jemMeta"><strong>Jem</strong> • Opening 1/1</div>
+            </div>
+          </div>
+          <div class="crt"></div>
+          <div class="noise"></div>
+
+          <div class="actions">
+            <div class="act">
+              <button class="actbtn" data-action="like" aria-label="Me gusta">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                  </path>
+                </svg>
+              </button>
+              <div class="count" data-count="like">7.2K</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="comment" aria-label="Comentarios">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <div class="count">245</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="who">
+              <div class="avatar">
+                <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
+              </div>
+              <div class="handle">
+                <div class="name">@jem_holograms</div>
+                <div class="desc">Truly outrageous 🎤✨</div>
+              </div>
+            </div>
+            <div class="caption">
+              <div class="title">Jem and the Holograms — Opening</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="clip" data-theme="comic" data-id="c8" data-canal="humor">
+          <div class="video series-stage" id="aladdinStage" aria-label="Serie Aladdin">
+            <video class="series-video" id="aladdinVideo" preload="metadata"></video>
+            <div class="series-ui">
+              <div class="series-chip" id="aladdinMeta"><strong>Aladdin</strong> • Opening</div>
+              <div class="series-nav">
+                <button class="series-btn" id="aladdinPrev" aria-label="Clip anterior">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <div class="series-counter" id="aladdinCounter">1/2</div>
+                <button class="series-btn" id="aladdinNext" aria-label="Clip siguiente">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="crt"></div>
+          <div class="noise"></div>
+
+          <div class="actions">
+            <div class="act">
+              <button class="actbtn" data-action="like" aria-label="Me gusta">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                  </path>
+                </svg>
+              </button>
+              <div class="count" data-count="like">6.6K</div>
+            </div>
+            <div class="act">
+              <button class="actbtn" data-action="comment" aria-label="Comentarios">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <div class="count">188</div>
+            </div>
+          </div>
+
+          <div class="meta">
+            <div class="who">
+              <div class="avatar">
+                <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
+              </div>
+              <div class="handle">
+                <div class="name">@aladdin</div>
+                <div class="desc">Un mundo ideal 🧞</div>
+              </div>
+            </div>
+            <div class="caption">
+              <div class="title">Aladdin — Opening</div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottomnav" aria-label="Navegación inferior">
+        <div class="navrow">
+          <button class="navbtn active" data-tab="home">
+            <strong>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </strong>Inicio
+          </button>
+          <button class="navbtn" data-tab="personajes">
+            <strong>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </strong>Personajes
+          </button>
+          <button class="navbtn" data-tab="xp" title="Mi nivel">
+            <strong>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+              </svg>
+            </strong>Mi Nivel
+          </button>
         </div>
-        <div class="ptxt">Saint Seiya</div>
-      </button>
-      <button class="pcard" data-filter="sonic" role="listitem" aria-label="Filtrar Sonic">
-        <div class="pimg" style="background:
+      </nav>
+
+      <section class="sheet" id="sheetPersonajes" aria-label="Panel de personajes">
+        <div class="sheethead">
+          <div class="sheettitle">🎭 Personajes <span class="pill">tap para filtrar (demo)</span></div>
+          <button class="close" id="closeSheet" aria-label="Cerrar">✕</button>
+        </div>
+
+        <div class="grid" role="list">
+          <button class="pcard" data-filter="saint-seiya" role="listitem" aria-label="Filtrar Caballeros del Zodíaco">
+            <div class="pimg">
+              <img src="img/round/saint-seiya-150x150.png" alt="Saint Seiya">
+            </div>
+            <div class="ptxt">Saint Seiya</div>
+          </button>
+          <button class="pcard" data-filter="sonic" role="listitem" aria-label="Filtrar Sonic">
+            <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(141,255,122,.50), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(57,215,255,.45), transparent 60%),
             linear-gradient(135deg, rgba(255,213,74,.35), rgba(255,74,163,.20));">
-          <img src="img/round/sonic-150x150.png" alt="Sonic">
-        </div>
-        <div class="ptxt">Sonic</div>
-      </button>
-      <button class="pcard" data-filter="sailor-moon" role="listitem" aria-label="Filtrar Sailor Moon">
-        <div class="pimg" style="background:
+              <img src="img/round/sonic-150x150.png" alt="Sonic">
+            </div>
+            <div class="ptxt">Sonic</div>
+          </button>
+          <button class="pcard" data-filter="sailor-moon" role="listitem" aria-label="Filtrar Sailor Moon">
+            <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(122,77,255,.55), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(255,213,74,.35), transparent 60%),
             linear-gradient(135deg, rgba(57,215,255,.28), rgba(255,74,163,.18));">
-          <img src="img/round/sailor-moon-150x150.png" alt="Sailor Moon">
-        </div>
-        <div class="ptxt">Sailor Moon</div>
-      </button>
-      <button class="pcard" data-filter="jem" role="listitem" aria-label="Filtrar Jem and the Holograms">
-        <div class="pimg">
-          <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
-        </div>
-        <div class="ptxt">Jem</div>
-      </button>
-      <button class="pcard" data-filter="aladdin" role="listitem" aria-label="Filtrar Aladdin">
-        <div class="pimg">
-          <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
-        </div>
-        <div class="ptxt">Aladdin</div>
-      </button>
-      <button class="pcard" data-filter="action-man" role="listitem" aria-label="Filtrar Action Man">
-        <div class="pimg" style="background:
+              <img src="img/round/sailor-moon-150x150.png" alt="Sailor Moon">
+            </div>
+            <div class="ptxt">Sailor Moon</div>
+          </button>
+          <button class="pcard" data-filter="jem" role="listitem" aria-label="Filtrar Jem and the Holograms">
+            <div class="pimg">
+              <img src="img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
+            </div>
+            <div class="ptxt">Jem</div>
+          </button>
+          <button class="pcard" data-filter="aladdin" role="listitem" aria-label="Filtrar Aladdin">
+            <div class="pimg">
+              <img src="img/round/aladdin-150-150px.png" alt="Aladdin">
+            </div>
+            <div class="ptxt">Aladdin</div>
+          </button>
+          <button class="pcard" data-filter="action-man" role="listitem" aria-label="Filtrar Action Man">
+            <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(255,74,163,.55), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(122,77,255,.45), transparent 60%),
             linear-gradient(135deg, rgba(255,213,74,.28), rgba(57,215,255,.18));">
-          <img src="img/round/action-man-150x150.png" alt="Action Man">
-        </div>
-        <div class="ptxt">Action Man</div>
-      </button>
-      <button class="pcard" data-filter="garfield" role="listitem" aria-label="Filtrar Garfield">
-        <div class="pimg" style="background:
+              <img src="img/round/action-man-150x150.png" alt="Action Man">
+            </div>
+            <div class="ptxt">Action Man</div>
+          </button>
+          <button class="pcard" data-filter="garfield" role="listitem" aria-label="Filtrar Garfield">
+            <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(255,213,74,.60), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(57,215,255,.40), transparent 60%),
             linear-gradient(135deg, rgba(141,255,122,.25), rgba(255,74,163,.15));">
-          <img src="img/round/garfield-and-friends-150x150.png" alt="Garfield">
-        </div>
-        <div class="ptxt">Garfield</div>
-      </button>
-      <button class="pcard" data-filter="super-mario" role="listitem" aria-label="Filtrar Super Mario">
-        <div class="pimg" style="background:
+              <img src="img/round/garfield-and-friends-150x150.png" alt="Garfield">
+            </div>
+            <div class="ptxt">Garfield</div>
+          </button>
+          <button class="pcard" data-filter="super-mario" role="listitem" aria-label="Filtrar Super Mario">
+            <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(141,255,122,.58), transparent 60%),
             radial-gradient(60px 40px at 80% 45%, rgba(255,74,163,.42), transparent 60%),
             linear-gradient(135deg, rgba(255,213,74,.28), rgba(57,215,255,.15));">
-          <img src="img/round/super-mario-bros-150x150.png" alt="Super Mario">
+              <img src="img/round/super-mario-bros-150x150.png" alt="Super Mario">
+            </div>
+            <div class="ptxt">Super Mario</div>
+          </button>
+          <button class="pcard" data-filter="phantom" role="listitem" aria-label="Filtrar Phantom 2040">
+            <div class="pimg">
+              <img src="img/round/phantom-2040-150x150.png" alt="Phantom 2040">
+            </div>
+            <div class="ptxt">Phantom 2040</div>
+          </button>
+          <button class="pcard" data-filter="virtua-fighter" role="listitem" aria-label="Filtrar Virtua Fighter">
+            <div class="pimg">
+              <img src="img/round/virtua-fighter-150x150.png" alt="Virtua Fighter">
+            </div>
+            <div class="ptxt">Virtua Fighter</div>
+          </button>
+          <button class="pcard" data-filter="robocop" role="listitem" aria-label="Filtrar Robocop">
+            <div class="pimg">
+              <img src="img/round/robocop-150x150.png" alt="Robocop">
+            </div>
+            <div class="ptxt">Robocop</div>
+          </button>
         </div>
-        <div class="ptxt">Super Mario</div>
-      </button>
-      <button class="pcard" data-filter="phantom" role="listitem" aria-label="Filtrar Phantom 2040">
-        <div class="pimg">
-          <img src="img/round/phantom-2040-150x150.png" alt="Phantom 2040">
+
+        <div style="margin-top:12px;display:flex;gap:10px;">
+          <button class="pill" id="clearFilter" style="flex:1;text-align:center;border-radius:18px;">Ver todo</button>
+          <button class="pill" id="hint" style="flex:1;text-align:center;border-radius:18px;">Idea UX</button>
         </div>
-        <div class="ptxt">Phantom 2040</div>
-      </button>
-      <button class="pcard" data-filter="virtua-fighter" role="listitem" aria-label="Filtrar Virtua Fighter">
-        <div class="pimg">
-          <img src="img/round/virtua-fighter-150x150.png" alt="Virtua Fighter">
+
+        <p
+          style="margin:10px 2px 0;font-family:Nunito,system-ui,sans-serif;font-weight:800;color:var(--muted2);font-size:12px;line-height:1.25;">
+          Este panel reemplaza el “selector de personajes” de escritorio: en mobile se convierte en un filtro rápido +
+          acceso al perfil.
+        </p>
+      </section>
+
+      <!-- Sheet de Nivel XP -->
+      <section class="sheet" id="sheetXP" aria-label="Mi nivel en Cablin">
+        <div class="sheethead">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <p class="xp-titulo">Tu nivel en Cablin</p>
+            <span class="xp-nivel-badge" id="xpNivelBadge">⭐ ESPECTADOR</span>
+          </div>
+          <button class="close" id="closeXP" aria-label="Cerrar">✕</button>
         </div>
-        <div class="ptxt">Virtua Fighter</div>
-      </button>
-      <button class="pcard" data-filter="robocop" role="listitem" aria-label="Filtrar Robocop">
-        <div class="pimg">
-          <img src="img/round/robocop-150x150.png" alt="Robocop">
-        </div>
-        <div class="ptxt">Robocop</div>
-      </button>
-    </div>
 
-    <div style="margin-top:12px;display:flex;gap:10px;">
-      <button class="pill" id="clearFilter" style="flex:1;text-align:center;border-radius:18px;">Ver todo</button>
-      <button class="pill" id="hint" style="flex:1;text-align:center;border-radius:18px;">Idea UX</button>
-    </div>
-
-    <p
-      style="margin:10px 2px 0;font-family:Nunito,system-ui,sans-serif;font-weight:800;color:var(--muted2);font-size:12px;line-height:1.25;">
-      Este panel reemplaza el “selector de personajes” de escritorio: en mobile se convierte en un filtro rápido +
-      acceso al perfil.
-    </p>
-  </section>
-
-  <!-- Sheet de Nivel XP -->
-  <section class="sheet" id="sheetXP" aria-label="Mi nivel en Cablin">
-    <div class="sheethead">
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <p class="xp-titulo">Tu nivel en Cablin</p>
-        <span class="xp-nivel-badge" id="xpNivelBadge">⭐ ESPECTADOR</span>
-      </div>
-      <button class="close" id="closeXP" aria-label="Cerrar">✕</button>
-    </div>
-
-    <!-- Barra de progreso estilo Mostaza -->
-    <div class="xp-track-wrap">
-      <div class="xp-labels">
-        <span id="xpLabelA">Espectador</span>
-        <span id="xpLabelB">Fan</span>
-        <span id="xpLabelC">Cablinero</span>
-      </div>
-      <div class="xp-track">
-        <div class="xp-track-fill" id="xpTrackFill" style="width:0%">
-          <!-- Logo Cablin deslizándose -->
-          <div class="xp-mascot" id="xpMascot">
-            <img src="img/logos/cablin-logo.png" alt="">
+        <!-- Barra de progreso estilo Mostaza -->
+        <div class="xp-track-wrap">
+          <div class="xp-labels">
+            <span id="xpLabelA">Espectador</span>
+            <span id="xpLabelB">Fan</span>
+            <span id="xpLabelC">Cablinero</span>
+          </div>
+          <div class="xp-track">
+            <div class="xp-track-fill" id="xpTrackFill" style="width:0%">
+              <!-- Logo Cablin deslizándose -->
+              <div class="xp-mascot" id="xpMascot">
+                <img src="img/logos/cablin-logo.png" alt="">
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Hitos desbloqueables -->
-    <div class="xp-milestones">
-      <div class="xp-milestone" id="xpM1">
-        <span class="xp-milestone-icon">📺</span>
-        <span class="xp-milestone-label">Espectador</span>
-        <span class="xp-milestone-pts">0 pts</span>
-      </div>
-      <div class="xp-milestone" id="xpM2">
-        <span class="xp-milestone-icon">🎭</span>
-        <span class="xp-milestone-label">Fan</span>
-        <span class="xp-milestone-pts">50 pts</span>
-      </div>
-      <div class="xp-milestone" id="xpM3">
-        <span class="xp-milestone-icon">🏆</span>
-        <span class="xp-milestone-label">Cablinero</span>
-        <span class="xp-milestone-pts">150 pts</span>
-      </div>
-      <div class="xp-milestone" id="xpM4">
-        <span class="xp-milestone-icon">📼</span>
-        <span class="xp-milestone-label">Leyenda</span>
-        <span class="xp-milestone-pts">300 pts</span>
-      </div>
-    </div>
+        <!-- Hitos desbloqueables -->
+        <div class="xp-milestones">
+          <div class="xp-milestone" id="xpM1">
+            <span class="xp-milestone-icon">📺</span>
+            <span class="xp-milestone-label">Espectador</span>
+            <span class="xp-milestone-pts">0 pts</span>
+          </div>
+          <div class="xp-milestone" id="xpM2">
+            <span class="xp-milestone-icon">🎭</span>
+            <span class="xp-milestone-label">Fan</span>
+            <span class="xp-milestone-pts">50 pts</span>
+          </div>
+          <div class="xp-milestone" id="xpM3">
+            <span class="xp-milestone-icon">🏆</span>
+            <span class="xp-milestone-label">Cablinero</span>
+            <span class="xp-milestone-pts">150 pts</span>
+          </div>
+          <div class="xp-milestone" id="xpM4">
+            <span class="xp-milestone-icon">📼</span>
+            <span class="xp-milestone-label">Leyenda</span>
+            <span class="xp-milestone-pts">300 pts</span>
+          </div>
+        </div>
 
-    <!-- Cómo ganar XP -->
-    <div class="xp-acciones">
-      <div class="xp-accion-row">
-        <div class="xp-accion-info"><span class="xp-accion-ico">❤️</span><span class="xp-accion-txt">Dar like a un
-            clip</span></div>
-        <span class="xp-accion-pts">+10 pts</span>
-      </div>
-      <div class="xp-accion-row">
-        <div class="xp-accion-info"><span class="xp-accion-ico">📺</span><span class="xp-accion-txt">Ver un clip
-            completo</span></div>
-        <span class="xp-accion-pts">+5 pts</span>
-      </div>
-      <div class="xp-accion-row">
-        <div class="xp-accion-info"><span class="xp-accion-ico">↗️</span><span class="xp-accion-txt">Compartir un
-            clip</span></div>
-        <span class="xp-accion-pts">+20 pts</span>
-      </div>
-      <div class="xp-accion-row">
-        <div class="xp-accion-info"><span class="xp-accion-ico">📡</span><span class="xp-accion-txt">Ver todos los
-            bloques</span></div>
-        <span class="xp-accion-pts">+30 pts</span>
-      </div>
-    </div>
-  </section>
+        <!-- Cómo ganar XP -->
+        <div class="xp-acciones">
+          <div class="xp-accion-row">
+            <div class="xp-accion-info"><span class="xp-accion-ico">❤️</span><span class="xp-accion-txt">Dar like a un
+                clip</span></div>
+            <span class="xp-accion-pts">+10 pts</span>
+          </div>
+          <div class="xp-accion-row">
+            <div class="xp-accion-info"><span class="xp-accion-ico">📺</span><span class="xp-accion-txt">Ver un clip
+                completo</span></div>
+            <span class="xp-accion-pts">+5 pts</span>
+          </div>
+          <div class="xp-accion-row">
+            <div class="xp-accion-info"><span class="xp-accion-ico">↗️</span><span class="xp-accion-txt">Compartir un
+                clip</span></div>
+            <span class="xp-accion-pts">+20 pts</span>
+          </div>
+          <div class="xp-accion-row">
+            <div class="xp-accion-info"><span class="xp-accion-ico">📡</span><span class="xp-accion-txt">Ver todos los
+                bloques</span></div>
+            <span class="xp-accion-pts">+30 pts</span>
+          </div>
+        </div>
+      </section>
 
-  <section class="sheet" id="sheetRanking" aria-label="Ranking semanal de canales">
-    <div class="sheethead">
-      <div class="ranking-headline">
-        <span class="ranking-kicker">Top 10 canales</span>
-        <div class="ranking-title">Ranking semanal</div>
-        <div class="ranking-subtitle">Periodo relevado: <strong id="rankingPeriod">-</strong></div>
-      </div>
-      <button class="close" id="closeRanking" aria-label="Cerrar">✕</button>
-    </div>
+      <section class="sheet" id="sheetRanking" aria-label="Ranking semanal de canales">
+        <div class="sheethead">
+          <div class="ranking-headline">
+            <span class="ranking-kicker">Top 10 canales</span>
+            <div class="ranking-title">Ranking semanal</div>
+            <div class="ranking-subtitle">Periodo relevado: <strong id="rankingPeriod">-</strong></div>
+          </div>
+          <button class="close" id="closeRanking" aria-label="Cerrar">✕</button>
+        </div>
 
-    <div class="ranking-table" id="rankingBody" role="list"></div>
-    <p class="ranking-footnote">Datos reales del proyecto: se actualiza con cada clip visto en este demo y se guarda
-      en tu navegador (localStorage).</p>
-  </section>
+        <div class="ranking-table" id="rankingBody" role="list"></div>
+        <p class="ranking-footnote">Datos reales del proyecto: se actualiza con cada clip visto en este demo y se guarda
+          en tu navegador (localStorage).</p>
+      </section>
 
-  <div class="toast" id="toast" aria-live="polite"><span></span></div>
+      <div class="toast" id="toast" aria-live="polite"><span></span></div>
   </div>
 
   <script>
