@@ -66,16 +66,127 @@
       right: 0;
       z-index: 50;
       height: calc(var(--topbar-h) + var(--safe-top));
-      padding: calc(4px + var(--safe-top)) 10px 4px;
+      padding: calc(4px + var(--safe-top)) 12px 4px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: nowrap;
-      gap: 8px;
+      gap: 10px;
       pointer-events: none;
-      background: rgba(8, 4, 20, .80);
+      background: rgba(8, 4, 20, .88);
       backdrop-filter: blur(16px) saturate(1.4);
       border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .topbar>* {
+      pointer-events: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 0 0 auto;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      background:
+        radial-gradient(16px 16px at 30% 30%, rgba(255, 255, 255, .25), transparent 60%),
+        linear-gradient(135deg, var(--yellow), var(--pink));
+      box-shadow: 0 8px 20px rgba(255, 74, 163, .18);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #220a2c;
+      letter-spacing: .5px;
+    }
+
+    .mode-label {
+      margin-left: 14px;
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .12);
+      color: var(--white);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .classic-link {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 9px;
+      border-radius: 999px;
+      border: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, .72);
+      text-decoration: none;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      transition: color .15s ease, background .15s ease;
+    }
+
+    .classic-link:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, .07);
+    }
+
+    .classic-link:active {
+      transform: scale(.97);
+    }
+
+    .classic-link svg {
+      display: none;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      flex: 0 0 auto;
+      gap: 6px;
+    }
+
+    .iconbtn {
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
+      border: 0;
+      background: rgba(255, 255, 255, .06);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      flex: 0 0 32px;
+      box-shadow: none;
+      color: rgba(255, 255, 255, .88);
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease;
+    }
+
+    .iconbtn:hover {
+      background: rgba(255, 255, 255, .11);
+      color: var(--white);
+    }
+
+    .iconbtn:active {
+      transform: scale(.96);
+    }
+
+    .iconbtn svg {
+      display: block;
     }
 
     .topbar>* {
@@ -167,6 +278,29 @@
 
     .iconbtn svg {
       display: block
+    }
+
+    /* Modo Canal: piezas de continuidad */
+    .bumper-clip {
+      background: #000;
+    }
+
+    .bumper-stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .bumper-video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #000;
     }
 
     .feed {
@@ -1430,6 +1564,17 @@
         </div>
       </section>
 
+      <!-- Continuidad Cablín: bumper entre programas -->
+      <section class="clip bumper-clip" data-theme="cablin" data-id="b1" data-canal="bumpers" data-type="bumper">
+
+        <div class="bumper-stage">
+          <video class="bumper-video" src="../Videos/cablin-bumper02.mp4" playsinline preload="metadata"
+            aria-label="Bumper de continuidad de Cablín">
+          </video>
+        </div>
+
+      </section>
+
       <section class="clip" data-theme="retro" data-id="c3" data-canal="anime" data-type="programa">
         <div class="video series-stage" id="sailorMoonStage" aria-label="Serie Sailor Moon">
           <video class="series-video" id="sailorMoonVideo" preload="metadata"></video>
@@ -1520,7 +1665,7 @@
         </div>
       </section>
 
-      <section class="clip" data-theme="cablin" data-id="c4" data-canal="accion">
+      <section class="clip" data-theme="cablin" data-id="c4" data-canal="accion" data-type="programa">
         <div class="video" role="img" aria-label="Clip demo 4"></div>
         <div class="crt"></div>
         <div class="noise"></div>
@@ -1590,7 +1735,7 @@
         </div>
       </section>
 
-      <section class="clip" data-theme="comic" data-id="c5" data-canal="humor">
+      <section class="clip" data-theme="comic" data-id="c5" data-canal="humor" data-type="programa">
         <div class="video" role="img" aria-label="Clip demo 5"></div>
         <div class="crt"></div>
         <div class="noise"></div>
@@ -1661,7 +1806,7 @@
         </div>
       </section>
 
-      <section class="clip" data-theme="retro" data-id="c6" data-canal="bumpers">
+      <section class="clip" data-theme="retro" data-id="c6" data-canal="humor" data-type="programa">
         <div class="video" role="img" aria-label="Clip demo 6"></div>
         <div class="crt"></div>
         <div class="noise"></div>
@@ -2201,6 +2346,51 @@
     document.querySelectorAll('.actbtn:not([data-action="like"]):not([data-action="comment"])').forEach(btn => {
       const item = btn.closest('.act');
       if (item) item.remove();
+    });
+
+    // Modo Canal: reproducción de piezas de continuidad.
+    const bumperClips = document.querySelectorAll('.clip[data-type="bumper"]');
+
+    const bumperObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target.querySelector('.bumper-video');
+        if (!video) return;
+
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          video.currentTime = 0;
+
+          video.play().catch(() => {
+            // El navegador puede bloquear autoplay con audio.
+            video.muted = true;
+            video.play().catch(() => { });
+          });
+        } else {
+          video.pause();
+        }
+      });
+    }, {
+      threshold: [0, 0.6, 1]
+    });
+
+    bumperClips.forEach(clip => {
+      bumperObserver.observe(clip);
+    });
+
+    // Al finalizar un bumper, continuar automáticamente con el siguiente contenido.
+    bumperClips.forEach(clip => {
+      const video = clip.querySelector('.bumper-video');
+      if (!video) return;
+
+      video.addEventListener('ended', () => {
+        const nextClip = clip.nextElementSibling;
+
+        if (nextClip && nextClip.classList.contains('clip')) {
+          feed.scrollTo({
+            top: nextClip.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
     });
 
     // Serie piloto Caballeros del Zodiaco: navegación horizontal (2 clips).
