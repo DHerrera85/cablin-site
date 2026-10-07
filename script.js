@@ -1,15 +1,4 @@
-// ------------------ CARRUSEL BÁSICO ------------------
-let currentIndex = 0;
-const track = document.querySelector('.carousel-track');
-const items = document.querySelectorAll('.carousel-track img');
 
-function updateCarousel() {
-  if(!items.length || !track) return;
-  const offset = items[0].offsetWidth + 20; // imagen + margen
-  track.scrollTo({ left: currentIndex * offset, behavior: 'smooth' });
-}
-function nextSlide(){ if (currentIndex < items.length - 1){ currentIndex++; updateCarousel(); } }
-function prevSlide(){ if (currentIndex > 0){ currentIndex--; updateCarousel(); } }
 
 // ------------------ SELECTOR DE PERSONAJES CON TOGGLE ------------------
 let activeSide = "right";
