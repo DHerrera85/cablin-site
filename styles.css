@@ -1,14 +1,10 @@
 /* ------------------ GLOBAL LAYOUT ------------------ */
-:root {
-  --char-vert-width: 380px;
-  /* desktop por defecto */
-}
 
 body {
   margin: 0;
-  font-family: 'Fredoka', sans-serif;
-  background: #fffaf2;
-  color: #333;
+  font-family: "Nunito", system-ui, sans-serif;
+  background: #050311;
+  color: #fff;
 }
 
 /* ------------------ HEADER / MODOS ------------------ */
@@ -136,33 +132,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* ------------------ BANNER SUPERIOR ------------------ */
-.banner-top {
-  background: #ff3399;
-  color: #fff;
-  font-weight: bold;
-  padding: 10px 0;
-  overflow: hidden;
-  position: relative;
-}
-
-.banner-top p {
-  white-space: nowrap;
-  animation: scroll-banner 15s linear infinite;
-  font-size: 16px;
-  padding-left: 100%;
-}
-
-@keyframes scroll-banner {
-  from {
-    transform: translateX(0)
-  }
-
-  to {
-    transform: translateX(-100%)
-  }
-}
-
 /* ------------------ ARCHIVO CABLÍN ------------------ */
 .archive-section {
   padding: 64px 24px;
@@ -267,68 +236,13 @@ body {
   }
 }
 
-/* ------------------ CATEGORÍAS ------------------ */
-.categories {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 30px 10px;
-  background: #ffe3f3;
-}
-
-.category-card {
-  background: #fff;
-  border: 3px solid #ff3399;
-  border-radius: 15px;
-  width: 250px;
-  margin: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, .1);
-}
-
-/* ------------------ DESTACADOS ------------------ */
-.featured {
-  background: #d6e3ff;
-  padding: 30px 20px;
-  background-image: url('https://www.transparenttextures.com/patterns/geometry.png');
-  background-repeat: repeat;
-  background-size: contain;
-}
-
-.featured-title {
-  text-align: center;
-  color: #663399;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.featured-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.featured-item {
-  background: #fff;
-  border: 2px dashed #663399;
-  border-radius: 10px;
-  padding: 15px 25px;
-  width: 200px;
-  text-align: center;
-  position: relative;
-}
-
 /* ------------------ EXPLORAR POR PERSONAJE ------------------ */
 .character-explorer {
   padding: 64px 24px 80px;
   background:
-    radial-gradient(
-      700px 360px at 100% 30%,
+    radial-gradient(700px 360px at 100% 30%,
       rgba(122, 77, 255, .14),
-      transparent 65%
-    ),
+      transparent 65%),
     #080418;
   color: #fff;
 }
@@ -378,11 +292,9 @@ body {
   border: 1px solid rgba(255, 255, 255, .10);
   border-radius: 28px;
   background:
-    radial-gradient(
-      280px 280px at 50% 70%,
+    radial-gradient(280px 280px at 50% 70%,
       rgba(255, 74, 163, .18),
-      transparent 70%
-    ),
+      transparent 70%),
     rgba(255, 255, 255, .04);
 }
 
@@ -478,4 +390,20 @@ body {
   .character-options {
     gap: 10px;
   }
+}
+
+/* ------------------ FOOTER ------------------ */
+.footer {
+  padding: 28px 24px;
+  background: #050311;
+  border-top: 1px solid rgba(255, 255, 255, .08);
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+  font-family: "Nunito", system-ui, sans-serif;
+  color: rgba(255, 255, 255, .48);
+  font-size: 12px;
+  font-weight: 700;
 }
