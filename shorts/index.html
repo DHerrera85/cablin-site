@@ -281,6 +281,7 @@
     }
 
     /* Modo Canal: piezas de continuidad */
+    /* BUMPER A PANTALLA COMPLETA */
     .bumper-clip {
       background: #000;
     }
@@ -288,19 +289,22 @@
     .bumper-stage {
       position: absolute;
       inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
       background: #000;
     }
 
     .bumper-video {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
+      max-height: none;
+      aspect-ratio: auto;
       display: block;
-      object-fit: contain;
-      background: #000;
+      object-fit: cover;
+      object-position: center center;
     }
 
     .feed {
