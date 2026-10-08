@@ -58,3 +58,4 @@ characterThumbs.forEach((thumb) => {
     }).catch(() => { });
   });
 });
+
