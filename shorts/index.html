@@ -1317,6 +1317,166 @@
       color: rgba(255, 255, 255, .62);
       line-height: 1.25;
     }
+
+    /* =========================================
+   CABLÍN SHORTS 2.0 - ESCRITORIO
+   ========================================= */
+
+    .desktop-sidebar {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+
+      .desktop-sidebar {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 240px;
+        padding: 28px 20px;
+        background: #0c081c;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 70;
+      }
+
+      .desktop-sidebar-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-bottom: 45px;
+        color: #ffd54a;
+        font-size: 25px;
+      }
+
+      .desktop-sidebar-brand small {
+        font-size: 11px;
+        letter-spacing: 3px;
+        color: #39d7ff;
+      }
+
+      .desktop-sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .desktop-sidebar-link {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 12px;
+        border-radius: 12px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 17px;
+        transition: background 0.2s ease;
+      }
+
+      .desktop-sidebar-link:hover,
+      .desktop-sidebar-link.active {
+        background: rgba(255, 213, 74, 0.12);
+        color: #ffd54a;
+      }
+
+      .desktop-sidebar-footer {
+        margin-top: auto;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* Ocultar navegación inferior en escritorio */
+      .bottomnav {
+        display: none;
+      }
+
+      /* Reservar espacio para el menú lateral */
+      .feed {
+        width: calc(100% - 240px);
+        max-width: none;
+        margin-left: 240px;
+        margin-right: 0;
+        padding-bottom: 0;
+      }
+
+      /* Centrar los contenidos verticales */
+      .clip {
+        width: min(100%, 430px);
+        margin-left: auto;
+        margin-right: auto;
+        height: calc(100svh - var(--topbar-h) - var(--strip-h) - var(--safe-top));
+      }
+
+      /* Mantener la barra superior alineada con el reproductor */
+      .topbar {
+        left: 240px;
+        right: 0;
+        width: calc(100% - 240px);
+        max-width: none;
+        padding-left: max(12px, calc((100% - 430px) / 2));
+        padding-right: max(12px, calc((100% - 430px) / 2));
+      }
+
+      /* =========================================
+   CONTROLES LATERALES - ESCRITORIO
+   ========================================= */
+
+      .clip {
+        overflow: visible;
+      }
+
+      .clip .actions {
+        position: absolute;
+        top: 50%;
+        bottom: auto;
+        left: calc(100% + 16px);
+        right: auto;
+
+        transform: translateY(-50%);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+
+        width: 72px;
+        z-index: 20;
+      }
+
+      .clip .actions .act {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .clip .actions .actbtn {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+      }
+
+      .clip .actions .count {
+        text-align: center;
+        font-size: 13px;
+      }
+
+      /* Controles laterales con fondo uniforme */
+      .clip .actions .actbtn {
+        background: #24212c;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: none;
+      }
+
+      .clip .actions .count {
+        color: #f5f5f5;
+        font-weight: 600;
+        text-shadow: none;
+      }
+
+    }
   </style>
 </head>
 
@@ -1384,6 +1544,33 @@
 
       </div>
     </div>
+
+    <!-- NAVEGACIÓN LATERAL - SOLO ESCRITORIO -->
+    <aside class="desktop-sidebar" aria-label="Navegación de escritorio">
+      <div class="desktop-sidebar-brand">
+        <span>📺</span>
+        <strong>CABLÍN</strong>
+        <small>SHORTS</small>
+      </div>
+
+      <nav class="desktop-sidebar-nav">
+        <a href="../index.html" class="desktop-sidebar-link">
+          <span>🏠</span> Inicio
+        </a>
+
+        <a href="#feed" class="desktop-sidebar-link active">
+          <span>▶️</span> Shorts
+        </a>
+
+        <a href="#feed" class="desktop-sidebar-link">
+          <span>🧭</span> Explorar
+        </a>
+      </nav>
+
+      <div class="desktop-sidebar-footer">
+        <span>La nostalgia sigue viva ✨</span>
+      </div>
+    </aside>
 
     <main class="feed" id="feed" aria-label="Feed de shorts">
       <section class="clip" data-theme="cablin" data-id="c1" data-canal="anime" data-type="programa">
