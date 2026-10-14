@@ -392,15 +392,6 @@
       touch-action: none;
     }
 
-    .short-progress-time {
-      flex-shrink: 0;
-      color: #ffffff;
-      font-size: 11px;
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-    }
-
     .short-progress-slider::-webkit-slider-thumb {
       opacity: 0;
     }
@@ -1553,23 +1544,24 @@
 
     }
 
-    /* Botón de sonido de los Shorts */
-    .short-mute-btn {
-      position: absolute;
-      top: 64px;
-      left: 14px;
-      z-index: 35;
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, .2);
-      background: rgba(0, 0, 0, .5);
-      color: #fff;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-    }
+/* Botón de sonido de los Shorts */
+.short-mute-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 35;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, .2);
+  background: rgba(0, 0, 0, .5);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
 
     .short-mute-btn:hover {
       background: rgba(0, 0, 0, .75);
