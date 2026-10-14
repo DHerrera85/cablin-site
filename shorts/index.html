@@ -359,6 +359,58 @@
       background: #000;
     }
 
+    /* Cablín Shorts 2.1 — Barra de progreso */
+    .short-progress {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 8px;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+    }
+
+    .short-progress-time {
+      display: none;
+    }
+
+    .short-progress:hover,
+    .short-progress:focus-within {
+      opacity: 1;
+    }
+
+    .short-progress-slider {
+      flex: 1;
+      min-width: 0;
+      height: 3px;
+      margin: 0;
+      cursor: pointer;
+      accent-color: #ffffff;
+      touch-action: none;
+    }
+
+    .short-progress-time {
+      flex-shrink: 0;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .short-progress-slider::-webkit-slider-thumb {
+      opacity: 0;
+    }
+
+    .short-progress-slider:hover::-webkit-slider-thumb,
+    .short-progress-slider:focus-visible::-webkit-slider-thumb,
+    .short-progress-slider:active::-webkit-slider-thumb {
+      opacity: 1;
+    }
+
     .series-stage .series-ui {
       position: absolute;
       inset: 0;
@@ -1419,6 +1471,24 @@
         padding-right: max(12px, calc((100% - 430px) / 2));
       }
 
+      /* CABLÍN SHORTS 2.1 — Navegación lateral de escritorio */
+
+      /* Evitar duplicar el logo, Canal y Explorar */
+      .topbar .brand {
+        display: none;
+      }
+
+      /* Mantener las herramientas en una barra compacta */
+      .topbar {
+        justify-content: flex-end;
+        padding-left: 16px;
+        padding-right: 24px;
+      }
+
+      .topbar .top-actions {
+        margin-left: auto;
+      }
+
       /* =========================================
    CONTROLES LATERALES - ESCRITORIO
    ========================================= */
@@ -1503,6 +1573,34 @@
 
     .short-mute-btn:hover {
       background: rgba(0, 0, 0, .75);
+    }
+
+    /* CABLÍN SHORTS 2.1 — Controles de episodios minimalistas */
+
+    @media (min-width: 1024px) {
+      .series-stage .series-btn {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .series-stage:hover .series-btn,
+      .series-stage:focus-within .series-btn {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .series-stage .series-btn {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    /* CABLÍN SHORTS 2.1 — Contador discreto */
+    .series-counter {
+      font-size: 11px;
+      font-weight: 600;
+      opacity: 0.75;
     }
   </style>
 </head>
@@ -2560,6 +2658,75 @@
     });
 
     actualizarBotonesSonido();
+
+
+    /* Cablín Shorts 2.1 — Progreso de reproducción */
+    document.querySelectorAll('.clip video').forEach(video => {
+      const contenedor = video.parentElement;
+
+      const progreso = document.createElement('div');
+      progreso.className = 'short-progress';
+
+      const slider = document.createElement('input');
+      slider.type = 'range';
+      slider.className = 'short-progress-slider';
+      slider.min = '0';
+      slider.max = '100';
+      slider.step = '0.1';
+      slider.value = '0';
+      slider.setAttribute('aria-label', 'Progreso del video');
+
+      const tiempo = document.createElement('span');
+      tiempo.className = 'short-progress-time';
+      tiempo.textContent = '0:00 / 0:00';
+
+      progreso.append(slider, tiempo);
+      contenedor.appendChild(progreso);
+
+      function formatearTiempo(segundos) {
+        if (!Number.isFinite(segundos)) return '0:00';
+
+        const total = Math.floor(segundos);
+        const minutos = Math.floor(total / 60);
+        const resto = String(total % 60).padStart(2, '0');
+
+        return `${minutos}:${resto}`;
+      }
+
+      function actualizarProgreso() {
+        const duracion = video.duration;
+        const actual = video.currentTime;
+
+        if (Number.isFinite(duracion) && duracion > 0) {
+          slider.value = String((actual / duracion) * 100);
+          tiempo.textContent =
+            `${formatearTiempo(actual)} / ${formatearTiempo(duracion)}`;
+        } else {
+          slider.value = '0';
+          tiempo.textContent = '0:00 / 0:00';
+        }
+      }
+
+      video.addEventListener('timeupdate', actualizarProgreso);
+      video.addEventListener('loadedmetadata', actualizarProgreso);
+      video.addEventListener('durationchange', actualizarProgreso);
+      video.addEventListener('emptied', actualizarProgreso);
+
+      slider.addEventListener('input', () => {
+        const duracion = video.duration;
+
+        if (Number.isFinite(duracion) && duracion > 0) {
+          video.currentTime = (Number(slider.value) / 100) * duracion;
+          actualizarProgreso();
+        }
+      });
+
+      // Evitar que el control active gestos de navegación de episodios.
+      ['pointerdown', 'pointerup', 'click', 'touchstart', 'touchend'].forEach(tipo => {
+        progreso.addEventListener(tipo, event => event.stopPropagation());
+      });
+    });
+
 
     const feed = document.getElementById('feed');
     const clips = Array.from(document.querySelectorAll('.clip'));
