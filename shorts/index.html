@@ -1588,6 +1588,33 @@
       }
     }
 
+    /* CABLÍN SHORTS 2.1 — Distribución inferior móvil */
+    @media (max-width: 759px) {
+      .series-stage .series-nav {
+        position: relative;
+        display: grid;
+        grid-template-columns: 36px 1fr 36px;
+        align-items: center;
+        width: 100%;
+      }
+
+      .series-stage .series-counter {
+        grid-column: 2;
+        justify-self: center;
+        min-width: 54px;
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+
+      .series-stage .series-btn:first-child {
+        grid-column: 1;
+      }
+
+      .series-stage .series-btn:last-child {
+        grid-column: 3;
+      }
+    }
+
     /* CABLÍN SHORTS 2.1 — Contador discreto */
     .series-counter {
       font-size: 11px;
@@ -1631,6 +1658,14 @@
     .mobile-more-menu[hidden] {
       display: none;
 
+      /* XP visible como indicador, no como botón en móvil */
+      .topbar #btnXP {
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+
+    @media (max-width: 759px) {
       .topbar #btnBuscar {
         order: 1;
       }
@@ -1642,7 +1677,6 @@
       .topbar #btnMobileMore {
         order: 3;
       }
-
     }
 
     .mobile-more-menu {
@@ -1684,6 +1718,11 @@
       .mobile-more-menu {
         display: none;
       }
+    }
+
+    /* CABLÍN SHORTS 2.1 — Ocultar interacciones sociales provisoriamente */
+    .clip .actions {
+      display: none;
     }
   </style>
 </head>
@@ -3731,7 +3770,22 @@
     const sheetXP = document.getElementById('sheetXP');
     function openXP() { sheetXP.classList.add('open'); }
     function closeXP() { sheetXP.classList.remove('open'); }
-    document.getElementById('btnXP').addEventListener('click', openXP);
+    const btnXP = document.getElementById('btnXP');
+
+    function actualizarInteraccionXP() {
+      const esMovil = window.matchMedia('(max-width: 759px)').matches;
+
+      btnXP.disabled = esMovil;
+      btnXP.setAttribute('aria-label',
+        esMovil ? 'Puntos acumulados' : 'Ver mi nivel'
+      );
+      btnXP.title = esMovil ? 'Puntos acumulados' : 'Mi nivel';
+    }
+
+    btnXP.addEventListener('click', openXP);
+    actualizarInteraccionXP();
+
+    window.addEventListener('resize', actualizarInteraccionXP);
     document.getElementById('closeXP').addEventListener('click', closeXP);
 
     // Sheet Ranking
