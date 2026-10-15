@@ -1544,24 +1544,24 @@
 
     }
 
-/* Botón de sonido de los Shorts */
-.short-mute-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 35;
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  padding: 6px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, .2);
-  background: rgba(0, 0, 0, .5);
-  color: #fff;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-}
+    /* Botón de sonido de los Shorts */
+    .short-mute-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 35;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      padding: 6px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .2);
+      background: rgba(0, 0, 0, .5);
+      color: #fff;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
 
     .short-mute-btn:hover {
       background: rgba(0, 0, 0, .75);
@@ -1594,6 +1594,97 @@
       font-weight: 600;
       opacity: 0.75;
     }
+
+    /* CABLÍN SHORTS 2.1 — Encabezado móvil compacto */
+
+    .mobile-more-btn {
+      display: none;
+    }
+
+    @media (max-width: 759px) {
+
+      .topbar .classic-link,
+      .topbar #btnPersonajes,
+      .topbar #btnRanking {
+        display: none;
+      }
+
+      .topbar .mode-label {
+        margin-left: 0;
+      }
+
+      .topbar .mobile-more-btn {
+        display: grid;
+      }
+
+      .topbar {
+        gap: 6px;
+      }
+
+      .topbar .brand,
+      .topbar .top-actions {
+        gap: 6px;
+      }
+    }
+
+    /* CABLÍN SHORTS 2.1 — Menú secundario móvil */
+    .mobile-more-menu[hidden] {
+      display: none;
+
+      .topbar #btnBuscar {
+        order: 1;
+      }
+
+      .topbar #btnXP {
+        order: 2;
+      }
+
+      .topbar #btnMobileMore {
+        order: 3;
+      }
+
+    }
+
+    .mobile-more-menu {
+      position: fixed;
+      top: calc(var(--topbar-h) + var(--safe-top) + 4px);
+      right: 8px;
+      z-index: 80;
+      width: min(240px, calc(100vw - 16px));
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 14px;
+      background: #171024;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .4);
+    }
+
+    .mobile-more-menu a,
+    .mobile-more-menu button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: white;
+      font: inherit;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .mobile-more-menu a:hover,
+    .mobile-more-menu button:hover,
+    .mobile-more-menu a:focus-visible,
+    .mobile-more-menu button:focus-visible {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    @media (min-width: 760px) {
+      .mobile-more-menu {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -1623,6 +1714,17 @@
       </div>
 
       <div class="top-actions">
+
+        <!-- Cablín Shorts 2.1 — Menú secundario móvil -->
+        <button class="iconbtn mobile-more-btn" id="btnMobileMore" type="button" aria-label="Más opciones"
+          aria-expanded="false" aria-controls="mobileMoreMenu" title="Más opciones">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="5" cy="12" r="1"></circle>
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="19" cy="12" r="1"></circle>
+          </svg>
+        </button>
 
         <button class="iconbtn" id="btnPersonajes" title="Personajes">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1660,6 +1762,11 @@
         </button>
 
       </div>
+    </div>
+
+    <div class="mobile-more-menu" id="mobileMoreMenu" hidden>
+      <a href="../index.html">Explorar Cablín clásico</a>
+      <button type="button" id="mobileRanking">Ranking semanal</button>
     </div>
 
     <!-- NAVEGACIÓN LATERAL - SOLO ESCRITORIO -->
@@ -2583,6 +2690,42 @@
     document.getElementById('btnPersonajes').addEventListener('click', openSheet);
     document.getElementById('btnBuscar').addEventListener('click', () => toast('Buscar: modal / overlay (demo)'));
     document.getElementById('btnRanking').addEventListener('click', openRanking);
+
+    /* CABLÍN SHORTS 2.1 — Menú secundario móvil */
+    const btnMobileMore = document.getElementById('btnMobileMore');
+    const mobileMoreMenu = document.getElementById('mobileMoreMenu');
+    const mobileRanking = document.getElementById('mobileRanking');
+
+    function cerrarMobileMore() {
+      mobileMoreMenu.hidden = true;
+      btnMobileMore.setAttribute('aria-expanded', 'false');
+    }
+
+    btnMobileMore.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const abrir = mobileMoreMenu.hidden;
+      mobileMoreMenu.hidden = !abrir;
+      btnMobileMore.setAttribute('aria-expanded', String(abrir));
+    });
+
+    mobileRanking.addEventListener('click', () => {
+      cerrarMobileMore();
+      document.getElementById('btnRanking').click();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!mobileMoreMenu.contains(event.target) &&
+        !btnMobileMore.contains(event.target)) {
+        cerrarMobileMore();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !mobileMoreMenu.hidden) {
+        cerrarMobileMore();
+        btnMobileMore.focus();
+      }
+    });
 
     const sheet = document.getElementById('sheetPersonajes');
 
