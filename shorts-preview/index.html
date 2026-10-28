@@ -1,0 +1,3901 @@
+﻿<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Cablin ÔÇö Demo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0620;
+      --pink: #ff4aa3;
+      --yellow: #ffd54a;
+      --cyan: #39d7ff;
+      --violet: #7a4dff;
+      --lime: #8dff7a;
+      --white: #ffffff;
+      --muted: rgba(255, 255, 255, .72);
+      --muted2: rgba(255, 255, 255, .55);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bot: env(safe-area-inset-bottom, 0px);
+      --topbar-h: 43px;
+      --bottomnav-h: 86px;
+      --strip-h: 0px;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      font-family: "Fredoka", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(1200px 520px at 20% -10%, rgba(255, 74, 163, .22), transparent 60%),
+        radial-gradient(1000px 520px at 110% 10%, rgba(57, 215, 255, .14), transparent 60%),
+        radial-gradient(900px 600px at 50% 120%, rgba(122, 77, 255, .22), transparent 65%),
+        linear-gradient(180deg, #050311, var(--bg));
+      overflow: hidden;
+    }
+
+    .app {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      height: calc(var(--topbar-h) + var(--safe-top));
+      padding: calc(4px + var(--safe-top)) 12px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      gap: 10px;
+      pointer-events: none;
+      background: rgba(8, 4, 20, .88);
+      backdrop-filter: blur(16px) saturate(1.4);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .topbar>* {
+      pointer-events: auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 0 0 auto;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      background:
+        radial-gradient(16px 16px at 30% 30%, rgba(255, 255, 255, .25), transparent 60%),
+        linear-gradient(135deg, var(--yellow), var(--pink));
+      box-shadow: 0 8px 20px rgba(255, 74, 163, .18);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #220a2c;
+      letter-spacing: .5px;
+    }
+
+    .mode-label {
+      margin-left: 14px;
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .12);
+      color: var(--white);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .classic-link {
+      display: inline-flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 9px;
+      border-radius: 999px;
+      border: 0;
+      background: transparent;
+      color: rgba(255, 255, 255, .72);
+      text-decoration: none;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      transition: color .15s ease, background .15s ease;
+    }
+
+    .classic-link:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, .07);
+    }
+
+    .classic-link:active {
+      transform: scale(.97);
+    }
+
+    .classic-link svg {
+      display: none;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      flex: 0 0 auto;
+      gap: 6px;
+    }
+
+    .iconbtn {
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
+      border: 0;
+      background: rgba(255, 255, 255, .06);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      flex: 0 0 32px;
+      box-shadow: none;
+      color: rgba(255, 255, 255, .88);
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease;
+    }
+
+    .iconbtn:hover {
+      background: rgba(255, 255, 255, .11);
+      color: var(--white);
+    }
+
+    .iconbtn:active {
+      transform: scale(.96);
+    }
+
+    .iconbtn svg {
+      display: block;
+    }
+
+    .topbar>* {
+      pointer-events: auto
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      min-width: 0;
+      flex: 0 0 auto
+    }
+
+    .classic-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .18);
+      color: var(--white);
+      text-decoration: none;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      backdrop-filter: blur(10px);
+      transition: background .15s ease, transform .15s ease;
+    }
+
+    .classic-link:hover {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    .classic-link:active {
+      transform: scale(.97);
+    }
+
+    .classic-link svg {
+      flex: none;
+    }
+
+    .logo {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 11px;
+      background:
+        radial-gradient(16px 16px at 30% 30%, rgba(255, 255, 255, .25), transparent 60%),
+        linear-gradient(135deg, var(--yellow), var(--pink));
+      box-shadow: 0 10px 25px rgba(255, 74, 163, .22);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #220a2c;
+      letter-spacing: .5px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      flex: 0 0 auto;
+      gap: 8px
+    }
+
+    .iconbtn {
+      width: 34px;
+      height: 34px;
+      border-radius: 13px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .18);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      flex: 0 0 34px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .iconbtn:active {
+      transform: scale(.98)
+    }
+
+    .iconbtn svg {
+      display: block
+    }
+
+    /* Modo Canal: piezas de continuidad */
+    /* BUMPER A PANTALLA COMPLETA */
+    .bumper-clip {
+      background: #000;
+    }
+
+    .bumper-stage {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .bumper-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      aspect-ratio: auto;
+      display: block;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .feed {
+      height: 100%;
+      width: 100%;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      scroll-snap-stop: always;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding-top: calc(var(--topbar-h) + var(--strip-h) + var(--safe-top));
+      scroll-padding-top: calc(var(--topbar-h) + var(--strip-h) + var(--safe-top));
+      padding-bottom: calc(var(--bottomnav-h) + var(--safe-bot));
+    }
+
+    .feed::-webkit-scrollbar {
+      display: none
+    }
+
+    .clip {
+      position: relative;
+      height: calc(100svh - var(--topbar-h) - var(--strip-h) - var(--safe-top) - var(--bottomnav-h) - var(--safe-bot));
+      width: 100%;
+      scroll-snap-align: start;
+      overflow: hidden;
+    }
+
+    .video {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(900px 460px at 50% 100%, rgba(0, 0, 0, .25), transparent 55%),
+        linear-gradient(180deg, rgba(0, 0, 0, .15), rgba(0, 0, 0, .65));
+    }
+
+    .video::before {
+      content: "";
+      position: absolute;
+      inset: -20%
+    }
+
+    .series-stage {
+      touch-action: pan-y;
+    }
+
+    .series-stage .series-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+    }
+
+    /* Cabl├¡n Shorts 2.1 ÔÇö Barra de progreso */
+    .short-progress {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 8px;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+    }
+
+    .short-progress-time {
+      display: none;
+    }
+
+    .short-progress:hover,
+    .short-progress:focus-within {
+      opacity: 1;
+    }
+
+    .short-progress-slider {
+      flex: 1;
+      min-width: 0;
+      height: 3px;
+      margin: 0;
+      cursor: pointer;
+      accent-color: #ffffff;
+      touch-action: none;
+    }
+
+    .short-progress-slider::-webkit-slider-thumb {
+      opacity: 0;
+    }
+
+    .short-progress-slider:hover::-webkit-slider-thumb,
+    .short-progress-slider:focus-visible::-webkit-slider-thumb,
+    .short-progress-slider:active::-webkit-slider-thumb {
+      opacity: 1;
+    }
+
+    .series-stage .series-ui {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 12px 12px 16px;
+      pointer-events: none;
+    }
+
+    .series-chip {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .20);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .24);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .88);
+      pointer-events: none;
+    }
+
+    .series-chip strong {
+      color: var(--yellow)
+    }
+
+    .series-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      pointer-events: auto;
+    }
+
+    .series-audio-cta {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      background: rgba(0, 0, 0, .42);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, .35);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .92);
+      pointer-events: auto;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .series-audio-cta.show {
+      display: inline-flex
+    }
+
+    .series-audio-cta svg {
+      display: block
+    }
+
+    .series-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      background: rgba(0, 0, 0, .22);
+      backdrop-filter: blur(8px);
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, .28);
+    }
+
+    .series-btn:active {
+      transform: scale(.97)
+    }
+
+    .series-btn svg {
+      display: block
+    }
+
+    .series-counter {
+      min-width: 66px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .22);
+      border: 1px solid rgba(255, 255, 255, .12);
+      backdrop-filter: blur(8px);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: .35px;
+      color: rgba(255, 255, 255, .82);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, .20);
+    }
+
+    .clip[data-theme="cablin"] .video::before {
+      background:
+        radial-gradient(380px 220px at 25% 25%, rgba(255, 213, 74, .55), transparent 60%),
+        radial-gradient(440px 260px at 70% 30%, rgba(255, 74, 163, .55), transparent 60%),
+        radial-gradient(520px 320px at 50% 90%, rgba(57, 215, 255, .35), transparent 62%),
+        linear-gradient(135deg, rgba(122, 77, 255, .55), rgba(0, 0, 0, 0));
+    }
+
+    .clip[data-theme="comic"] .video::before {
+      background:
+        radial-gradient(420px 240px at 20% 20%, rgba(141, 255, 122, .50), transparent 62%),
+        radial-gradient(420px 240px at 80% 35%, rgba(57, 215, 255, .52), transparent 62%),
+        radial-gradient(560px 320px at 50% 95%, rgba(255, 74, 163, .32), transparent 65%),
+        linear-gradient(135deg, rgba(255, 213, 74, .45), rgba(0, 0, 0, 0));
+    }
+
+    .clip[data-theme="retro"] .video::before {
+      background:
+        radial-gradient(420px 240px at 18% 24%, rgba(122, 77, 255, .58), transparent 62%),
+        radial-gradient(460px 260px at 80% 35%, rgba(255, 213, 74, .38), transparent 62%),
+        radial-gradient(620px 360px at 55% 95%, rgba(255, 74, 163, .38), transparent 65%),
+        linear-gradient(135deg, rgba(57, 215, 255, .38), rgba(0, 0, 0, 0));
+    }
+
+    .crt {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      mix-blend-mode: overlay;
+      opacity: .18;
+      background: repeating-linear-gradient(180deg, rgba(255, 255, 255, .12) 0 1px, rgba(0, 0, 0, 0) 1px 3px);
+    }
+
+    .noise {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      opacity: .08;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+      background-size: 120px 120px;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1
+      }
+
+      50% {
+        transform: scale(1.12);
+        opacity: .75
+      }
+    }
+
+    .actions {
+      position: absolute;
+      right: 12px;
+      bottom: calc(34px + var(--safe-bot));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      z-index: 20;
+    }
+
+    .act {
+      width: 54px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      user-select: none
+    }
+
+    .actbtn {
+      width: 50px;
+      height: 50px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .18);
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, .35);
+      color: var(--white);
+      cursor: pointer;
+    }
+
+    .actbtn:active {
+      transform: scale(.98)
+    }
+
+    .actbtn svg {
+      display: block
+    }
+
+    .actbtn[data-action="like"].liked svg {
+      fill: var(--pink);
+      stroke: var(--pink)
+    }
+
+    .count {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--muted);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .6);
+      text-align: center;
+    }
+
+    .meta {
+      position: absolute;
+      left: 14px;
+      right: 86px;
+      bottom: calc(20px + var(--safe-bot));
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .who {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--yellow), var(--pink));
+      border: 1px solid rgba(255, 255, 255, .20);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, .35);
+      display: grid;
+      place-items: center;
+      color: #240a2f;
+      font-weight: 1000;
+      letter-spacing: .3px;
+      overflow: hidden;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .handle {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px
+    }
+
+    .handle .name {
+      font-weight: 1000;
+      font-size: 16px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .65);
+    }
+
+    .handle .desc {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--muted2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .65);
+      display: none;
+    }
+
+    .caption {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(0, 0, 0, .16);
+      backdrop-filter: blur(6px);
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .24);
+      display: none;
+    }
+
+    .caption .title {
+      font-weight: 1000;
+      font-size: 14px;
+      line-height: 1.2
+    }
+
+    .tags {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .06)
+    }
+
+    .bottomnav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      padding: 10px 12px calc(10px + var(--safe-bot));
+      background: rgba(0, 0, 0, .35);
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      backdrop-filter: blur(12px);
+    }
+
+    .navrow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      align-items: center;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .navbtn {
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .06);
+      border-radius: 18px;
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-weight: 1000;
+      color: var(--muted);
+      font-size: 11px;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .navbtn strong {
+      font-size: 18px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .navbtn strong svg {
+      display: block
+    }
+
+    .navbtn.active {
+      background: linear-gradient(135deg, rgba(255, 213, 74, .22), rgba(255, 74, 163, .18));
+      border-color: rgba(255, 74, 163, .35);
+      color: var(--white);
+      box-shadow: 0 16px 34px rgba(255, 74, 163, .12);
+    }
+
+    .navbtn:active {
+      transform: scale(.99)
+    }
+
+    .sheet,
+    .toast {
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: 80;
+      display: none
+    }
+
+    .sheet {
+      bottom: 0;
+      padding: 14px 14px calc(14px + var(--safe-bot));
+      background: rgba(10, 6, 28, .92);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 22px 22px 0 0;
+      box-shadow: 0 -30px 70px rgba(0, 0, 0, .55);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .sheet.open {
+      display: block
+    }
+
+    .sheethead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .sheettitle {
+      font-weight: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .pill {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .close {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+    }
+
+    .close:active {
+      transform: scale(.98)
+    }
+
+    .grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px
+    }
+
+    .pcard {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(255, 255, 255, .06);
+      overflow: hidden;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pimg {
+      height: 64px;
+      border-radius: 14px;
+      background:
+        radial-gradient(60px 40px at 25% 25%, rgba(255, 213, 74, .55), transparent 60%),
+        radial-gradient(60px 40px at 80% 45%, rgba(57, 215, 255, .45), transparent 60%),
+        linear-gradient(135deg, rgba(122, 77, 255, .45), rgba(255, 74, 163, .25));
+      border: 1px solid rgba(255, 255, 255, .12);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pimg img {
+      width: auto;
+      height: 100%;
+      object-fit: contain
+    }
+
+    .ptxt {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.1
+    }
+
+    .toast {
+      top: calc(10px + var(--safe-top));
+      text-align: center;
+      pointer-events: none
+    }
+
+    .toast span {
+      display: inline-block;
+      max-width: 86vw;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      background: rgba(0, 0, 0, .55);
+      backdrop-filter: blur(10px);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--muted);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .45);
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity .18s ease, transform .18s ease;
+    }
+
+    .toast.show span {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    @media (min-width: 760px) {
+      .feed {
+        max-width: 520px;
+        margin: 0 auto;
+        border-left: 1px solid rgba(255, 255, 255, .08);
+        border-right: 1px solid rgba(255, 255, 255, .08)
+      }
+
+      .topbar {
+        max-width: 520px;
+        margin: 0 auto
+      }
+
+      .bottomnav {
+        background: rgba(0, 0, 0, .42)
+      }
+    }
+
+    @media (max-width: 400px) {
+      .topbar {
+        gap: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+
+      .brand,
+      .top-actions {
+        gap: 4px;
+      }
+
+      .classic-link {
+        margin-left: 0;
+        padding: 6px 7px;
+      }
+
+      .xp-chip {
+        padding: 3px 5px;
+      }
+    }
+
+    @media (max-width: 340px) {
+      .classic-link span {
+        display: none;
+      }
+    }
+
+    /* ÔöÇÔöÇ Sistema XP / Niveles ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ */
+
+    /* Chip de XP en el topbar */
+    .xp-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex: 0 0 auto;
+      white-space: nowrap;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 213, 74, .30);
+      background: rgba(255, 213, 74, .10);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .xp-chip:active {
+      transform: scale(.97)
+    }
+
+    .xp-chip-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--yellow), var(--pink));
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .xp-chip-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain
+    }
+
+    .xp-chip-pts {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      color: var(--yellow);
+      white-space: nowrap;
+    }
+
+    /* Sheet de nivel (mismo base que .sheet) */
+    #sheetXP {
+      bottom: 0;
+      padding: 18px 16px calc(18px + var(--safe-bot));
+      background: rgba(10, 6, 28, .96);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255, 213, 74, .20);
+      border-radius: 24px 24px 0 0;
+      box-shadow: 0 -30px 70px rgba(0, 0, 0, .65);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    /* Cabecera del sheet */
+    .xp-titulo {
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 1.1;
+      margin: 0
+    }
+
+    .xp-nivel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255, 213, 74, .22), rgba(255, 74, 163, .18));
+      border: 1px solid rgba(255, 213, 74, .30);
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      color: var(--yellow);
+    }
+
+    /* Barra de progreso estilo Mostaza */
+    .xp-track-wrap {
+      position: relative;
+      margin: 20px 0 10px;
+      padding: 0 10px;
+    }
+
+    .xp-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 10px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin-bottom: 6px;
+    }
+
+    .xp-labels span.active-nivel {
+      color: var(--yellow)
+    }
+
+    .xp-track {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .10);
+      position: relative;
+      overflow: visible;
+    }
+
+    .xp-track-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--violet), var(--pink), var(--yellow));
+      transition: width .6s cubic-bezier(.34, 1.56, .64, 1);
+      position: relative;
+    }
+
+    /* Logo Cablin desliz├índose sobre la barra */
+    .xp-mascot {
+      position: absolute;
+      top: 50%;
+      right: -14px;
+      transform: translateY(-50%);
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--yellow), var(--pink));
+      border: 2px solid rgba(255, 255, 255, .30);
+      box-shadow: 0 4px 14px rgba(255, 74, 163, .45), 0 0 0 4px rgba(255, 213, 74, .12);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      transition: right .6s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .xp-mascot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain
+    }
+
+    /* Hitos (checkpoints) */
+    .xp-milestones {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      gap: 6px;
+    }
+
+    .xp-milestone {
+      flex: 1;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .04);
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+    }
+
+    .xp-milestone.desbloqueado {
+      border-color: rgba(255, 213, 74, .30);
+      background: rgba(255, 213, 74, .08);
+    }
+
+    .xp-milestone-icon {
+      font-size: 20px;
+      line-height: 1
+    }
+
+    .xp-milestone-label {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 9px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      color: var(--muted2);
+      text-align: center;
+    }
+
+    .xp-milestone.desbloqueado .xp-milestone-label {
+      color: var(--yellow)
+    }
+
+    .xp-milestone-pts {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 10px;
+      color: var(--muted2);
+    }
+
+    .xp-milestone.desbloqueado .xp-milestone-pts {
+      color: var(--white)
+    }
+
+    /* check sobre el milestone desbloqueado */
+    .xp-milestone.desbloqueado::after {
+      content: "Ô£ô";
+      position: absolute;
+      top: -7px;
+      right: -5px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: #220a2c;
+      font-size: 9px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Acciones de XP */
+    .xp-acciones {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .xp-accion-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .xp-accion-info {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .xp-accion-ico {
+      font-size: 18px;
+      line-height: 1
+    }
+
+    .xp-accion-txt {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .xp-accion-pts {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 12px;
+      color: var(--yellow);
+      background: rgba(255, 213, 74, .12);
+      border: 1px solid rgba(255, 213, 74, .20);
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* Ranking semanal de canales */
+    #sheetRanking {
+      padding: 16px 14px calc(16px + var(--safe-bot));
+      background:
+        radial-gradient(500px 260px at 20% -15%, rgba(57, 215, 255, .14), transparent 60%),
+        linear-gradient(180deg, rgba(8, 11, 64, .96), rgba(7, 6, 26, .97));
+      border-top: 1px solid rgba(57, 215, 255, .20);
+      max-height: 78svh;
+      overflow: auto;
+    }
+
+    .ranking-headline {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 12px
+    }
+
+    .ranking-kicker {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: .45px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .ranking-title {
+      font-weight: 1000;
+      font-size: 22px;
+      line-height: 1;
+      color: #f2f5ff
+    }
+
+    .ranking-subtitle {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .76);
+    }
+
+    .ranking-subtitle strong {
+      color: var(--yellow)
+    }
+
+    .ranking-table {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ranking-row {
+      display: grid;
+      grid-template-columns: 36px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      border-radius: 16px;
+      padding: 10px 12px;
+      border: 1px solid rgba(122, 77, 255, .30);
+      background: linear-gradient(90deg, rgba(30, 50, 173, .65), rgba(20, 31, 116, .68));
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .25);
+    }
+
+    .ranking-pos {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, #ff5574, #ff3c95);
+      border: 1px solid rgba(255, 255, 255, .25);
+    }
+
+    .ranking-channel {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ranking-handle {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      color: #f5f8ff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .ranking-meta {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, .68);
+    }
+
+    .ranking-views {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 16px;
+      font-weight: 900;
+      color: #8dff7a;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .35);
+      white-space: nowrap;
+    }
+
+    .ranking-footnote {
+      margin-top: 12px;
+      font-family: "Nunito", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      color: rgba(255, 255, 255, .62);
+      line-height: 1.25;
+    }
+
+    /* =========================================
+   CABL├ìN SHORTS 2.0 - ESCRITORIO
+   ========================================= */
+
+    .desktop-sidebar {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+
+      .desktop-sidebar {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 240px;
+        padding: 28px 20px;
+        background: #0c081c;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 70;
+      }
+
+      .desktop-sidebar-brand {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-bottom: 45px;
+        color: #ffd54a;
+        font-size: 25px;
+      }
+
+      .desktop-sidebar-brand small {
+        font-size: 11px;
+        letter-spacing: 3px;
+        color: #39d7ff;
+      }
+
+      .desktop-sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .desktop-sidebar-link {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 12px;
+        border-radius: 12px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 17px;
+        transition: background 0.2s ease;
+      }
+
+      .desktop-sidebar-link:hover,
+      .desktop-sidebar-link.active {
+        background: rgba(255, 213, 74, 0.12);
+        color: #ffd54a;
+      }
+
+      .desktop-sidebar-footer {
+        margin-top: auto;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* Ocultar navegaci├│n inferior en escritorio */
+      .bottomnav {
+        display: none;
+      }
+
+      /* Reservar espacio para el men├║ lateral */
+      .feed {
+        width: calc(100% - 240px);
+        max-width: none;
+        margin-left: 240px;
+        margin-right: 0;
+        padding-bottom: 0;
+      }
+
+      /* Centrar los contenidos verticales */
+      .clip {
+        width: min(100%, 430px);
+        margin-left: auto;
+        margin-right: auto;
+        height: calc(100svh - var(--topbar-h) - var(--strip-h) - var(--safe-top));
+      }
+
+      /* Mantener la barra superior alineada con el reproductor */
+      .topbar {
+        left: 240px;
+        right: 0;
+        width: calc(100% - 240px);
+        max-width: none;
+        padding-left: max(12px, calc((100% - 430px) / 2));
+        padding-right: max(12px, calc((100% - 430px) / 2));
+      }
+
+      /* CABL├ìN SHORTS 2.1 ÔÇö Navegaci├│n lateral de escritorio */
+
+      /* Evitar duplicar el logo, Canal y Explorar */
+      .topbar .brand {
+        display: none;
+      }
+
+      /* Mantener las herramientas en una barra compacta */
+      .topbar {
+        justify-content: flex-end;
+        padding-left: 16px;
+        padding-right: 24px;
+      }
+
+      .topbar .top-actions {
+        margin-left: auto;
+      }
+
+      /* =========================================
+   CONTROLES LATERALES - ESCRITORIO
+   ========================================= */
+
+      .clip {
+        overflow: visible;
+      }
+
+      .clip .actions {
+        position: absolute;
+        top: 50%;
+        bottom: auto;
+        left: calc(100% + 16px);
+        right: auto;
+
+        transform: translateY(-50%);
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+
+        width: 72px;
+        z-index: 20;
+      }
+
+      .clip .actions .act {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .clip .actions .actbtn {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+      }
+
+      .clip .actions .count {
+        text-align: center;
+        font-size: 13px;
+      }
+
+      /* Controles laterales con fondo uniforme */
+      .clip .actions .actbtn {
+        background: #24212c;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: none;
+      }
+
+      .clip .actions .count {
+        color: #f5f5f5;
+        font-weight: 600;
+        text-shadow: none;
+      }
+
+      /* Limitar el fondo decorativo al reproductor */
+      .clip .video {
+        overflow: hidden;
+      }
+
+    }
+
+    /* Bot├│n de sonido de los Shorts */
+    .short-mute-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 35;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      padding: 6px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .2);
+      background: rgba(0, 0, 0, .5);
+      color: #fff;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+
+    .short-mute-btn:hover {
+      background: rgba(0, 0, 0, .75);
+    }
+
+    /* CABL├ìN SHORTS 2.1 ÔÇö Controles de episodios minimalistas */
+
+    @media (min-width: 1024px) {
+      .series-stage .series-btn {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .series-stage:hover .series-btn,
+      .series-stage:focus-within .series-btn {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .series-stage .series-btn {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    /* CABL├ìN SHORTS 2.1 ÔÇö Distribuci├│n inferior m├│vil */
+    @media (max-width: 759px) {
+      .series-stage .series-nav {
+        position: relative;
+        display: grid;
+        grid-template-columns: 36px 1fr 36px;
+        align-items: center;
+        width: 100%;
+      }
+
+      .series-stage .series-counter {
+        grid-column: 2;
+        justify-self: center;
+        min-width: 54px;
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+
+      .series-stage .series-btn:first-child {
+        grid-column: 1;
+      }
+
+      .series-stage .series-btn:last-child {
+        grid-column: 3;
+      }
+    }
+
+    /* CABL├ìN SHORTS 2.1 ÔÇö Contador discreto */
+    .series-counter {
+      font-size: 11px;
+      font-weight: 600;
+      opacity: 0.75;
+    }
+
+    /* CABL├ìN SHORTS 2.1 ÔÇö Encabezado m├│vil compacto */
+
+    .mobile-more-btn {
+      display: none;
+    }
+
+    @media (max-width: 759px) {
+
+      .topbar .classic-link,
+      .topbar #btnPersonajes,
+      .topbar #btnRanking {
+        display: none;
+      }
+
+      .topbar .mode-label {
+        margin-left: 0;
+      }
+
+      .topbar .mobile-more-btn {
+        display: grid;
+      }
+
+      .topbar {
+        gap: 6px;
+      }
+
+      .topbar .brand,
+      .topbar .top-actions {
+        gap: 6px;
+      }
+    }
+
+    /* CABL├ìN SHORTS 2.1 ÔÇö Men├║ secundario m├│vil */
+    .mobile-more-menu[hidden] {
+      display: none;
+
+      /* XP visible como indicador, no como bot├│n en m├│vil */
+      .topbar #btnXP {
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+
+    @media (max-width: 759px) {
+      .topbar #btnBuscar {
+        order: 1;
+      }
+
+      .topbar #btnXP {
+        order: 2;
+      }
+
+      .topbar #btnMobileMore {
+        order: 3;
+      }
+    }
+
+    .mobile-more-menu {
+      position: fixed;
+      top: calc(var(--topbar-h) + var(--safe-top) + 4px);
+      right: 8px;
+      z-index: 80;
+      width: min(240px, calc(100vw - 16px));
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 14px;
+      background: #171024;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .4);
+    }
+
+    .mobile-more-menu a,
+    .mobile-more-menu button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: white;
+      font: inherit;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .mobile-more-menu a:hover,
+    .mobile-more-menu button:hover,
+    .mobile-more-menu a:focus-visible,
+    .mobile-more-menu button:focus-visible {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    @media (min-width: 760px) {
+      .mobile-more-menu {
+        display: none;
+      }
+    }
+
+    /* CABL├ìN SHORTS 2.1 ÔÇö Ocultar interacciones sociales provisoriamente */
+    .clip .actions {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <div class="topbar" aria-label="Cablin top bar">
+
+      <div class="brand">
+        <div class="logo" title="Cablin">
+          <img src="../img/logos/cablin-logo.png" alt="Cablin" style="width:100%;height:100%;object-fit:contain;">
+        </div>
+
+        <span class="mode-label" title="Modo Canal">
+          Canal
+        </span>
+
+        <a href="https://dherrera85.github.io/cablin-site/" class="classic-link" title="Ir a Cabl├¡n cl├ísico"
+          aria-label="Ir a la p├ígina cl├ísica de Cabl├¡n">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+
+          <span>Explorar</span>
+        </a>
+      </div>
+
+      <div class="top-actions">
+
+        <!-- Cabl├¡n Shorts 2.1 ÔÇö Men├║ secundario m├│vil -->
+        <button class="iconbtn mobile-more-btn" id="btnMobileMore" type="button" aria-label="M├ís opciones"
+          aria-expanded="false" aria-controls="mobileMoreMenu" title="M├ís opciones">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="5" cy="12" r="1"></circle>
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="19" cy="12" r="1"></circle>
+          </svg>
+        </button>
+
+        <button class="iconbtn" id="btnPersonajes" title="Personajes">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </button>
+
+        <button class="iconbtn" id="btnBuscar" title="Buscar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </button>
+
+        <button class="iconbtn" id="btnRanking" title="Ranking semanal" aria-label="Ver ranking semanal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 20V10"></path>
+            <path d="M12 20V4"></path>
+            <path d="M6 20v-6"></path>
+          </svg>
+        </button>
+
+        <button class="xp-chip" id="btnXP" title="Mi nivel" aria-label="Ver mi nivel">
+          <div class="xp-chip-icon">
+            <img src="../img/logos/cablin-logo.png" alt="Cablin XP">
+          </div>
+
+          <span class="xp-chip-pts" id="xpChipPts">0 pts</span>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="mobile-more-menu" id="mobileMoreMenu" hidden>
+      <a href="../index.html">Explorar Cabl├¡n cl├ísico</a>
+      <button type="button" id="mobileRanking">Ranking semanal</button>
+    </div>
+
+    <!-- NAVEGACI├ôN LATERAL - SOLO ESCRITORIO -->
+    <aside class="desktop-sidebar" aria-label="Navegaci├│n de escritorio">
+      <div class="desktop-sidebar-brand">
+        <span>­ƒô║</span>
+        <strong>CABL├ìN</strong>
+        <small>SHORTS</small>
+      </div>
+
+      <nav class="desktop-sidebar-nav">
+        <a href="../index.html" class="desktop-sidebar-link">
+          <span>­ƒÅá</span> Inicio
+        </a>
+
+        <a href="#feed" class="desktop-sidebar-link active">
+          <span>ÔûÂ´©Å</span> Shorts
+        </a>
+
+        <a href="#feed" class="desktop-sidebar-link">
+          <span>­ƒº¡</span> Explorar
+        </a>
+      </nav>
+
+      <div class="desktop-sidebar-footer">
+        <span>La nostalgia sigue viva Ô£¿</span>
+      </div>
+    </aside>
+
+    <main class="feed" id="feed" aria-label="Feed de shorts">
+      <section class="clip" data-theme="cablin" data-id="c1" data-canal="anime" data-type="programa">
+        <div class="video series-stage" id="caballerosStage" aria-label="Serie Caballeros del Zodiaco">
+          <video class="series-video" id="caballerosVideo" preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="caballerosMeta"><strong>Caballeros</strong> ÔÇó Opening</div>
+            <div class="series-nav">
+              <button class="series-btn" id="caballerosPrev" aria-label="Clip anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="series-counter" id="caballerosCounter">1/1</div>
+              <button class="series-btn" id="caballerosNext" aria-label="Clip siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">12.4K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">321</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="share" aria-label="Compartir">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+            </button>
+            <div class="count">Compartir</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="more" aria-label="M├ís">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="1"></circle>
+                <circle cx="12" cy="5" r="1"></circle>
+                <circle cx="12" cy="19" r="1"></circle>
+              </svg>
+            </button>
+            <div class="count">M├ís</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar">
+              <img src="../img/round/saint-seiya-150x150.png" alt="Caballeros del Zod├¡aco">
+            </div>
+            <div class="handle">
+              <div class="name">@caballeros_zodiaco</div>
+              <div class="desc">Pegaso con su Cosmo ardiente ÔÜí</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">┬íPegaso Meteoro de Pegaso! ­ƒîá El poder del Cosmo en acci├│n ­ƒÆ½</div>
+            <div class="tags">
+              <span class="tag">#Cablin</span>
+              <span class="tag">#SaintSeiya</span>
+              <span class="tag">#Anime90s</span>
+              <span class="tag">#Nostalgia</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="clip" data-theme="comic" data-id="c2" data-canal="accion" data-type="programa">
+        <div class="video series-stage" id="sonicStage" aria-label="Serie Sonic">
+          <video class="series-video" id="sonicVideo" preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="sonicMeta"><strong>Sonic</strong> ÔÇó Opening</div>
+            <div class="series-nav">
+              <button class="series-btn" id="sonicPrev" aria-label="Clip anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="series-counter" id="sonicCounter">1/2</div>
+              <button class="series-btn" id="sonicNext" aria-label="Clip siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">8.1K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">187</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="share" aria-label="Compartir">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+            </button>
+            <div class="count">Compartir</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="vote" aria-label="Votar">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 15h10M7 11h10M7 7h4"></path>
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              </svg>
+            </button>
+            <div class="count">Vot├í</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar" style="background:linear-gradient(135deg,var(--cyan),var(--lime));">
+              <img src="../img/round/sonic-150x150.png" alt="Sonic">
+            </div>
+            <div class="handle">
+              <div class="name">@sonic</div>
+              <div class="desc">Gotta go fast! ­ƒÆ¿</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">┬íSonic corriendo a toda velocidad! ­ƒªö­ƒÆ¿ ┬┐Podr├ís seguirle el ritmo?</div>
+            <div class="tags">
+              <span class="tag">#Sonic</span>
+              <span class="tag">#Velocidad</span>
+              <span class="tag">#Cablin90s</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Continuidad Cabl├¡n: bumper entre programas -->
+      <section class="clip bumper-clip" data-theme="cablin" data-id="b1" data-canal="bumpers" data-type="bumper">
+
+        <div class="bumper-stage">
+          <video class="bumper-video" src="../Videos/cablin-bumper02.mp4" playsinline preload="metadata"
+            aria-label="Bumper de continuidad de Cabl├¡n">
+          </video>
+        </div>
+
+      </section>
+
+      <section class="clip" data-theme="retro" data-id="c3" data-canal="anime" data-type="programa">
+        <div class="video series-stage" id="sailorMoonStage" aria-label="Serie Sailor Moon">
+          <video class="series-video" id="sailorMoonVideo" preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="sailorMoonMeta"><strong>Sailor Moon</strong> ÔÇó Opening</div>
+            <div class="series-nav">
+              <button class="series-btn" id="sailorPrev" aria-label="Clip anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="series-counter" id="sailorCounter">1/3</div>
+              <button class="series-btn" id="sailorNext" aria-label="Clip siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">22.0K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">902</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="share" aria-label="Compartir">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+            </button>
+            <div class="count">Compartir</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </button>
+            <div class="count">Perfil</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar" style="background:linear-gradient(135deg,var(--violet),var(--yellow));">
+              <img src="../img/round/sailor-moon-150x150.png" alt="Sailor Moon">
+            </div>
+            <div class="handle">
+              <div class="name">@sailor_moon</div>
+              <div class="desc">┬íEn el nombre de la Luna! ­ƒîÖÔ£¿</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">"┬íCastigo Lunar!" ­ƒîÖ­ƒÆû Sailor Moon transforma y defiende el amor</div>
+            <div class="tags">
+              <span class="tag">#SailorMoon</span>
+              <span class="tag">#MagicalGirl</span>
+              <span class="tag">#Anime</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="clip" data-theme="cablin" data-id="c4" data-canal="accion" data-type="programa">
+        <div class="video series-stage" id="actionManStage" aria-label="Serie Action Man">
+          <video class="series-video" id="actionManVideo" playsinline preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="actionManMeta">
+              <strong>Action Man</strong> ┬À Clip 1
+            </div>
+            <div class="series-nav">
+              <button class="series-btn" id="actionManPrev" aria-label="Video anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+
+              <div class="series-counter" id="actionManCounter">1/4</div>
+
+              <button class="series-btn" id="actionManNext" aria-label="Video siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">15.2K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">542</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="share" aria-label="Compartir">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+            </button>
+            <div class="count">Compartir</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="profile" aria-label="Ir al perfil">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </button>
+            <div class="count">Perfil</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar" style="background:linear-gradient(135deg,var(--pink),var(--violet));">
+              <img src="../img/round/action-man-150x150.png" alt="Action Man">
+            </div>
+            <div class="handle">
+              <div class="name">@action_man</div>
+              <div class="desc">┬íSiempre listo para la acci├│n! ­ƒÆ¬</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">┬íMisi├│n extrema! Action Man en su mejor momento ­ƒÜü­ƒÆÑ</div>
+            <div class="tags">
+              <span class="tag">#ActionMan</span>
+              <span class="tag">#H├®roe</span>
+              <span class="tag">#Aventura</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="clip" data-theme="comic" data-id="c5" data-canal="humor" data-type="programa">
+        <div class="video" role="img" aria-label="Clip demo 5"></div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">9.8K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">234</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="share" aria-label="Compartir">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+            </button>
+            <div class="count">Compartir</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="more" aria-label="M├ís">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="1"></circle>
+                <circle cx="12" cy="5" r="1"></circle>
+                <circle cx="12" cy="19" r="1"></circle>
+              </svg>
+            </button>
+            <div class="count">M├ís</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar" style="background:linear-gradient(135deg,var(--yellow),var(--cyan));">
+              <img src="../img/round/garfield-and-friends-150x150.png" alt="Garfield">
+            </div>
+            <div class="handle">
+              <div class="name">@garfield</div>
+              <div class="desc">Amante de la lasa├▒a ­ƒìØ­ƒÿ║</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">┬íGarfield odia los lunes! ­ƒÿ¥Ôÿò Momento cl├ísico del gato m├ís perezoso</div>
+            <div class="tags">
+              <span class="tag">#Garfield</span>
+              <span class="tag">#Comedia</span>
+              <span class="tag">#Lunes</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="clip" data-theme="retro" data-id="c6" data-canal="humor" data-type="programa">
+        <div class="video" role="img" aria-label="Clip demo 6"></div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">18.5K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">678</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="share" aria-label="Compartir">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+              </svg>
+            </button>
+            <div class="count">Compartir</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="vote" aria-label="Votar">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 15h10M7 11h10M7 7h4"></path>
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+              </svg>
+            </button>
+            <div class="count">Vot├í</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar" style="background:linear-gradient(135deg,var(--lime),var(--pink));">
+              <img src="../img/round/super-mario-bros-150x150.png" alt="Super Mario">
+            </div>
+            <div class="handle">
+              <div class="name">@super_mario_bros</div>
+              <div class="desc">┬íIt's-a me, Mario! ­ƒìä</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">┬íMario salva a la princesa una vez m├ís! ­ƒìä­ƒææ Aventura cl├ísica</div>
+            <div class="tags">
+              <span class="tag">#Mario</span>
+              <span class="tag">#Nintendo</span>
+              <span class="tag">#Retro</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="clip" data-theme="retro" data-id="c7" data-canal="humor" data-type="programa">
+        <div class="video series-stage" id="jemStage" aria-label="Serie Jem and the Holograms">
+          <video class="series-video" id="jemVideo" preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="jemMeta"><strong>Jem</strong> ÔÇó Opening 1/1</div>
+          </div>
+        </div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">7.2K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">245</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar">
+              <img src="../img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
+            </div>
+            <div class="handle">
+              <div class="name">@jem_holograms</div>
+              <div class="desc">Truly outrageous ­ƒÄñÔ£¿</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">Jem and the Holograms ÔÇö Opening</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="clip" data-theme="comic" data-id="c8" data-canal="humor" data-type="programa">
+        <div class="video series-stage" id="aladdinStage" aria-label="Serie Aladdin">
+          <video class="series-video" id="aladdinVideo" preload="metadata"></video>
+          <div class="series-ui">
+            <div class="series-chip" id="aladdinMeta"><strong>Aladdin</strong> ÔÇó Opening</div>
+            <div class="series-nav">
+              <button class="series-btn" id="aladdinPrev" aria-label="Clip anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <div class="series-counter" id="aladdinCounter">1/2</div>
+              <button class="series-btn" id="aladdinNext" aria-label="Clip siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+
+        <div class="actions">
+          <div class="act">
+            <button class="actbtn" data-action="like" aria-label="Me gusta">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                </path>
+              </svg>
+            </button>
+            <div class="count" data-count="like">6.6K</div>
+          </div>
+          <div class="act">
+            <button class="actbtn" data-action="comment" aria-label="Comentarios">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+            <div class="count">188</div>
+          </div>
+        </div>
+
+        <div class="meta">
+          <div class="who">
+            <div class="avatar">
+              <img src="../img/round/aladdin-150-150px.png" alt="Aladdin">
+            </div>
+            <div class="handle">
+              <div class="name">@aladdin</div>
+              <div class="desc">Un mundo ideal ­ƒº×</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">Aladdin ÔÇö Opening</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottomnav" aria-label="Navegaci├│n inferior">
+      <div class="navrow">
+        <button class="navbtn active" data-tab="home">
+          <strong>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </strong>Inicio
+        </button>
+        <button class="navbtn" data-tab="personajes">
+          <strong>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </strong>Personajes
+        </button>
+        <button class="navbtn" data-tab="xp" title="Mi nivel">
+          <strong>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+              </polygon>
+            </svg>
+          </strong>Mi Nivel
+        </button>
+      </div>
+    </nav>
+
+    <section class="sheet" id="sheetPersonajes" aria-label="Panel de personajes">
+      <div class="sheethead">
+        <div class="sheettitle">­ƒÄ¡ Personajes <span class="pill">tap para filtrar (demo)</span></div>
+        <button class="close" id="closeSheet" aria-label="Cerrar">Ô£ò</button>
+      </div>
+
+      <div class="grid" role="list">
+        <button class="pcard" data-filter="saint-seiya" role="listitem" aria-label="Filtrar Caballeros del Zod├¡aco">
+          <div class="pimg">
+            <img src="../img/round/saint-seiya-150x150.png" alt="Saint Seiya">
+          </div>
+          <div class="ptxt">Saint Seiya</div>
+        </button>
+        <button class="pcard" data-filter="sonic" role="listitem" aria-label="Filtrar Sonic">
+          <div class="pimg" style="background:
+            radial-gradient(60px 40px at 25% 25%, rgba(141,255,122,.50), transparent 60%),
+            radial-gradient(60px 40px at 80% 45%, rgba(57,215,255,.45), transparent 60%),
+            linear-gradient(135deg, rgba(255,213,74,.35), rgba(255,74,163,.20));">
+            <img src="../img/round/sonic-150x150.png" alt="Sonic">
+          </div>
+          <div class="ptxt">Sonic</div>
+        </button>
+        <button class="pcard" data-filter="sailor-moon" role="listitem" aria-label="Filtrar Sailor Moon">
+          <div class="pimg" style="background:
+            radial-gradient(60px 40px at 25% 25%, rgba(122,77,255,.55), transparent 60%),
+            radial-gradient(60px 40px at 80% 45%, rgba(255,213,74,.35), transparent 60%),
+            linear-gradient(135deg, rgba(57,215,255,.28), rgba(255,74,163,.18));">
+            <img src="../img/round/sailor-moon-150x150.png" alt="Sailor Moon">
+          </div>
+          <div class="ptxt">Sailor Moon</div>
+        </button>
+        <button class="pcard" data-filter="jem" role="listitem" aria-label="Filtrar Jem and the Holograms">
+          <div class="pimg">
+            <img src="../img/round/jem-holograms-150x150.png" alt="Jem and the Holograms">
+          </div>
+          <div class="ptxt">Jem</div>
+        </button>
+        <button class="pcard" data-filter="aladdin" role="listitem" aria-label="Filtrar Aladdin">
+          <div class="pimg">
+            <img src="../img/round/aladdin-150-150px.png" alt="Aladdin">
+          </div>
+          <div class="ptxt">Aladdin</div>
+        </button>
+        <button class="pcard" data-filter="action-man" role="listitem" aria-label="Filtrar Action Man">
+          <div class="pimg" style="background:
+            radial-gradient(60px 40px at 25% 25%, rgba(255,74,163,.55), transparent 60%),
+            radial-gradient(60px 40px at 80% 45%, rgba(122,77,255,.45), transparent 60%),
+            linear-gradient(135deg, rgba(255,213,74,.28), rgba(57,215,255,.18));">
+            <img src="../img/round/action-man-150x150.png" alt="Action Man">
+          </div>
+          <div class="ptxt">Action Man</div>
+        </button>
+        <button class="pcard" data-filter="garfield" role="listitem" aria-label="Filtrar Garfield">
+          <div class="pimg" style="background:
+            radial-gradient(60px 40px at 25% 25%, rgba(255,213,74,.60), transparent 60%),
+            radial-gradient(60px 40px at 80% 45%, rgba(57,215,255,.40), transparent 60%),
+            linear-gradient(135deg, rgba(141,255,122,.25), rgba(255,74,163,.15));">
+            <img src="../img/round/garfield-and-friends-150x150.png" alt="Garfield">
+          </div>
+          <div class="ptxt">Garfield</div>
+        </button>
+        <button class="pcard" data-filter="super-mario" role="listitem" aria-label="Filtrar Super Mario">
+          <div class="pimg" style="background:
+            radial-gradient(60px 40px at 25% 25%, rgba(141,255,122,.58), transparent 60%),
+            radial-gradient(60px 40px at 80% 45%, rgba(255,74,163,.42), transparent 60%),
+            linear-gradient(135deg, rgba(255,213,74,.28), rgba(57,215,255,.15));">
+            <img src="../img/round/super-mario-bros-150x150.png" alt="Super Mario">
+          </div>
+          <div class="ptxt">Super Mario</div>
+        </button>
+        <button class="pcard" data-filter="phantom" role="listitem" aria-label="Filtrar Phantom 2040">
+          <div class="pimg">
+            <img src="../img/round/phantom-2040-150x150.png" alt="Phantom 2040">
+          </div>
+          <div class="ptxt">Phantom 2040</div>
+        </button>
+        <button class="pcard" data-filter="virtua-fighter" role="listitem" aria-label="Filtrar Virtua Fighter">
+          <div class="pimg">
+            <img src="../img/round/virtua-fighter-150x150.png" alt="Virtua Fighter">
+          </div>
+          <div class="ptxt">Virtua Fighter</div>
+        </button>
+        <button class="pcard" data-filter="robocop" role="listitem" aria-label="Filtrar Robocop">
+          <div class="pimg">
+            <img src="../img/round/robocop-150x150.png" alt="Robocop">
+          </div>
+          <div class="ptxt">Robocop</div>
+        </button>
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:10px;">
+        <button class="pill" id="clearFilter" style="flex:1;text-align:center;border-radius:18px;">Ver todo</button>
+        <button class="pill" id="hint" style="flex:1;text-align:center;border-radius:18px;">Idea UX</button>
+      </div>
+
+      <p
+        style="margin:10px 2px 0;font-family:Nunito,system-ui,sans-serif;font-weight:800;color:var(--muted2);font-size:12px;line-height:1.25;">
+        Este panel reemplaza el ÔÇ£selector de personajesÔÇØ de escritorio: en mobile se convierte en un filtro r├ípido +
+        acceso al perfil.
+      </p>
+    </section>
+
+    <!-- Sheet de Nivel XP -->
+    <section class="sheet" id="sheetXP" aria-label="Mi nivel en Cablin">
+      <div class="sheethead">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <p class="xp-titulo">Tu nivel en Cablin</p>
+          <span class="xp-nivel-badge" id="xpNivelBadge">Ô¡É ESPECTADOR</span>
+        </div>
+        <button class="close" id="closeXP" aria-label="Cerrar">Ô£ò</button>
+      </div>
+
+      <!-- Barra de progreso estilo Mostaza -->
+      <div class="xp-track-wrap">
+        <div class="xp-labels">
+          <span id="xpLabelA">Espectador</span>
+          <span id="xpLabelB">Fan</span>
+          <span id="xpLabelC">Cablinero</span>
+        </div>
+        <div class="xp-track">
+          <div class="xp-track-fill" id="xpTrackFill" style="width:0%">
+            <!-- Logo Cablin desliz├índose -->
+            <div class="xp-mascot" id="xpMascot">
+              <img src="../img/logos/cablin-logo.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hitos desbloqueables -->
+      <div class="xp-milestones">
+        <div class="xp-milestone" id="xpM1">
+          <span class="xp-milestone-icon">­ƒô║</span>
+          <span class="xp-milestone-label">Espectador</span>
+          <span class="xp-milestone-pts">0 pts</span>
+        </div>
+        <div class="xp-milestone" id="xpM2">
+          <span class="xp-milestone-icon">­ƒÄ¡</span>
+          <span class="xp-milestone-label">Fan</span>
+          <span class="xp-milestone-pts">50 pts</span>
+        </div>
+        <div class="xp-milestone" id="xpM3">
+          <span class="xp-milestone-icon">­ƒÅå</span>
+          <span class="xp-milestone-label">Cablinero</span>
+          <span class="xp-milestone-pts">150 pts</span>
+        </div>
+        <div class="xp-milestone" id="xpM4">
+          <span class="xp-milestone-icon">­ƒô╝</span>
+          <span class="xp-milestone-label">Leyenda</span>
+          <span class="xp-milestone-pts">300 pts</span>
+        </div>
+      </div>
+
+      <!-- C├│mo ganar XP -->
+      <div class="xp-acciones">
+        <div class="xp-accion-row">
+          <div class="xp-accion-info"><span class="xp-accion-ico">ÔØñ´©Å</span><span class="xp-accion-txt">Dar like a un
+              clip</span></div>
+          <span class="xp-accion-pts">+10 pts</span>
+        </div>
+        <div class="xp-accion-row">
+          <div class="xp-accion-info"><span class="xp-accion-ico">­ƒô║</span><span class="xp-accion-txt">Ver un clip
+              completo</span></div>
+          <span class="xp-accion-pts">+5 pts</span>
+        </div>
+        <div class="xp-accion-row">
+          <div class="xp-accion-info"><span class="xp-accion-ico">Ôåù´©Å</span><span class="xp-accion-txt">Compartir un
+              clip</span></div>
+          <span class="xp-accion-pts">+20 pts</span>
+        </div>
+        <div class="xp-accion-row">
+          <div class="xp-accion-info"><span class="xp-accion-ico">­ƒôí</span><span class="xp-accion-txt">Ver todos los
+              bloques</span></div>
+          <span class="xp-accion-pts">+30 pts</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="sheet" id="sheetRanking" aria-label="Ranking semanal de canales">
+      <div class="sheethead">
+        <div class="ranking-headline">
+          <span class="ranking-kicker">Top 10 canales</span>
+          <div class="ranking-title">Ranking semanal</div>
+          <div class="ranking-subtitle">Periodo relevado: <strong id="rankingPeriod">-</strong></div>
+        </div>
+        <button class="close" id="closeRanking" aria-label="Cerrar">Ô£ò</button>
+      </div>
+
+      <div class="ranking-table" id="rankingBody" role="list"></div>
+      <p class="ranking-footnote">Datos reales del proyecto: se actualiza con cada clip visto en este demo y se guarda
+        en tu navegador (localStorage).</p>
+    </section>
+
+    <div class="toast" id="toast" aria-live="polite"><span></span></div>
+  </div>
+
+  <script>
+    const toastEl = document.getElementById('toast');
+    const toastSpan = toastEl.querySelector('span');
+    let toastTimer;
+
+    function toast(msg) {
+      toastSpan.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1200);
+    }
+
+    document.querySelectorAll('.navbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.navbtn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const tab = btn.dataset.tab;
+        if (tab === 'personajes') openSheet();
+        else if (tab === 'xp') openXP();
+        else {
+          toast('Inicio');
+          document.getElementById('feed').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+    });
+
+    document.getElementById('btnPersonajes').addEventListener('click', openSheet);
+    document.getElementById('btnBuscar').addEventListener('click', () => toast('Buscar: modal / overlay (demo)'));
+    document.getElementById('btnRanking').addEventListener('click', openRanking);
+
+    /* CABL├ìN SHORTS 2.1 ÔÇö Men├║ secundario m├│vil */
+    const btnMobileMore = document.getElementById('btnMobileMore');
+    const mobileMoreMenu = document.getElementById('mobileMoreMenu');
+    const mobileRanking = document.getElementById('mobileRanking');
+
+    function cerrarMobileMore() {
+      mobileMoreMenu.hidden = true;
+      btnMobileMore.setAttribute('aria-expanded', 'false');
+    }
+
+    btnMobileMore.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const abrir = mobileMoreMenu.hidden;
+      mobileMoreMenu.hidden = !abrir;
+      btnMobileMore.setAttribute('aria-expanded', String(abrir));
+    });
+
+    mobileRanking.addEventListener('click', () => {
+      cerrarMobileMore();
+      document.getElementById('btnRanking').click();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!mobileMoreMenu.contains(event.target) &&
+        !btnMobileMore.contains(event.target)) {
+        cerrarMobileMore();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !mobileMoreMenu.hidden) {
+        cerrarMobileMore();
+        btnMobileMore.focus();
+      }
+    });
+
+    const sheet = document.getElementById('sheetPersonajes');
+
+    function openSheet() { sheet.classList.add('open'); }
+    function closeSheet() { sheet.classList.remove('open'); }
+
+    document.getElementById('closeSheet').addEventListener('click', closeSheet);
+
+    // CABLIN SHORTS ÔÇö CONTROL GENERAL DE SONIDO
+    let shortsMuted = false;
+
+    const iconoSonido = `
+  <svg width="22" height="22" viewBox="0 0 24 24"
+       fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+  </svg>
+`;
+
+    const iconoSilencio = `
+  <svg width="22" height="22" viewBox="0 0 24 24"
+       fill="none" stroke="currentColor" stroke-width="2"
+       stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+    <line x1="23" y1="9" x2="17" y2="15"></line>
+    <line x1="17" y1="9" x2="23" y2="15"></line>
+  </svg>
+`;
+
+    function aplicarSonidoShorts() {
+      document.querySelectorAll('.clip video').forEach(video => {
+        video.muted = shortsMuted;
+      });
+    }
+
+    function actualizarBotonesSonido() {
+      document.querySelectorAll('.short-mute-btn').forEach(btn => {
+        btn.innerHTML = shortsMuted ? iconoSilencio : iconoSonido;
+        btn.setAttribute(
+          'aria-label',
+          shortsMuted ? 'Activar sonido' : 'Silenciar'
+        );
+        btn.title = shortsMuted ? 'Activar sonido' : 'Silenciar';
+      });
+    }
+
+    // Crear un bot├│n dentro de cada reproductor
+    document.querySelectorAll('.clip video').forEach(video => {
+      const contenedor = video.parentElement;
+      const btn = document.createElement('button');
+
+      btn.type = 'button';
+      btn.className = 'short-mute-btn';
+
+      contenedor.appendChild(btn);
+
+      btn.addEventListener('click', event => {
+        event.stopPropagation();
+        shortsMuted = !shortsMuted;
+        aplicarSonidoShorts();
+        actualizarBotonesSonido();
+      });
+    });
+
+    actualizarBotonesSonido();
+
+
+    /* Cabl├¡n Shorts 2.1 ÔÇö Progreso de reproducci├│n */
+    document.querySelectorAll('.clip video').forEach(video => {
+      const contenedor = video.parentElement;
+
+      const progreso = document.createElement('div');
+      progreso.className = 'short-progress';
+
+      const slider = document.createElement('input');
+      slider.type = 'range';
+      slider.className = 'short-progress-slider';
+      slider.min = '0';
+      slider.max = '100';
+      slider.step = '0.1';
+      slider.value = '0';
+      slider.setAttribute('aria-label', 'Progreso del video');
+
+      const tiempo = document.createElement('span');
+      tiempo.className = 'short-progress-time';
+      tiempo.textContent = '0:00 / 0:00';
+
+      progreso.append(slider, tiempo);
+      contenedor.appendChild(progreso);
+
+      function formatearTiempo(segundos) {
+        if (!Number.isFinite(segundos)) return '0:00';
+
+        const total = Math.floor(segundos);
+        const minutos = Math.floor(total / 60);
+        const resto = String(total % 60).padStart(2, '0');
+
+        return `${minutos}:${resto}`;
+      }
+
+      function actualizarProgreso() {
+        const duracion = video.duration;
+        const actual = video.currentTime;
+
+        if (Number.isFinite(duracion) && duracion > 0) {
+          slider.value = String((actual / duracion) * 100);
+          tiempo.textContent =
+            `${formatearTiempo(actual)} / ${formatearTiempo(duracion)}`;
+        } else {
+          slider.value = '0';
+          tiempo.textContent = '0:00 / 0:00';
+        }
+      }
+
+      video.addEventListener('timeupdate', actualizarProgreso);
+      video.addEventListener('loadedmetadata', actualizarProgreso);
+      video.addEventListener('durationchange', actualizarProgreso);
+      video.addEventListener('emptied', actualizarProgreso);
+
+      slider.addEventListener('input', () => {
+        const duracion = video.duration;
+
+        if (Number.isFinite(duracion) && duracion > 0) {
+          video.currentTime = (Number(slider.value) / 100) * duracion;
+          actualizarProgreso();
+        }
+      });
+
+      // Evitar que el control active gestos de navegaci├│n de episodios.
+      ['pointerdown', 'pointerup', 'click', 'touchstart', 'touchend'].forEach(tipo => {
+        progreso.addEventListener(tipo, event => event.stopPropagation());
+      });
+    });
+
+
+    const feed = document.getElementById('feed');
+    const clips = Array.from(document.querySelectorAll('.clip'));
+    const canalesConVideo = ['c1', 'c2', 'c3', 'c4', 'c7', 'c8'];
+    let ultimoCanalOrigenAuto = null;
+
+    // ÔöÇÔöÇ CABLIN SHORTS: INICIO ROTATIVO ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+    function iniciarShortsRotativo() {
+      const STORAGE_KEY = 'cablin_shorts_ultimo_inicio';
+
+      const disponibles = canalesConVideo.filter(id =>
+        document.querySelector(`.clip[data-id="${id}"]`)
+      );
+
+      if (!disponibles.length) return;
+
+      let ultimo = null;
+
+      try {
+        ultimo = localStorage.getItem(STORAGE_KEY);
+      } catch (error) {
+        console.warn('No se pudo leer el ├║ltimo inicio', error);
+      }
+
+      let candidatos = disponibles.filter(id => id !== ultimo);
+
+      if (!candidatos.length) {
+        candidatos = disponibles;
+      }
+
+      const elegido = candidatos[
+        Math.floor(Math.random() * candidatos.length)
+      ];
+
+      const destino = document.querySelector(
+        `.clip[data-id="${elegido}"]`
+      );
+
+      if (!destino) return;
+
+      try {
+        localStorage.setItem(STORAGE_KEY, elegido);
+      } catch (error) {
+        console.warn('No se pudo guardar el ├║ltimo inicio', error);
+      }
+
+      feed.scrollTop = destino.offsetTop;
+    }
+
+    // Ejecutar cuando los clips ya est├®n inicializados.
+    window.addEventListener('load', () => {
+      requestAnimationFrame(() => {
+        iniciarShortsRotativo();
+      });
+    });
+
+    // ÔöÇÔöÇ FIN INICIO ROTATIVO ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+    function irACanalAleatorio(desdeId) {
+      let candidatos = canalesConVideo.filter(id => id !== desdeId && id !== ultimoCanalOrigenAuto);
+      if (!candidatos.length) {
+        candidatos = canalesConVideo.filter(id => id !== desdeId);
+      }
+      if (!candidatos.length) return;
+
+      const targetId = candidatos[Math.floor(Math.random() * candidatos.length)];
+      const targetClip = document.querySelector(`.clip[data-id="${targetId}"]`);
+      if (!targetClip) return;
+
+      ultimoCanalOrigenAuto = desdeId;
+
+      feed.scrollTo({ top: targetClip.offsetTop, behavior: 'smooth' });
+
+      setTimeout(() => {
+        if (targetId === 'c1') renderCaballerosClip(0, true);
+        if (targetId === 'c2') renderSonicClip(0, true);
+        if (targetId === 'c3') renderSailorMoonClip(0, true);
+        if (targetId === 'c7') renderJemClip(true);
+        if (targetId === 'c8') renderAladdinClip(0, true);
+      }, 280);
+    }
+
+    function scrollToClipByFilter(filter) {
+      const target = clips.find(clip => {
+        const who = clip.querySelector('.handle .name');
+        return who && who.textContent.toLowerCase().includes(filter.toLowerCase());
+      });
+      if (!target) {
+        toast('Aun no hay clips cargados para este personaje');
+        return;
+      }
+      feed.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.pcard[data-filter]').forEach(card => {
+      card.addEventListener('click', () => {
+        const filter = card.dataset.filter;
+        toast('Filtro: ' + card.querySelector('.ptxt').textContent);
+        closeSheet();
+        if (filter === 'aladdin') {
+          feed.scrollTo({ top: aladdinClip.offsetTop, behavior: 'smooth' });
+          renderAladdinClip(0, true);
+          return;
+        }
+        if (filter === 'saint-seiya') {
+          feed.scrollTo({ top: caballerosClip.offsetTop, behavior: 'smooth' });
+          renderCaballerosClip(0, true);
+          return;
+        }
+        if (filter === 'jem') {
+          feed.scrollTo({ top: jemClip.offsetTop, behavior: 'smooth' });
+          renderJemClip(true);
+          return;
+        }
+        if (filter === 'sonic') {
+          feed.scrollTo({ top: sonicClip.offsetTop, behavior: 'smooth' });
+          renderSonicClip(0, true);
+          return;
+        }
+        if (filter === 'sailor-moon') {
+          feed.scrollTo({ top: sailorMoonClip.offsetTop, behavior: 'smooth' });
+          renderSailorMoonClip(0, true);
+          return;
+        }
+        scrollToClipByFilter(filter);
+      });
+    });
+
+    document.getElementById('clearFilter').addEventListener('click', () => {
+      toast('Ver todo');
+      closeSheet();
+      feed.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('hint').addEventListener('click', () => toast('Ôî¿´©Å Navegaci├│n: Ôåæ/Ôåô cambiar videos | L dar like | P personajes'));
+
+    // Limpieza visual: dejamos solo Coraz├│n y Mensajes en el rail derecho.
+    document.querySelectorAll('.actbtn:not([data-action="like"]):not([data-action="comment"])').forEach(btn => {
+      const item = btn.closest('.act');
+      if (item) item.remove();
+    });
+
+    // Modo Canal: reproducci├│n de piezas de continuidad.
+    const bumperClips = document.querySelectorAll('.clip[data-type="bumper"]');
+
+    const bumperObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target.querySelector('.bumper-video');
+        if (!video) return;
+
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          video.currentTime = 0;
+
+          video.play().catch(() => {
+            // El navegador puede bloquear autoplay con audio.
+            video.muted = true;
+            video.play().catch(() => { });
+          });
+        } else {
+          video.pause();
+        }
+      });
+    }, {
+      threshold: [0, 0.6, 1]
+    });
+
+    bumperClips.forEach(clip => {
+      bumperObserver.observe(clip);
+    });
+
+    // Al finalizar un bumper, continuar autom├íticamente con el siguiente contenido.
+    bumperClips.forEach(clip => {
+      const video = clip.querySelector('.bumper-video');
+      if (!video) return;
+
+      video.addEventListener('ended', () => {
+        const nextClip = clip.nextElementSibling;
+
+        if (nextClip && nextClip.classList.contains('clip')) {
+          feed.scrollTo({
+            top: nextClip.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Serie piloto Caballeros del Zodiaco: navegaci├│n horizontal (2 clips).
+    const caballerosClips = [
+      '../Videos/caballeros_zodiaco_01.mp4'
+    ];
+    const caballerosStage = document.getElementById('caballerosStage');
+    const caballerosVideo = document.getElementById('caballerosVideo');
+    const caballerosCounter = document.getElementById('caballerosCounter');
+    const caballerosMeta = document.getElementById('caballerosMeta');
+    const caballerosPrevBtn = document.getElementById('caballerosPrev');
+    const caballerosNextBtn = document.getElementById('caballerosNext');
+    const caballerosAudioCta = document.createElement('button');
+    caballerosAudioCta.type = 'button';
+    caballerosAudioCta.className = 'series-audio-cta';
+    caballerosAudioCta.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg><span>Activar audio</span>';
+    caballerosStage.appendChild(caballerosAudioCta);
+    const caballerosClip = document.querySelector('.clip[data-id="c1"]');
+    let caballerosIndex = 0;
+    let caballerosSwipeStartX = 0;
+    let caballerosSwipeStartY = 0;
+    let caballerosSwipeActive = false;
+    let caballerosAudioArmed = false;
+
+    function renderCaballerosClip(index, autoplay = true) {
+      caballerosIndex = (index + caballerosClips.length) % caballerosClips.length;
+      caballerosVideo.src = caballerosClips[caballerosIndex];
+      caballerosVideo.volume = 1;
+      caballerosVideo.load();
+      caballerosCounter.textContent = `${caballerosIndex + 1}/${caballerosClips.length}`;
+      caballerosMeta.innerHTML = `<strong>Caballeros</strong> ÔÇó Opening ${caballerosIndex + 1}`;
+      if (autoplay) {
+        caballerosVideo.play().then(() => {
+          caballerosAudioCta.classList.remove('show');
+        }).catch(() => {
+          caballerosAudioCta.classList.add('show');
+        });
+      }
+    }
+
+    function moveCaballeros(delta) {
+      renderCaballerosClip(caballerosIndex + delta, true);
+    }
+
+    function playCaballerosWithAudio() {
+      caballerosAudioArmed = true;
+      caballerosVideo.muted = false;
+      caballerosVideo.volume = 1;
+      caballerosVideo.play().then(() => {
+        caballerosAudioCta.classList.remove('show');
+      }).catch(() => {
+        caballerosAudioCta.classList.add('show');
+      });
+    }
+
+    caballerosPrevBtn.addEventListener('click', () => moveCaballeros(-1));
+    caballerosNextBtn.addEventListener('click', () => moveCaballeros(1));
+    caballerosAudioCta.addEventListener('click', playCaballerosWithAudio);
+    caballerosVideo.addEventListener('ended', () => {
+      if (caballerosIndex < caballerosClips.length - 1) moveCaballeros(1);
+      else irACanalAleatorio('c1');
+    });
+
+    caballerosStage.addEventListener('pointerdown', (e) => {
+      caballerosSwipeActive = true;
+      caballerosSwipeStartX = e.clientX;
+      caballerosSwipeStartY = e.clientY;
+    });
+    caballerosStage.addEventListener('pointerup', (e) => {
+      if (!caballerosSwipeActive) return;
+      caballerosSwipeActive = false;
+      const dx = e.clientX - caballerosSwipeStartX;
+      const dy = e.clientY - caballerosSwipeStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) moveCaballeros(1);
+        else moveCaballeros(-1);
+      }
+    });
+    caballerosStage.addEventListener('pointercancel', () => { caballerosSwipeActive = false; });
+
+    const caballerosObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== caballerosClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (caballerosAudioArmed) playCaballerosWithAudio();
+          else renderCaballerosClip(caballerosIndex, true);
+        } else {
+          caballerosVideo.pause();
+        }
+      });
+    }, { threshold: 0.6 });
+    caballerosObserver.observe(caballerosClip);
+
+    renderCaballerosClip(0, false);
+
+    // Serie piloto Sonic: navegaci├│n horizontal dentro del mismo personaje.
+    const sonicClips = [
+      '../Videos/sonic_01.mp4',
+      '../Videos/sonic_02.mp4'
+    ];
+    const sonicStage = document.getElementById('sonicStage');
+    const sonicVideo = document.getElementById('sonicVideo');
+    const sonicCounter = document.getElementById('sonicCounter');
+    const sonicMeta = document.getElementById('sonicMeta');
+    const sonicPrevBtn = document.getElementById('sonicPrev');
+    const sonicNextBtn = document.getElementById('sonicNext');
+    const sonicAudioCta = document.createElement('button');
+    sonicAudioCta.type = 'button';
+    sonicAudioCta.className = 'series-audio-cta';
+    sonicAudioCta.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg><span>Activar audio</span>';
+    sonicStage.appendChild(sonicAudioCta);
+    const sonicClip = document.querySelector('.clip[data-id="c2"]');
+    let sonicIndex = 0;
+    let sonicSwipeStartX = 0;
+    let sonicSwipeStartY = 0;
+    let sonicSwipeActive = false;
+    let sonicAudioArmed = false;
+
+    function renderSonicClip(index, autoplay = true) {
+      sonicIndex = (index + sonicClips.length) % sonicClips.length;
+      sonicVideo.src = sonicClips[sonicIndex];
+      sonicVideo.volume = 1;
+      sonicVideo.load();
+      sonicCounter.textContent = `${sonicIndex + 1}/${sonicClips.length}`;
+      sonicMeta.innerHTML = `<strong>Sonic</strong> ÔÇó Opening ${sonicIndex + 1}`;
+      if (autoplay) {
+        sonicVideo.play().then(() => {
+          sonicAudioCta.classList.remove('show');
+        }).catch(() => {
+          sonicAudioCta.classList.add('show');
+        });
+      }
+    }
+
+    function moveSonic(delta) {
+      renderSonicClip(sonicIndex + delta, true);
+    }
+
+    function playSonicWithAudio() {
+      sonicAudioArmed = true;
+      sonicVideo.muted = false;
+      sonicVideo.volume = 1;
+      sonicVideo.play().then(() => {
+        sonicAudioCta.classList.remove('show');
+      }).catch(() => {
+        sonicAudioCta.classList.add('show');
+      });
+    }
+
+    sonicPrevBtn.addEventListener('click', () => moveSonic(-1));
+    sonicNextBtn.addEventListener('click', () => moveSonic(1));
+    sonicAudioCta.addEventListener('click', playSonicWithAudio);
+    sonicVideo.addEventListener('ended', () => {
+      if (sonicIndex < sonicClips.length - 1) moveSonic(1);
+      else irACanalAleatorio('c2');
+    });
+
+    sonicStage.addEventListener('pointerdown', (e) => {
+      sonicSwipeActive = true;
+      sonicSwipeStartX = e.clientX;
+      sonicSwipeStartY = e.clientY;
+    });
+    sonicStage.addEventListener('pointerup', (e) => {
+      if (!sonicSwipeActive) return;
+      sonicSwipeActive = false;
+      const dx = e.clientX - sonicSwipeStartX;
+      const dy = e.clientY - sonicSwipeStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) moveSonic(1);
+        else moveSonic(-1);
+      }
+    });
+    sonicStage.addEventListener('pointercancel', () => { sonicSwipeActive = false; });
+
+    const sonicObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== sonicClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (sonicAudioArmed) playSonicWithAudio();
+          else renderSonicClip(sonicIndex, true);
+        } else {
+          sonicVideo.pause();
+        }
+      });
+    }, { threshold: 0.6 });
+    sonicObserver.observe(sonicClip);
+
+    renderSonicClip(0, false);
+
+    // Serie piloto Jem: clip unico por ahora.
+    const jemClipPath = '../Videos/jem_01.mp4';
+    const jemStage = document.getElementById('jemStage');
+    const jemVideo = document.getElementById('jemVideo');
+    const jemMeta = document.getElementById('jemMeta');
+    const jemAudioCta = document.createElement('button');
+    jemAudioCta.type = 'button';
+    jemAudioCta.className = 'series-audio-cta';
+    jemAudioCta.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg><span>Activar audio</span>';
+    jemStage.appendChild(jemAudioCta);
+    const jemClip = document.querySelector('.clip[data-id="c7"]');
+    let jemAudioArmed = false;
+
+    function renderJemClip(autoplay = true) {
+      if (jemVideo.src.indexOf(jemClipPath) === -1) {
+        jemVideo.src = jemClipPath;
+        jemVideo.load();
+      }
+      jemMeta.innerHTML = '<strong>Jem</strong> ÔÇó Opening 1/1';
+      if (autoplay) {
+        jemVideo.play().then(() => {
+          jemAudioCta.classList.remove('show');
+        }).catch(() => {
+          jemAudioCta.classList.add('show');
+        });
+      }
+    }
+
+    function playJemWithAudio() {
+      jemAudioArmed = true;
+      jemVideo.muted = false;
+      jemVideo.volume = 1;
+      jemVideo.play().then(() => {
+        jemAudioCta.classList.remove('show');
+      }).catch(() => {
+        jemAudioCta.classList.add('show');
+      });
+    }
+
+    jemAudioCta.addEventListener('click', playJemWithAudio);
+    jemVideo.addEventListener('ended', () => irACanalAleatorio('c7'));
+
+    const jemObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== jemClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (jemAudioArmed) playJemWithAudio();
+          else renderJemClip(true);
+        } else {
+          jemVideo.pause();
+        }
+      });
+    }, { threshold: 0.6 });
+    jemObserver.observe(jemClip);
+
+    renderJemClip(false);
+
+    // Serie piloto Aladdin: navegaci├│n horizontal (2 clips).
+    const aladdinClips = [
+      '../Videos/aladdin_01.mp4',
+      '../Videos/aladdin_02.mp4'
+    ];
+    const aladdinStage = document.getElementById('aladdinStage');
+    const aladdinVideo = document.getElementById('aladdinVideo');
+    const aladdinCounter = document.getElementById('aladdinCounter');
+    const aladdinMeta = document.getElementById('aladdinMeta');
+    const aladdinPrevBtn = document.getElementById('aladdinPrev');
+    const aladdinNextBtn = document.getElementById('aladdinNext');
+    const aladdinAudioCta = document.createElement('button');
+    aladdinAudioCta.type = 'button';
+    aladdinAudioCta.className = 'series-audio-cta';
+    aladdinAudioCta.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg><span>Activar audio</span>';
+    aladdinStage.appendChild(aladdinAudioCta);
+    const aladdinClip = document.querySelector('.clip[data-id="c8"]');
+    let aladdinIndex = 0;
+    let aladdinSwipeStartX = 0;
+    let aladdinSwipeStartY = 0;
+    let aladdinSwipeActive = false;
+    let aladdinAudioArmed = false;
+
+    function renderAladdinClip(index, autoplay = true) {
+      aladdinIndex = (index + aladdinClips.length) % aladdinClips.length;
+      aladdinVideo.src = aladdinClips[aladdinIndex];
+      aladdinVideo.volume = 1;
+      aladdinVideo.load();
+      aladdinCounter.textContent = `${aladdinIndex + 1}/${aladdinClips.length}`;
+      aladdinMeta.innerHTML = `<strong>Aladdin</strong> ÔÇó Opening ${aladdinIndex + 1}`;
+      if (autoplay) {
+        aladdinVideo.play().then(() => {
+          aladdinAudioCta.classList.remove('show');
+        }).catch(() => {
+          aladdinAudioCta.classList.add('show');
+        });
+      }
+    }
+
+    function moveAladdin(delta) {
+      renderAladdinClip(aladdinIndex + delta, true);
+    }
+
+    function playAladdinWithAudio() {
+      aladdinAudioArmed = true;
+      aladdinVideo.muted = false;
+      aladdinVideo.volume = 1;
+      aladdinVideo.play().then(() => {
+        aladdinAudioCta.classList.remove('show');
+      }).catch(() => {
+        aladdinAudioCta.classList.add('show');
+      });
+    }
+
+    aladdinPrevBtn.addEventListener('click', () => moveAladdin(-1));
+    aladdinNextBtn.addEventListener('click', () => moveAladdin(1));
+    aladdinAudioCta.addEventListener('click', playAladdinWithAudio);
+    aladdinVideo.addEventListener('ended', () => {
+      if (aladdinIndex < aladdinClips.length - 1) moveAladdin(1);
+      else irACanalAleatorio('c8');
+    });
+
+    aladdinStage.addEventListener('pointerdown', (e) => {
+      aladdinSwipeActive = true;
+      aladdinSwipeStartX = e.clientX;
+      aladdinSwipeStartY = e.clientY;
+    });
+    aladdinStage.addEventListener('pointerup', (e) => {
+      if (!aladdinSwipeActive) return;
+      aladdinSwipeActive = false;
+      const dx = e.clientX - aladdinSwipeStartX;
+      const dy = e.clientY - aladdinSwipeStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) moveAladdin(1);
+        else moveAladdin(-1);
+      }
+    });
+    aladdinStage.addEventListener('pointercancel', () => { aladdinSwipeActive = false; });
+
+    const aladdinObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== aladdinClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (aladdinAudioArmed) playAladdinWithAudio();
+          else renderAladdinClip(aladdinIndex, true);
+        } else {
+          aladdinVideo.pause();
+        }
+      });
+    }, { threshold: 0.6 });
+    aladdinObserver.observe(aladdinClip);
+
+    renderAladdinClip(0, false);
+
+    // Serie piloto Sailor Moon: navegaci├│n horizontal dentro del mismo personaje.
+    const sailorMoonClips = [
+      '../Videos/sailor_moon_01.mp4',
+      '../Videos/sailor_moon_02.mp4',
+      '../Videos/sailor_moon_03.mp4'
+    ];
+    const sailorMoonStage = document.getElementById('sailorMoonStage');
+    const sailorMoonVideo = document.getElementById('sailorMoonVideo');
+    const sailorMoonCounter = document.getElementById('sailorCounter');
+    const sailorMoonMeta = document.getElementById('sailorMoonMeta');
+    const sailorPrevBtn = document.getElementById('sailorPrev');
+    const sailorNextBtn = document.getElementById('sailorNext');
+    const sailorAudioCta = document.createElement('button');
+    sailorAudioCta.type = 'button';
+    sailorAudioCta.className = 'series-audio-cta';
+    sailorAudioCta.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg><span>Activar audio</span>';
+    sailorMoonStage.appendChild(sailorAudioCta);
+    const sailorMoonClip = document.querySelector('.clip[data-id="c3"]');
+    let sailorMoonIndex = 0;
+    let sailorMoonSwipeStartX = 0;
+    let sailorMoonSwipeStartY = 0;
+    let sailorMoonSwipeActive = false;
+    let sailorMoonAudioArmed = false;
+
+    function renderSailorMoonClip(index, autoplay = true) {
+      sailorMoonIndex = (index + sailorMoonClips.length) % sailorMoonClips.length;
+      sailorMoonVideo.src = sailorMoonClips[sailorMoonIndex];
+      sailorMoonVideo.volume = 1;
+      sailorMoonVideo.load();
+      sailorMoonCounter.textContent = `${sailorMoonIndex + 1}/${sailorMoonClips.length}`;
+      sailorMoonMeta.innerHTML = `<strong>Sailor Moon</strong> ÔÇó Opening ${sailorMoonIndex + 1}`;
+      if (autoplay) {
+        sailorMoonVideo.play().then(() => {
+          sailorAudioCta.classList.remove('show');
+        }).catch(() => {
+          sailorAudioCta.classList.add('show');
+        });
+      }
+    }
+
+    function moveSailorMoon(delta) {
+      renderSailorMoonClip(sailorMoonIndex + delta, true);
+    }
+
+    function playSailorMoonWithAudio() {
+      sailorMoonAudioArmed = true;
+      sailorMoonVideo.muted = false;
+      sailorMoonVideo.volume = 1;
+      sailorMoonVideo.play().then(() => {
+        sailorAudioCta.classList.remove('show');
+      }).catch(() => {
+        sailorAudioCta.classList.add('show');
+      });
+    }
+
+    sailorPrevBtn.addEventListener('click', () => moveSailorMoon(-1));
+    sailorNextBtn.addEventListener('click', () => moveSailorMoon(1));
+    sailorAudioCta.addEventListener('click', playSailorMoonWithAudio);
+    sailorMoonVideo.addEventListener('ended', () => {
+      if (sailorMoonIndex < sailorMoonClips.length - 1) moveSailorMoon(1);
+      else irACanalAleatorio('c3');
+    });
+
+    sailorMoonStage.addEventListener('pointerdown', (e) => {
+      sailorMoonSwipeActive = true;
+      sailorMoonSwipeStartX = e.clientX;
+      sailorMoonSwipeStartY = e.clientY;
+    });
+    sailorMoonStage.addEventListener('pointerup', (e) => {
+      if (!sailorMoonSwipeActive) return;
+      sailorMoonSwipeActive = false;
+      const dx = e.clientX - sailorMoonSwipeStartX;
+      const dy = e.clientY - sailorMoonSwipeStartY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) moveSailorMoon(1);
+        else moveSailorMoon(-1);
+      }
+    });
+    sailorMoonStage.addEventListener('pointercancel', () => { sailorMoonSwipeActive = false; });
+
+    const sailorMoonObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.target !== sailorMoonClip) return;
+        if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+          if (sailorMoonAudioArmed) playSailorMoonWithAudio();
+          else renderSailorMoonClip(sailorMoonIndex, true);
+        } else {
+          sailorMoonVideo.pause();
+        }
+      });
+    }, { threshold: 0.6 });
+    sailorMoonObserver.observe(sailorMoonClip);
+
+    renderSailorMoonClip(0, false);
+
+    document.querySelectorAll('.actbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.dataset.action;
+        const clip = btn.closest('.clip');
+        const who = clip.querySelector('.name')?.textContent ?? 'clip';
+
+        if (action === 'like') {
+          const countEl = clip.querySelector('[data-count="like"]');
+          if (countEl) countEl.textContent = bumpCount(countEl.textContent);
+          const yaLiked = btn.classList.contains('liked');
+          btn.classList.toggle('liked');
+          if (!yaLiked) sumarXP(10, 'ÔØñ´©Å like');
+          else toast('ÔØñ´©Å ' + who);
+          btn.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.18)' }, { transform: 'scale(1)' }], { duration: 220 });
+        } else if (action === 'comment') toast('­ƒÆ¼ Comentarios (demo)');
+        else if (action === 'share') { sumarXP(20, 'Ôåù´©Å compartido'); }
+        else if (action === 'vote') toast('­ƒù│´©Å Vot├í: ┬┐te re├¡ste? (demo)');
+        else if (action === 'profile') toast('­ƒæñ Perfil del personaje (demo)');
+        else toast('Ôï» M├ís opciones (demo)');
+      });
+    });
+
+    function bumpCount(txt) {
+      const m = String(txt).trim().match(/^(\d+(\.\d+)?)K$/i);
+      if (m) {
+        const v = parseFloat(m[1]);
+        return (v + 0.1).toFixed(1) + 'K';
+      }
+      const n = parseInt(txt.replace(/[^\d]/g, ''), 10);
+      if (Number.isFinite(n)) return String(n + 1);
+      return txt;
+    }
+
+    const avatars = Array.from(document.querySelectorAll('.avatar'));
+    avatars.forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openSheet();
+        toast('Personajes: eleg├¡ uno');
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeSheet();
+        closeXP();
+        closeRanking();
+      }
+      if (e.key.toLowerCase() === 'p') openSheet();
+
+      // Navegaci├│n tipo TikTok con flechas
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const currentScroll = feed.scrollTop;
+        const clipHeight = window.innerHeight;
+        const currentIndex = Math.round(currentScroll / clipHeight);
+
+        let nextIndex;
+        if (e.key === 'ArrowDown') {
+          nextIndex = Math.min(currentIndex + 1, clips.length - 1);
+          toast('Ô¼ç´©Å Siguiente video');
+        } else {
+          nextIndex = Math.max(currentIndex - 1, 0);
+          toast('Ô¼å´©Å Video anterior');
+        }
+
+        feed.scrollTo({ top: nextIndex * clipHeight, behavior: 'smooth' });
+      }
+
+      // Like con tecla L
+      if (e.key.toLowerCase() === 'l') {
+        const currentScroll = feed.scrollTop;
+        const clipHeight = window.innerHeight;
+        const currentIndex = Math.round(currentScroll / clipHeight);
+        const currentClip = clips[currentIndex];
+        if (currentClip) {
+          const likeBtn = currentClip.querySelector('[data-action="like"]');
+          if (likeBtn) likeBtn.click();
+        }
+      }
+    });
+    // ÔöÇÔöÇ SISTEMA XP / NIVELES ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+    const XP_KEY = 'cablin_xp';
+    const XP_VISTO_KEY = 'cablin_vistos';
+    const RANK_EVENTS_KEY = 'cablin_channel_view_events';
+    const VIEW_EVENT_COOLDOWN_MS = 4000;
+    const lastChannelViewAt = new Map();
+
+    const niveles = [
+      { nombre: 'Espectador', min: 0, emoji: '­ƒô║', id: 'xpM1', labelId: 'xpLabelA' },
+      { nombre: 'Fans', min: 50, emoji: '­ƒÄ¡', id: 'xpM2', labelId: 'xpLabelB' },
+      { nombre: 'Cablinero', min: 150, emoji: '­ƒÅå', id: 'xpM3', labelId: 'xpLabelC' },
+      { nombre: 'Leyenda', min: 300, emoji: '­ƒô╝', id: 'xpM4', labelId: null }
+    ];
+
+    function getXP() { return parseInt(localStorage.getItem(XP_KEY) || '0', 10); }
+    function setXP(v) { localStorage.setItem(XP_KEY, Math.max(0, Math.floor(v))); }
+    function getVistos() { return JSON.parse(localStorage.getItem(XP_VISTO_KEY) || '[]'); }
+    function getRankingEvents() {
+      try {
+        const raw = JSON.parse(localStorage.getItem(RANK_EVENTS_KEY) || '[]');
+        return Array.isArray(raw) ? raw : [];
+      } catch {
+        return [];
+      }
+    }
+    function setRankingEvents(events) {
+      localStorage.setItem(RANK_EVENTS_KEY, JSON.stringify(events));
+    }
+    function formatViews(v) {
+      return new Intl.NumberFormat('es-AR').format(v);
+    }
+    function getCatalogChannels() {
+      const channels = new Set();
+      document.querySelectorAll('.clip .handle .name').forEach(el => {
+        const handle = (el.textContent || '').trim().toLowerCase();
+        if (handle.startsWith('@')) channels.add(handle);
+      });
+      document.querySelectorAll('.pcard[data-filter]').forEach(card => {
+        const handle = '@' + card.dataset.filter.replace(/-/g, '_').toLowerCase();
+        channels.add(handle);
+      });
+      return Array.from(channels);
+    }
+    function getWeeklyRange() {
+      const end = new Date();
+      const start = new Date(end.getTime() - (7 * 24 * 60 * 60 * 1000));
+      return { start, end };
+    }
+    function formatDate(d) {
+      return d.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit' });
+    }
+    function buildWeeklyRanking(limit = 10) {
+      const now = Date.now();
+      const weekAgo = now - (7 * 24 * 60 * 60 * 1000);
+      const counts = new Map();
+
+      getCatalogChannels().forEach(ch => counts.set(ch, 0));
+      getRankingEvents().forEach(evt => {
+        if (!evt || typeof evt.channel !== 'string' || !Number.isFinite(evt.ts)) return;
+        if (evt.ts < weekAgo || evt.ts > now) return;
+        const ch = evt.channel.toLowerCase();
+        counts.set(ch, (counts.get(ch) || 0) + 1);
+      });
+
+      return Array.from(counts.entries())
+        .map(([channel, views]) => ({ channel, views }))
+        .sort((a, b) => (b.views - a.views) || a.channel.localeCompare(b.channel))
+        .slice(0, limit);
+    }
+    function actualizarRankingUI() {
+      const rankingBody = document.getElementById('rankingBody');
+      const rankingPeriod = document.getElementById('rankingPeriod');
+      const rows = buildWeeklyRanking(10);
+      const range = getWeeklyRange();
+
+      rankingPeriod.textContent = `${formatDate(range.start)} al ${formatDate(range.end)}`;
+      rankingBody.innerHTML = rows.map((row, idx) => `
+        <div class="ranking-row" role="listitem">
+          <span class="ranking-pos">${idx + 1}</span>
+          <div class="ranking-channel">
+            <span class="ranking-handle">${row.channel}</span>
+          </div>
+          <span class="ranking-views">${formatViews(row.views)} views</span>
+        </div>
+      `).join('');
+    }
+    function registrarVistaCanal(channel) {
+      if (!channel) return;
+      const normalized = channel.toLowerCase();
+      const now = Date.now();
+      const last = lastChannelViewAt.get(normalized) || 0;
+      if (now - last < VIEW_EVENT_COOLDOWN_MS) return;
+
+      lastChannelViewAt.set(normalized, now);
+      const events = getRankingEvents();
+      events.push({ channel: normalized, ts: now });
+      if (events.length > 8000) events.splice(0, events.length - 8000);
+      setRankingEvents(events);
+      actualizarRankingUI();
+    }
+    function addVisto(id) {
+      const v = getVistos();
+      if (!v.includes(id)) { v.push(id); localStorage.setItem(XP_VISTO_KEY, JSON.stringify(v)); }
+      return !getVistos().includes(id); // true = era nuevo
+    }
+
+    function nivelActual(xp) {
+      let nivel = niveles[0];
+      for (const n of niveles) { if (xp >= n.min) nivel = n; }
+      return nivel;
+    }
+
+    function pctEnNivel(xp) {
+      const idx = niveles.findIndex(n => n === nivelActual(xp));
+      const actual = niveles[idx];
+      const siguiente = niveles[idx + 1];
+      if (!siguiente) return 100;
+      const rango = siguiente.min - actual.min;
+      const avance = xp - actual.min;
+      return Math.min(100, Math.round((avance / rango) * 100));
+    }
+
+    function sumarXP(pts, motivo) {
+      const xpPrev = getXP();
+      const nivelPrev = nivelActual(xpPrev).nombre;
+      setXP(xpPrev + pts);
+      const xpNew = getXP();
+      const nivelNew = nivelActual(xpNew).nombre;
+      actualizarXPUI();
+      toast(`+${pts} pts ${motivo}`);
+      // Subida de nivel
+      if (nivelNew !== nivelPrev) {
+        setTimeout(() => toast(`­ƒÄë ┬íSubiste de nivel! Ahora sos ${nivelNew}`), 800);
+      }
+    }
+
+    function actualizarXPUI() {
+      const xp = getXP();
+      const nivel = nivelActual(xp);
+      const pct = pctEnNivel(xp);
+
+      // Chip del topbar
+      document.getElementById('xpChipPts').textContent = xp + ' pts';
+
+      // Badge del sheet
+      document.getElementById('xpNivelBadge').textContent = nivel.emoji + ' ' + nivel.nombre.toUpperCase();
+
+      // Barra de progreso + mascot
+      const fill = document.getElementById('xpTrackFill');
+      const fillPct = Math.max(2, pct); // m├¡nimo 2% para que se vea el logo
+      fill.style.width = fillPct + '%';
+
+      // Labels activos
+      niveles.forEach(n => {
+        if (n.labelId) {
+          const el = document.getElementById(n.labelId);
+          if (el) el.classList.toggle('active-nivel', n === nivel);
+        }
+        const m = document.getElementById(n.id);
+        if (m) m.classList.toggle('desbloqueado', xp >= n.min);
+      });
+    }
+
+    // Sheet XP
+    const sheetXP = document.getElementById('sheetXP');
+    function openXP() { sheetXP.classList.add('open'); }
+    function closeXP() { sheetXP.classList.remove('open'); }
+    const btnXP = document.getElementById('btnXP');
+
+    function actualizarInteraccionXP() {
+      const esMovil = window.matchMedia('(max-width: 759px)').matches;
+
+      btnXP.disabled = esMovil;
+      btnXP.setAttribute('aria-label',
+        esMovil ? 'Puntos acumulados' : 'Ver mi nivel'
+      );
+      btnXP.title = esMovil ? 'Puntos acumulados' : 'Mi nivel';
+    }
+
+    btnXP.addEventListener('click', openXP);
+    actualizarInteraccionXP();
+
+    window.addEventListener('resize', actualizarInteraccionXP);
+    document.getElementById('closeXP').addEventListener('click', closeXP);
+
+    // Sheet Ranking
+    const sheetRanking = document.getElementById('sheetRanking');
+    function openRanking() {
+      actualizarRankingUI();
+      sheetRanking.classList.add('open');
+    }
+    function closeRanking() { sheetRanking.classList.remove('open'); }
+    document.getElementById('closeRanking').addEventListener('click', closeRanking);
+
+    // XP por ver clips (IntersectionObserver ÔÇö sin tocar el scroll existente)
+    const clipObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.7) {
+          const id = entry.target.dataset.id;
+          const channel = entry.target.querySelector('.handle .name')?.textContent?.trim();
+          registrarVistaCanal(channel);
+          const vistos = getVistos();
+          if (id && !vistos.includes(id)) {
+            addVisto(id);
+            sumarXP(5, '­ƒô║ clip visto');
+          }
+        }
+      });
+    }, { threshold: 0.7 });
+    document.querySelectorAll('.clip[data-id]').forEach(c => clipObserver.observe(c));
+
+    // Inicializar UI al cargar
+    actualizarXPUI();
+    actualizarRankingUI();
+    // ÔöÇÔöÇ FIN SISTEMA XP ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+
+    // ------------------ ACTION MAN: 4 VIDEOS ------------------
+    {
+      const clips = [
+        '../Videos/action_man_01.mp4',
+        '../Videos/action_man_02.mp4',
+        '../Videos/action_man_03.mp4',
+        '../Videos/action_man_04.mp4'
+      ];
+
+      const stage = document.getElementById('actionManStage');
+      const video = document.getElementById('actionManVideo');
+      const counter = document.getElementById('actionManCounter');
+      const meta = document.getElementById('actionManMeta');
+      const prev = document.getElementById('actionManPrev');
+      const next = document.getElementById('actionManNext');
+      const clip = document.querySelector('.clip[data-id="c4"]');
+
+      if (stage && video && clip) {
+        let index = 0;
+        let visible = false;
+        let startX = 0;
+        let startY = 0;
+
+        video.playsInline = true;
+
+        function render(newIndex) {
+          index = (newIndex + clips.length) % clips.length;
+          video.src = clips[index];
+          counter.textContent = `${index + 1}/${clips.length}`;
+          meta.innerHTML = `<strong>Action Man</strong> ┬À Clip ${index + 1}`;
+          video.load();
+
+          if (visible) video.play().catch(() => { });
+        }
+
+        prev.addEventListener('click', (event) => {
+          event.stopPropagation();
+          render(index - 1);
+        });
+
+        next.addEventListener('click', (event) => {
+          event.stopPropagation();
+          render(index + 1);
+        });
+
+        stage.addEventListener('touchstart', (event) => {
+          startX = event.touches[0].clientX;
+          startY = event.touches[0].clientY;
+        }, { passive: true });
+
+        stage.addEventListener('touchend', (event) => {
+          const dx = event.changedTouches[0].clientX - startX;
+          const dy = event.changedTouches[0].clientY - startY;
+
+          if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.3) {
+            render(index + (dx < 0 ? 1 : -1));
+          }
+        }, { passive: true });
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            visible = entry.isIntersecting && entry.intersectionRatio >= 0.6;
+
+            if (visible) {
+              video.play().catch(() => { });
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: [0, 0.6, 1] });
+
+        observer.observe(clip);
+        render(0);
+      }
+    }
+
+  </script>
+</body>
+
+</html>
