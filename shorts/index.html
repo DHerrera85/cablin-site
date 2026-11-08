@@ -359,6 +359,49 @@
       background: #000;
     }
 
+    /* Cablín Shorts 2.1 — Barra de progreso */
+    .short-progress {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 8px;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0.85;
+      transition: opacity 0.2s ease;
+    }
+
+    .short-progress-time {
+      display: none;
+    }
+
+    .short-progress:hover,
+    .short-progress:focus-within {
+      opacity: 1;
+    }
+
+    .short-progress-slider {
+      flex: 1;
+      min-width: 0;
+      height: 3px;
+      margin: 0;
+      cursor: pointer;
+      accent-color: #ffffff;
+      touch-action: none;
+    }
+
+    .short-progress-slider::-webkit-slider-thumb {
+      opacity: 0;
+    }
+
+    .short-progress-slider:hover::-webkit-slider-thumb,
+    .short-progress-slider:focus-visible::-webkit-slider-thumb,
+    .short-progress-slider:active::-webkit-slider-thumb {
+      opacity: 1;
+    }
+
     .series-stage .series-ui {
       position: absolute;
       inset: 0;
@@ -1419,6 +1462,24 @@
         padding-right: max(12px, calc((100% - 430px) / 2));
       }
 
+      /* CABLÍN SHORTS 2.1 — Navegación lateral de escritorio */
+
+      /* Evitar duplicar el logo, Canal y Explorar */
+      .topbar .brand {
+        display: none;
+      }
+
+      /* Mantener las herramientas en una barra compacta */
+      .topbar {
+        justify-content: flex-end;
+        padding-left: 16px;
+        padding-right: 24px;
+      }
+
+      .topbar .top-actions {
+        margin-left: auto;
+      }
+
       /* =========================================
    CONTROLES LATERALES - ESCRITORIO
    ========================================= */
@@ -1486,13 +1547,14 @@
     /* Botón de sonido de los Shorts */
     .short-mute-btn {
       position: absolute;
-      top: 64px;
-      left: 14px;
+      top: 12px;
+      right: 12px;
       z-index: 35;
-      width: 42px;
-      height: 42px;
+      width: 34px;
+      height: 34px;
       display: grid;
       place-items: center;
+      padding: 6px;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, .2);
       background: rgba(0, 0, 0, .5);
@@ -1503,6 +1565,164 @@
 
     .short-mute-btn:hover {
       background: rgba(0, 0, 0, .75);
+    }
+
+    /* CABLÍN SHORTS 2.1 — Controles de episodios minimalistas */
+
+    @media (min-width: 1024px) {
+      .series-stage .series-btn {
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
+
+      .series-stage:hover .series-btn,
+      .series-stage:focus-within .series-btn {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      .series-stage .series-btn {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    /* CABLÍN SHORTS 2.1 — Distribución inferior móvil */
+    @media (max-width: 759px) {
+      .series-stage .series-nav {
+        position: relative;
+        display: grid;
+        grid-template-columns: 36px 1fr 36px;
+        align-items: center;
+        width: 100%;
+      }
+
+      .series-stage .series-counter {
+        grid-column: 2;
+        justify-self: center;
+        min-width: 54px;
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+
+      .series-stage .series-btn:first-child {
+        grid-column: 1;
+      }
+
+      .series-stage .series-btn:last-child {
+        grid-column: 3;
+      }
+    }
+
+    /* CABLÍN SHORTS 2.1 — Contador discreto */
+    .series-counter {
+      font-size: 11px;
+      font-weight: 600;
+      opacity: 0.75;
+    }
+
+    /* CABLÍN SHORTS 2.1 — Encabezado móvil compacto */
+
+    .mobile-more-btn {
+      display: none;
+    }
+
+    @media (max-width: 759px) {
+
+      .topbar .classic-link,
+      .topbar #btnPersonajes,
+      .topbar #btnRanking {
+        display: none;
+      }
+
+      .topbar .mode-label {
+        margin-left: 0;
+      }
+
+      .topbar .mobile-more-btn {
+        display: grid;
+      }
+
+      .topbar {
+        gap: 6px;
+      }
+
+      .topbar .brand,
+      .topbar .top-actions {
+        gap: 6px;
+      }
+    }
+
+    /* CABLÍN SHORTS 2.1 — Menú secundario móvil */
+    .mobile-more-menu[hidden] {
+      display: none;
+
+      /* XP visible como indicador, no como botón en móvil */
+      .topbar #btnXP {
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+
+    @media (max-width: 759px) {
+      .topbar #btnBuscar {
+        order: 1;
+      }
+
+      .topbar #btnXP {
+        order: 2;
+      }
+
+      .topbar #btnMobileMore {
+        order: 3;
+      }
+    }
+
+    .mobile-more-menu {
+      position: fixed;
+      top: calc(var(--topbar-h) + var(--safe-top) + 4px);
+      right: 8px;
+      z-index: 80;
+      width: min(240px, calc(100vw - 16px));
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 14px;
+      background: #171024;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .4);
+    }
+
+    .mobile-more-menu a,
+    .mobile-more-menu button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: white;
+      font: inherit;
+      text-align: left;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .mobile-more-menu a:hover,
+    .mobile-more-menu button:hover,
+    .mobile-more-menu a:focus-visible,
+    .mobile-more-menu button:focus-visible {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    @media (min-width: 760px) {
+      .mobile-more-menu {
+        display: none;
+      }
+    }
+
+    /* CABLÍN SHORTS 2.1 — Ocultar interacciones sociales provisoriamente */
+    .clip .actions {
+      display: none;
     }
   </style>
 </head>
@@ -1533,6 +1753,17 @@
       </div>
 
       <div class="top-actions">
+
+        <!-- Cablín Shorts 2.1 — Menú secundario móvil -->
+        <button class="iconbtn mobile-more-btn" id="btnMobileMore" type="button" aria-label="Más opciones"
+          aria-expanded="false" aria-controls="mobileMoreMenu" title="Más opciones">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="5" cy="12" r="1"></circle>
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="19" cy="12" r="1"></circle>
+          </svg>
+        </button>
 
         <button class="iconbtn" id="btnPersonajes" title="Personajes">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -1570,6 +1801,11 @@
         </button>
 
       </div>
+    </div>
+
+    <div class="mobile-more-menu" id="mobileMoreMenu" hidden>
+      <a href="../index.html">Explorar Cablín clásico</a>
+      <button type="button" id="mobileRanking">Ranking semanal</button>
     </div>
 
     <!-- NAVEGACIÓN LATERAL - SOLO ESCRITORIO -->
@@ -1687,6 +1923,44 @@
               <span class="tag">#SaintSeiya</span>
               <span class="tag">#Anime90s</span>
               <span class="tag">#Nostalgia</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Tattooed Teenage Alien Fighters from Beverly Hills -->
+      <section class="clip" data-theme="comic" data-id="tattooed"
+        data-canal="accion" data-type="programa">
+        <div class="video series-stage" aria-label="Tattooed Teenage Alien Fighters">
+          <video class="series-video" id="tattooedVideo"
+            src="../Videos/tattooed_teenage_alien_fighters_intro.mp4"
+            playsinline preload="metadata" loop></video>
+          <div class="series-ui">
+            <div class="series-chip">
+              <strong>Tattooed Teenage Alien Fighters</strong> &#8226; Intro
+            </div>
+          </div>
+        </div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+        <div class="meta">
+          <div class="who">
+            <div class="avatar">
+              <img src="../img/round/tattooed-teenage-alien-fighters.png"
+                alt="Teenage Alien Fighters">
+            </div>
+            <div class="handle">
+              <div class="name">@tattooed_alien_fighters</div>
+              <div class="desc">Tattooed Teenage Alien Fighters from Beverly Hills</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">Intro original de la serie</div>
+            <div class="tags">
+              <span class="tag">#Cablin</span>
+              <span class="tag">#RetroTV</span>
+              <span class="tag">#AlienFighters</span>
             </div>
           </div>
         </div>
@@ -2280,6 +2554,14 @@
           </div>
           <div class="ptxt">Saint Seiya</div>
         </button>
+        <button class="pcard" data-filter="tattooed_alien_fighters"
+          role="listitem" aria-label="Ver Teenage Alien Fighters">
+          <div class="pimg">
+            <img src="../img/round/tattooed-teenage-alien-fighters.png"
+              alt="Teenage Alien Fighters">
+          </div>
+          <div class="ptxt">Teenage Alien Fighters</div>
+        </button>
         <button class="pcard" data-filter="sonic" role="listitem" aria-label="Filtrar Sonic">
           <div class="pimg" style="background:
             radial-gradient(60px 40px at 25% 25%, rgba(141,255,122,.50), transparent 60%),
@@ -2494,6 +2776,42 @@
     document.getElementById('btnBuscar').addEventListener('click', () => toast('Buscar: modal / overlay (demo)'));
     document.getElementById('btnRanking').addEventListener('click', openRanking);
 
+    /* CABLÍN SHORTS 2.1 — Menú secundario móvil */
+    const btnMobileMore = document.getElementById('btnMobileMore');
+    const mobileMoreMenu = document.getElementById('mobileMoreMenu');
+    const mobileRanking = document.getElementById('mobileRanking');
+
+    function cerrarMobileMore() {
+      mobileMoreMenu.hidden = true;
+      btnMobileMore.setAttribute('aria-expanded', 'false');
+    }
+
+    btnMobileMore.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const abrir = mobileMoreMenu.hidden;
+      mobileMoreMenu.hidden = !abrir;
+      btnMobileMore.setAttribute('aria-expanded', String(abrir));
+    });
+
+    mobileRanking.addEventListener('click', () => {
+      cerrarMobileMore();
+      document.getElementById('btnRanking').click();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!mobileMoreMenu.contains(event.target) &&
+        !btnMobileMore.contains(event.target)) {
+        cerrarMobileMore();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !mobileMoreMenu.hidden) {
+        cerrarMobileMore();
+        btnMobileMore.focus();
+      }
+    });
+
     const sheet = document.getElementById('sheetPersonajes');
 
     function openSheet() { sheet.classList.add('open'); }
@@ -2560,6 +2878,75 @@
     });
 
     actualizarBotonesSonido();
+
+
+    /* Cablín Shorts 2.1 — Progreso de reproducción */
+    document.querySelectorAll('.clip video').forEach(video => {
+      const contenedor = video.parentElement;
+
+      const progreso = document.createElement('div');
+      progreso.className = 'short-progress';
+
+      const slider = document.createElement('input');
+      slider.type = 'range';
+      slider.className = 'short-progress-slider';
+      slider.min = '0';
+      slider.max = '100';
+      slider.step = '0.1';
+      slider.value = '0';
+      slider.setAttribute('aria-label', 'Progreso del video');
+
+      const tiempo = document.createElement('span');
+      tiempo.className = 'short-progress-time';
+      tiempo.textContent = '0:00 / 0:00';
+
+      progreso.append(slider, tiempo);
+      contenedor.appendChild(progreso);
+
+      function formatearTiempo(segundos) {
+        if (!Number.isFinite(segundos)) return '0:00';
+
+        const total = Math.floor(segundos);
+        const minutos = Math.floor(total / 60);
+        const resto = String(total % 60).padStart(2, '0');
+
+        return `${minutos}:${resto}`;
+      }
+
+      function actualizarProgreso() {
+        const duracion = video.duration;
+        const actual = video.currentTime;
+
+        if (Number.isFinite(duracion) && duracion > 0) {
+          slider.value = String((actual / duracion) * 100);
+          tiempo.textContent =
+            `${formatearTiempo(actual)} / ${formatearTiempo(duracion)}`;
+        } else {
+          slider.value = '0';
+          tiempo.textContent = '0:00 / 0:00';
+        }
+      }
+
+      video.addEventListener('timeupdate', actualizarProgreso);
+      video.addEventListener('loadedmetadata', actualizarProgreso);
+      video.addEventListener('durationchange', actualizarProgreso);
+      video.addEventListener('emptied', actualizarProgreso);
+
+      slider.addEventListener('input', () => {
+        const duracion = video.duration;
+
+        if (Number.isFinite(duracion) && duracion > 0) {
+          video.currentTime = (Number(slider.value) / 100) * duracion;
+          actualizarProgreso();
+        }
+      });
+
+      // Evitar que el control active gestos de navegación de episodios.
+      ['pointerdown', 'pointerup', 'click', 'touchstart', 'touchend'].forEach(tipo => {
+        progreso.addEventListener(tipo, event => event.stopPropagation());
+      });
+    });
+
 
     const feed = document.getElementById('feed');
     const clips = Array.from(document.querySelectorAll('.clip'));
@@ -2748,9 +3135,31 @@
       });
     });
 
-    // Serie piloto Caballeros del Zodiaco: navegación horizontal (2 clips).
+
+    // Reproduccion automatica de Tattooed Teenage Alien Fighters.
+    const tattooedVideo = document.getElementById('tattooedVideo');
+    const tattooedClip = tattooedVideo.closest('.clip');
+
+    const tattooedObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+          tattooedVideo.play().catch(() => {
+            tattooedVideo.muted = true;
+            tattooedVideo.play().catch(() => {});
+          });
+        } else {
+          tattooedVideo.pause();
+        }
+      });
+    }, { threshold: [0, 0.6, 1] });
+
+    tattooedObserver.observe(tattooedClip);
+
+        // Serie piloto Caballeros del Zodiaco: navegación horizontal (2 clips).
     const caballerosClips = [
-      '../Videos/caballeros_zodiaco_01.mp4'
+      '../Videos/caballeros_zodiaco_01.mp4',
+      '../Videos/caballeros_zodiaco_opening_01.mp4',
+      '../Videos/caballeros_zodiaco_opening_02.mp4'
     ];
     const caballerosStage = document.getElementById('caballerosStage');
     const caballerosVideo = document.getElementById('caballerosVideo');
@@ -3429,7 +3838,22 @@
     const sheetXP = document.getElementById('sheetXP');
     function openXP() { sheetXP.classList.add('open'); }
     function closeXP() { sheetXP.classList.remove('open'); }
-    document.getElementById('btnXP').addEventListener('click', openXP);
+    const btnXP = document.getElementById('btnXP');
+
+    function actualizarInteraccionXP() {
+      const esMovil = window.matchMedia('(max-width: 759px)').matches;
+
+      btnXP.disabled = esMovil;
+      btnXP.setAttribute('aria-label',
+        esMovil ? 'Puntos acumulados' : 'Ver mi nivel'
+      );
+      btnXP.title = esMovil ? 'Puntos acumulados' : 'Mi nivel';
+    }
+
+    btnXP.addEventListener('click', openXP);
+    actualizarInteraccionXP();
+
+    window.addEventListener('resize', actualizarInteraccionXP);
     document.getElementById('closeXP').addEventListener('click', closeXP);
 
     // Sheet Ranking
