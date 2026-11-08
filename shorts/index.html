@@ -1928,6 +1928,40 @@
         </div>
       </section>
 
+
+      <!-- Tattooed Teenage Alien Fighters from Beverly Hills -->
+      <section class="clip" data-theme="comic" data-id="tattooed"
+        data-canal="accion" data-type="programa">
+        <div class="video series-stage" aria-label="Tattooed Teenage Alien Fighters">
+          <video class="series-video" id="tattooedVideo"
+            src="../Videos/tattooed_teenage_alien_fighters_intro.mp4"
+            playsinline preload="metadata" loop></video>
+          <div class="series-ui">
+            <div class="series-chip">
+              <strong>Tattooed Teenage Alien Fighters</strong> &#8226; Intro
+            </div>
+          </div>
+        </div>
+        <div class="crt"></div>
+        <div class="noise"></div>
+        <div class="meta">
+          <div class="who">
+            <div class="handle">
+              <div class="name">@tattooed_alien_fighters</div>
+              <div class="desc">Tattooed Teenage Alien Fighters from Beverly Hills</div>
+            </div>
+          </div>
+          <div class="caption">
+            <div class="title">Intro original de la serie</div>
+            <div class="tags">
+              <span class="tag">#Cablin</span>
+              <span class="tag">#RetroTV</span>
+              <span class="tag">#AlienFighters</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="clip" data-theme="comic" data-id="c2" data-canal="accion" data-type="programa">
         <div class="video series-stage" id="sonicStage" aria-label="Serie Sonic">
           <video class="series-video" id="sonicVideo" preload="metadata"></video>
@@ -3089,7 +3123,27 @@
       });
     });
 
-    // Serie piloto Caballeros del Zodiaco: navegación horizontal (2 clips).
+
+    // Reproduccion automatica de Tattooed Teenage Alien Fighters.
+    const tattooedVideo = document.getElementById('tattooedVideo');
+    const tattooedClip = tattooedVideo.closest('.clip');
+
+    const tattooedObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+          tattooedVideo.play().catch(() => {
+            tattooedVideo.muted = true;
+            tattooedVideo.play().catch(() => {});
+          });
+        } else {
+          tattooedVideo.pause();
+        }
+      });
+    }, { threshold: [0, 0.6, 1] });
+
+    tattooedObserver.observe(tattooedClip);
+
+        // Serie piloto Caballeros del Zodiaco: navegación horizontal (2 clips).
     const caballerosClips = [
       '../Videos/caballeros_zodiaco_01.mp4',
       '../Videos/caballeros_zodiaco_opening_01.mp4',
